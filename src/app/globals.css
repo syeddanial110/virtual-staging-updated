@@ -1,0 +1,635 @@
+:root {
+  --initial-top: 1200px;
+  --initial-right: 1000px;
+}
+
+body {
+  background-color: #ededed;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+@font-face {
+  font-family: "custFont";
+  src: url("../assets/font/tt-norms-pro-cufonfonts/TT-Norms-Pro-Regular.otf");
+}
+
+@font-face {
+  font-family: "custFontTitle";
+  src: url("../assets/font/Garamond/GaramondPremrPro-LtDisp.woff");
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "custFontTitle";
+}
+p {
+  font-family: "custFont";
+}
+
+/* hero slider css */
+
+.headerSlider {
+  width: 100%;
+  height: 100% !important;
+}
+.headerSlider > .swiper-pagination,
+.swiper-pagination-horizontal {
+  bottom: 80px;
+  width: 29% !important;
+  top: auto !important;
+  left: 0 !important;
+}
+
+.headerSlider > .swiper-pagination > .swiper-pagination-progressbar-fill {
+  background-color: #3c828e !important;
+  border-radius: 40px !important;
+}
+
+@media screen and (max-width: 700px) {
+  .headerSlider > .swiper-pagination,
+  .swiper-pagination-horizontal {
+    left: 0 !important;
+  }
+  .sliderBoxImg {
+    height: 70%;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .headerSlider > .swiper-pagination {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1100px) and (max-width: 1299px) {
+  .headerSlider > .swiper-pagination,
+  .swiper-pagination-horizontal {
+    bottom: 120px;
+  }
+  .arrowBtn {
+    bottom: 120px;
+  }
+}
+
+@media screen and (min-width: 1300px) and (max-width: 1399px) {
+  .headerSlider > .swiper-pagination,
+  .swiper-pagination-horizontal {
+    bottom: 80px;
+  }
+  .arrowBtn {
+    bottom: 80px;
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .headerSlider > .swiper-pagination,
+  .swiper-pagination-horizontal {
+    bottom: 80px;
+  }
+  .arrowBtn {
+    bottom: 80px;
+  }
+}
+
+@media screen and (min-width: 1400px) and (max-width: 1499px) {
+  .arrowBtn {
+    bottom: 50px !important;
+  }
+  .headerSlider > .swiper-pagination,
+  .swiper-pagination-horizontal {
+    bottom: 50px;
+  }
+}
+
+.shade1 {
+  z-index: -1;
+}
+
+/* hero slider css end */
+
+.virtualStaging {
+  background: transparent
+    linear-gradient(261deg, #63a5b1 0%, #bfb2a1 47%, #3c828e 100%) 0% 0%
+    no-repeat padding-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* tabs slider css */
+.tabSwiper {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  height: 508px;
+}
+
+.tabSwiper .swiper-wrapper .swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 280px;
+  height: 100%;
+}
+
+.tabSwiper .swiper-wrapper {
+  padding: 29px 20px 113px 5px;
+}
+
+/* .tabSwiper .swiper-wrapper .swiper-slide-active{
+  width: 600px;
+} */
+.tabSwiper .swiper-wrapper .swiper-slide {
+  width: 430;
+}
+.tabSwiper .swiper-wrapper .swiper-slide img {
+  display: block;
+  width: 100%;
+}
+.tabSwiper .swiper-wrapper .swiper-slide {
+  height: 450px;
+  display: flex;
+  align-items: center;
+}
+
+
+.tabSwiper .swiper-wrapper .swiper-slide-active {
+  z-index: 999;
+}
+
+.tabSwiper .swiper-wrapper .swiper-slide-active > div {
+  display: flex !important;
+}
+.tabSwiper .swiper-wrapper .swiper-slide-active {
+  width: 530px;
+  scale: 1.4;
+  display: flex;
+  align-items: center;
+  height: 420px;
+}
+
+
+
+@media screen and (max-width: 1000px) {
+  .tabSwiper .swiper-wrapper .swiper-slide-active {
+    scale: 1;
+  }
+  .tabSwiper .swiper-wrapper .swiper-slide-active {
+    height: 350px;
+  }
+  .tabSwiper {
+    height: 370px;
+  }
+}
+
+.__rcs-handle-button {
+  width: 35px !important;
+  height: 35px !important;
+}
+
+/* tabs slider css end */
+
+.MuiTabs-scrollButtons.Mui-disabled {
+  opacity: 0.3;
+}
+
+.myTabs > div > div > .Mui-selected {
+  background-color: #3c828e !important;
+  color: #ffffff !important;
+  border-radius: 67px;
+}
+
+.chooseUsBox::-webkit-scrollbar {
+  display: none;
+}
+
+/* latest slider swiper css */
+
+.latestSliderSwiper {
+  width: 100%;
+  height: 100%;
+}
+
+.latestSliderSwiper > div > .swiper-slide {
+  text-align: center;
+  font-size: 18px;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.latestSliderSwiper > div > .swiper-slide > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* latest slider swiper css end */
+
+/* testimonial slider css */
+
+.testimonialSliderSwiper {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+}
+
+.testimonialSliderSwiper > div > .swiper-slide {
+  text-align: center;
+  font-size: 18px;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.testimonialSliderSwiper > div > .swiper-slide > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.testimonialSliderSwiper > .swiper-pagination,
+.swiper-pagination-horizontal {
+  bottom: 0px;
+  width: 70px !important;
+  top: auto !important;
+  z-index: 99999 !important;
+  /* transform: translate(50%, 50%); */
+  left: 50% !important;
+  right: 50% !important;
+}
+
+.testimonialSliderSwiper
+  > .swiper-pagination
+  > .swiper-pagination-progressbar-fill {
+  background-color: #3c828e !important;
+  border-radius: 40px !important;
+}
+
+.testimonialSliderSwiper > div > .swiper-slide-next > div > div > div {
+  background-color: #bfb2a1;
+}
+.testimonialSliderSwiper
+  > div
+  > .swiper-slide-next
+  > div
+  > div
+  > div
+  > div
+  > p {
+  color: white;
+}
+
+@media screen and (max-width: 950px) {
+  .testimonialSliderSwiper > .swiper-pagination,
+  .swiper-pagination-horizontal {
+    left: 45% !important;
+    right: 50% !important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .testimonialSliderSwiper {
+    width: 100%;
+    height: 100%;
+    min-height: 450px;
+  }
+}
+
+@media screen and (min-width: 402px) and (max-width: 600px) {
+  .testimonialSliderSwiper {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+  }
+}
+@media screen and (min-width: 602px) and (max-width: 900px) {
+  .testimonialSliderSwiper {
+    width: 100%;
+    height: 100%;
+    min-height: 470px;
+  }
+}
+@media screen and (min-width: 902px) and (max-width: 1199px) {
+  .testimonialSliderSwiper {
+    width: 100%;
+    height: 100%;
+    min-height: 570px;
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1399px) {
+  .testimonialSliderSwiper {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+  }
+}
+@media screen and (min-width: 1400px) and (min-width: 1600px) {
+  .testimonialSliderSwiper {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+  }
+}
+@media screen and (min-width: 1700px) {
+  .testimonialSliderSwiper {
+    width: 100%;
+    height: 100%;
+    min-height: 520px;
+  }
+}
+@media screen and (max-width: 700px) {
+  .testimonialSliderSwiper > div > .swiper-slide-active > div > div > div {
+    background-color: #bfb2a1;
+  }
+  .testimonialSliderSwiper
+    > div
+    > .swiper-slide-active
+    > div
+    > div
+    > div
+    > div
+    > p {
+    color: white;
+  }
+}
+
+/* testimonial slider css end */
+
+/* Virtual slider css */
+
+.virtualSliderSwiper {
+  width: 100%;
+  height: 100%;
+  min-height: 950px;
+}
+
+.virtualSliderSwiper > div > .swiper-slide {
+  text-align: center;
+  font-size: 18px;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.virtualSliderSwiper > div > .swiper-slide > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.virtualSliderSwiper > .swiper-pagination,
+.swiper-pagination-horizontal {
+  bottom: 0px;
+  width: 70px !important;
+  top: auto !important;
+  z-index: 99999 !important;
+  /* transform: translate(50%, 50%); */
+  left: 50% !important;
+  right: 50% !important;
+}
+
+.virtualSliderSwiper
+  > .swiper-pagination
+  > .swiper-pagination-progressbar-fill {
+  background-color: #3c828e !important;
+  border-radius: 40px !important;
+}
+
+.virtualSliderSwiper > div > .swiper-slide-next > div > div > div {
+  background-color: #bfb2a1;
+}
+.virtualSliderSwiper > div > .swiper-slide-next > div > div > div > div > p {
+  background-color: #bfb2a1;
+  color: white;
+}
+
+@media screen and (max-width: 700px) {
+  .virtualSliderSwiper > .swiper-pagination,
+  .swiper-pagination-horizontal {
+    left: 41% !important;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .virtualSliderSwiper {
+    width: 100%;
+    height: 100%;
+    min-height: 550px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .virtualSliderSwiper {
+    width: 100%;
+    height: 100%;
+    min-height: 550px;
+  }
+}
+
+@media screen and (min-width: 1900px) {
+  .virtualSliderSwiper {
+    width: 100%;
+    height: 100%;
+    min-height: 450px;
+  }
+}
+
+/* virtual slider css end */
+
+/* header css  */
+.dropdownButton {
+  background-color: transparent !important;
+  color: #7e7e7e !important;
+  padding: 0 0px 0 0 !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+}
+.dropdownButton:focus {
+  box-shadow: 0 0 0 0px rgba(235, 236, 240, 0.4) !important;
+}
+
+.subnameDropdown {
+  left: -390%;
+  right: -349% !important;
+  background-color: #575757 !important;
+  border-radius: 25px !important;
+  width: 93vw !important;
+  z-index: 9999999 !important;
+}
+
+.subLinkTitle:hover {
+  background-color: #3c828e;
+}
+
+.Dropdown_menu__VJLNl.Dropdown_menu-left__Js_a5.subnameDropdown {
+  max-height: 440px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* .subnameDropdown > ul >div > div> div > div> div > p */
+
+@media screen and (min-width: 1200px) and (max-width: 1450px) {
+  .subnameDropdown {
+    left: -290%;
+    right: -349% !important;
+    width: 80vw !important;
+  }
+}
+@media screen and (min-width: 1700px) and (max-width: 2400px) {
+  .subnameDropdown {
+    left: -490%;
+    right: -349% !important;
+    width: 90vw !important;
+  }
+}
+@media screen and (min-width: 2400px) and (max-width: 3400px) {
+  .subnameDropdown {
+    left: -590%;
+    right: -349% !important;
+    width: 90vw !important;
+  }
+}
+
+.subLinkDropdown {
+  background-color: #575757 !important;
+  border-radius: 25px;
+}
+
+.subLinkDropdown > ul > li:hover {
+  background-color: #3c828e;
+}
+
+/* header css end */
+
+/* .sliderBox::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  mask-image: linear-gradient(transparent 0 100%, black 100%),
+    linear-gradient(transparent 0 100%, black 100%) 90deg,
+    linear-gradient(transparent 0 100%, black 100%) 180deg,
+    linear-gradient(transparent 0 100%, black 100%) 270deg,
+    radial-gradient(
+      circle at top left,
+      transparent 0,
+      transparent 70%,
+      black 71%
+    ),
+    radial-gradient(
+      circle at top right,
+      transparent 0,
+      transparent 70%,
+      black 71%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      transparent 0,
+      transparent 70%,
+      black 71%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      transparent 0,
+      transparent 70%,
+      black 71%
+    );
+  mask-composite: xor;
+} */
+
+/* .sliderBox::before {
+  content: '';
+  display: block;
+  position: absolute;
+  border-radius: 100% 50%;
+  width: 55%;
+  height: 100%;
+  transform: translate(85%, 60%);
+ 
+}
+
+.sliderBox::after {
+  content: '';
+  display: block;
+  position: absolute;
+  border-radius: 100% 50%;
+  width: 55%;
+  height: 100%;
+  transform: translate(-4%, 40%);
+  z-index: -1;
+} */
+
+/* review slider css start */
+.reviewSwiper {
+  width: 100%;
+  height: 100%;
+}
+.reviewSwiper > .swiper-wrapper {
+  /* min-height: 50vh; */
+  /* height: auto; */
+  height: 470px;
+}
+
+.reviewSwiper > .swiper-wrapper > .swiper-slide {
+  /* text-align: center; */
+  font-size: 18px;
+  /* background: #fff; */
+
+  /* Center slide text vertically */
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+
+.reviewSwiper > .swiper-pagination .swiper-pagination-bullet-active {
+  background-color: #3c828e;
+}
+
+/* @media screen and (max-width: 450px) {
+  .reviewSwiper .swiper-pagination,
+  .swiper-pagination-horizontal {
+    width: max-content !important;
+    left: 17% !important;
+    
+  }
+}
+@media screen and (min-width: 451px) and (max-width: 650px) {
+  .reviewSwiper .swiper-pagination,
+  .swiper-pagination-horizontal {
+    width: max-content !important;
+    left: 28% !important;
+    
+  }
+} */
+
+/* review slider css end */

@@ -1,0 +1,17 @@
+export const pathLocations = {
+  home: "/",
+  aboutUs: "/about-us",
+  blogs: "/blogs",
+  furnitureGallery: "/furniture-gallery",
+  commercialVirtualStaging: "/commercial-virtual-staging",
+  faq: "/faq",
+  privacyPolicy: "/privacy-policy",
+  termsAndCondition: "/terms-and-conditions",
+  contactUs: "/contact-us",
+  virtualStaging: "/services/virtual-staging",
+  virtualRenovation: "/services/virtual-renovation",
+  virtualTwilight: "/services/virtual-twilights",
+  commercialVirtualRenovation: "/services/commercial-virtual-renovation",
+  placeOrder: "/place-order",
+  premadeGallery: "/residential-premade-gallery",
+};

@@ -1,0 +1,54 @@
+import { BannerWrapper } from "@/containers/AboutUs/ui";
+import DefaultLayout from "@/layout/default-layout";
+import React from "react";
+import virtualRenovationImg from "../../../assets/images/virtualRenovationBanner.jpg";
+import UITypography from "@/components/UITypography/UITypography";
+import { Grid } from "@mui/material";
+import UIButton from "@/components/UIButton/UIButton";
+
+const VirtualRenovation = () => {
+  return (
+    <DefaultLayout>
+      <Grid container justifyContent="center" gap={3} my={3}>
+        <Grid item xs={11}>
+          <BannerWrapper bgImg={virtualRenovationImg}>
+            <UITypography
+              type="mainHeading"
+              title="Virtual Renovation"
+              sx={{
+                color: "white",
+                fontSize: { xs: "40px", md: "60px !important" },
+                fontWeight: "regular",
+                mb: "13px",
+                ml: { xs: "30px", md: "60px" },
+              }}
+            />
+          </BannerWrapper>
+        </Grid>
+        <Grid item xs={11}>
+          <UITypography
+            type="description"
+            title={`Introducing our virtual renovation services at an unbeatable price of just $69 per image! Enhance your property's selling potential by offering potential buyers a fresh perspective on outdated kitchens, bathrooms, and unfinished lower levels. With our advanced technology, we can help reimagine these spaces, giving them a modern and appealing makeover that will captivate your audience.`}
+          />
+        </Grid>
+        <Grid item xs={11}>
+          <UITypography
+            type="description"
+            title={`Our experienced team of designers will seamlessly add patios and decks to unfinished outdoor areas, transforming them into inviting spaces for relaxation and entertainment. Utilizing state-of-the-art virtual rendering, we ensure utmost accuracy and attention to detail in every image, allowing interested buyers to visualize the full potential of your property.`}
+          />
+        </Grid>
+        <Grid item xs={11}>
+          <UITypography
+            type="description"
+            title={`Don't let outdated or unfinished spaces deter potential buyers. Let our virtual renovation services bring new life and excitement to your listing, helping you sell faster and at a higher price. Contact us today to take advantage of this incredible opportunity to transform your property into a buyer's dream!`}
+          />
+        </Grid>
+        <Grid item xs={11}>
+          <UIButton variant="contained" label="Order now" />
+        </Grid>
+      </Grid>
+    </DefaultLayout>
+  );
+};
+
+export default VirtualRenovation;
