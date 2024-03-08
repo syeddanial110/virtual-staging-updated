@@ -199,15 +199,19 @@ export const pages = [
 export const menu = [
   {
     title: "Profile",
+    link: "/profile",
   },
   {
     title: "Cart",
+    link: "/",
   },
   {
     title: "Orders",
+    link: "/order",
   },
   {
     title: "Logout",
+    link: "/login",
   },
 ];
 

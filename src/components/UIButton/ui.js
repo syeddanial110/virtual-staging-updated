@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Typography } from "@mui/material";
+import { Avatar, Box, Button, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import Image from "next/image";
 
@@ -25,7 +25,7 @@ export const Input = styled("input")({
 });
 
 export const UIStyledInputButton = styled(Button)(({ theme, data }) => ({
-  width: "100%",
+  // width: "100%",
   border: "0px solid grey",
   borderRadius: "50%",
   justifyContent: "flex-start",
@@ -77,9 +77,20 @@ export const UIFileImg = styled(Image)(({ theme, data }) => ({
 }));
 
 export const UIBoxInput = styled(Box)(({ theme, data }) => ({
-  // display: "flex",
-  // alignItems: "center",
-  // position: "absolute",
-  // bottom: 0,
-  // right: 10,
+  display: "flex",
+  alignItems: "center",
+  position: "absolute",
+  bottom: 0,
+  right: 10,
+}));
+
+export const FileAvatar = styled(Avatar)(({ theme, data }) => ({
+  height: 100,
+  width: 100,
+}));
+
+export const UIFileMainBox = styled(Box)(({ theme, data }) => ({
+  position: "relative",
+  height: 100,
+  width: 100,
 }));

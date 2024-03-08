@@ -44,14 +44,13 @@ const DefaultLayout = ({ children }) => {
 
   return (
     <>
-    
-          <Header />
-          <div>{children}</div>
-          <Grid container>
-            <Grid item xs={12}>
-              <Footer />
-            </Grid>
-          </Grid>
+      <Header />
+      <div>{children}</div>
+      <Grid container>
+        <Grid item xs={12}>
+          <Footer />
+        </Grid>
+      </Grid>
     </>
   );
 };

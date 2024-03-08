@@ -30,7 +30,7 @@ const UIFileButton = ({
               <CircularProgress sx={{ height: 100, width: 100 }} />
             </UILoadingBox>
           ) : (
-            <UIBoxInput onClick={_handleInputClick}>
+            <Box onClick={_handleInputClick}>
               {!data?.imagePath && !isFileUpload && (
                 <Box
                   sx={{
@@ -48,7 +48,7 @@ const UIFileButton = ({
                   <UITypography title="Upload Image" isWhite={true} />
                 </Box>
               )}
-            </UIBoxInput>
+            </Box>
           )}
         </Stack>
       </UIStyledInputButton>

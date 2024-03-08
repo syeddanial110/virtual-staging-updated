@@ -1,11 +1,11 @@
 "use client";
 
-import OrderStepper from "@/containers/Order/OrderStepper";
-import Step1 from "@/containers/Order/Step1";
-import Step2 from "@/containers/Order/Step2";
-import Step3 from "@/containers/Order/Step3";
-import Step4 from "@/containers/Order/Step4";
-import Step5 from "@/containers/Order/Step5";
+import OrderStepper from "@/containers/PlaceOrder/OrderStepper";
+import Step1 from "@/containers/PlaceOrder/Step1";
+import Step2 from "@/containers/PlaceOrder/Step2";
+import Step3 from "@/containers/PlaceOrder/Step3";
+import Step4 from "@/containers/PlaceOrder/Step4";
+import Step5 from "@/containers/PlaceOrder/Step5";
 import DefaultLayout from "@/layout/default-layout";
 import { Box, Grid } from "@mui/material";
 import React from "react";

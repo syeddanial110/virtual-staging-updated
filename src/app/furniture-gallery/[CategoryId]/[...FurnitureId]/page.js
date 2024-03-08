@@ -77,7 +77,7 @@ const FurnitureId = () => {
           </Breadcrumbs>
         </Grid>
         <Grid item xs={11} md={4}>
-          <Image
+          <img
             src={`${ImageBASEURL}${productsData?.image}`}
             alt="furniture-img"
             height={500}

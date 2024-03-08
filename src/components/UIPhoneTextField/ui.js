@@ -23,6 +23,12 @@ export const CountryListWrapper = styled(Box)(({ theme, error }) => ({
   //   },
   "& > div > input": {
     padding: "12px 14px 12px 56px !important",
+    border: `1px solid ${theme.palette.primary.greyShade2}`,
+  },
+  "& > div > input:focus": {
+    borderColor: `${theme.palette.primary.main} !important`,
+    boxShadow: "none !important",
+    borderWidth: "1px !important",
   },
   "& .special-label": {
     display: "none",

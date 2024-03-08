@@ -263,7 +263,7 @@ const WebHeader = () => {
             }}
           />
         </Box>
-        <Box
+        {/* <Box
           sx={{
             "&:hover": {
               cursor: "pointer",
@@ -271,7 +271,7 @@ const WebHeader = () => {
           }}
         >
           <Image src={cart} alt="avatar" height={20} />
-        </Box>
+        </Box> */}
 
         <Popover
           // id={id}
@@ -298,7 +298,11 @@ const WebHeader = () => {
                 }}
                 key={`${item.title}-${i}`}
               >
-                <UITypography title={item.title} sx={{ color: "#4b4b4b" }} />
+                <UITypography
+                  title={item.title}
+                  sx={{ color: "#4b4b4b" }}
+                  onClick={() => router.push(item.link)}
+                />
               </Box>
             );
           })}

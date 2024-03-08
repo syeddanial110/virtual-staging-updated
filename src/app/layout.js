@@ -1,6 +1,10 @@
-import Providers from "@/store/Provider";
 import "./globals.css";
+import theme from "@/theme/theme";
+import favIcon from "../../public/favicon.png";
+import Head from "next/head";
+import Providers from "@/store/Provider";
 import ThemeWrapper from "@/components/ThemeWrapper/ThemeWrapper";
+
 export const metadata = {
   title: "Chris",
   description: "",

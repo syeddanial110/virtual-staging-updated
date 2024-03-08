@@ -1,4 +1,6 @@
 export const pathLocations = {
+  login: "/login",
+  signup: "/sign-up",
   home: "/",
   aboutUs: "/about-us",
   blogs: "/blogs",
@@ -14,4 +16,6 @@ export const pathLocations = {
   commercialVirtualRenovation: "/services/commercial-virtual-renovation",
   placeOrder: "/place-order",
   premadeGallery: "/residential-premade-gallery",
+  profile: "/profile",
+  order: "/order",
 };
