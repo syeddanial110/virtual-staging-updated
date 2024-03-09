@@ -15,6 +15,7 @@ import { ApiEndpoints } from "@/auth/apiEndpoints";
 import { toast } from "react-toastify";
 import { getToken, getUserId, setToken, setUserId } from "@/auth/Auth";
 import PaymentForm from "./PaymentForm";
+import StripeElement from "./StripeElement";
 
 const Step5 = () => {
   const dispatch = useDispatch();
