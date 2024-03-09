@@ -2,10 +2,41 @@ import UIDivider from "@/components/UIDivider";
 import UITypography from "@/components/UITypography/UITypography";
 import { Grid, Paper } from "@mui/material";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import paymentImg from "../../assets/images/paymentImg.png";
+import { useSelector } from "react-redux";
 
 const Invoice = () => {
+  const orderPlaceReducer = useSelector((state) => state?.orderPlaceReducer);
+  const [totalPrice, setTotalPrice] = useState("");
+  const [additionalServicePrice, setAdditionalServicePrice] = useState("");
+
+  useEffect(() => {
+    let x =
+      parseInt(orderPlaceReducer?.servicePrice) +
+      orderPlaceReducer?.deliveryPrice;
+
+    setTotalPrice(x);
+  }, [orderPlaceReducer?.servicePrice, orderPlaceReducer?.deliveryPrice]);
+
+  useEffect(() => {
+    let z = 0;
+    let x = orderPlaceReducer.uploadImageDetails.map((item) => {
+      let y = item.additionalServices.map((elm) => {
+        z += parseFloat(elm.price);
+        return z;
+      });
+      return y;
+    });
+    setAdditionalServicePrice(z);
+  }, [orderPlaceReducer.uploadImageDetails]);
+
+  useEffect(() => {
+    let x = totalPrice / orderPlaceReducer.promoCodeDiscount;
+
+    setTotalPrice(totalPrice - x);
+  }, [orderPlaceReducer?.promoCodeDiscount]);
+
   return (
     <Paper elevation={10}>
       <Grid container px={3} py={2} gap={2} justifyContent="center">
@@ -14,38 +45,43 @@ const Invoice = () => {
         </Grid>
         <Grid item xs={12} display="flex" justifyContent="space-between">
           <UITypography
-            title="Virtual Staging for 1 photos"
+            title={`${orderPlaceReducer?.serviceName}`}
             sx={{ fontSize: "14px !important" }}
           />
-          <UITypography title="$23.00" sx={{ fontSize: "14px !important" }} />
+          <UITypography
+            title={`$${orderPlaceReducer?.servicePrice}`}
+            sx={{ fontSize: "14px !important" }}
+          />
         </Grid>
         <Grid item xs={12} display="flex" justifyContent="space-between">
           <UITypography
-            title="Basic Editing for 0 photos"
+            title="Additional Services"
             sx={{ fontSize: "14px !important" }}
           />
-          <UITypography title="$0.00" sx={{ fontSize: "14px !important" }} />
+          <UITypography
+            title={`$${additionalServicePrice}`}
+            sx={{ fontSize: "14px !important" }}
+          />
         </Grid>
         <Grid item xs={12} display="flex" justifyContent="space-between">
           <UITypography
-            title="Clutter Removal for 0 photos"
+            title="Rapid Delivery"
             sx={{ fontSize: "14px !important" }}
           />
-          <UITypography title="$0.00" sx={{ fontSize: "14px !important" }} />
+          <UITypography
+            title={`$${orderPlaceReducer?.deliveryPrice}`}
+            sx={{ fontSize: "14px !important" }}
+          />
         </Grid>
         <Grid item xs={12} display="flex" justifyContent="space-between">
           <UITypography
-            title="Occupied To Vacant for 0 photos"
+            title="Promo Code Discount"
             sx={{ fontSize: "14px !important" }}
           />
-          <UITypography title="$0.00" sx={{ fontSize: "14px !important" }} />
-        </Grid>
-        <Grid item xs={12} display="flex" justifyContent="space-between">
           <UITypography
-            title="Image Modification for 0 photos"
+            title={`${orderPlaceReducer?.promoCodeDiscount}%`}
             sx={{ fontSize: "14px !important" }}
           />
-          <UITypography title="$0.00" sx={{ fontSize: "14px !important" }} />
         </Grid>
         <Grid item xs={12}>
           <UIDivider />
@@ -55,7 +91,10 @@ const Invoice = () => {
             title="ORDER TOTAL"
             sx={{ fontSize: "14px !important", fontWeight: "bold" }}
           />
-          <UITypography title="$23.00" sx={{ fontSize: "14px !important" }} />
+          <UITypography
+            title={`$${totalPrice}`}
+            sx={{ fontSize: "14px !important" }}
+          />
         </Grid>
       </Grid>
       <Grid container spacing={2} pb={3}>

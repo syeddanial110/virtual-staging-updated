@@ -13,32 +13,31 @@ import { useSelector } from "react-redux";
 
 const placeOrder = () => {
   const stepper = useSelector((state) => state?.stepperValueReducer);
+  const orderPlaceReducer = useSelector((state) => state?.orderPlaceReducer);
+  console.log("orderPlaceReducer", orderPlaceReducer);
+
   return (
     <DefaultLayout>
       <Grid container justifyContent="center">
         <Grid item xs={10}>
           <OrderStepper>
-            {stepper.step == 0 ? (
+            <Step1 />
+            <Step3 />
+            <Step4 />
+            <Step5 />
+            {/* {stepper.step == 0 ? (
               <Box sx={{ minHeight: "50vh" }} mt={4}>
-                <Step1 />
               </Box>
             ) : stepper.step == 1 ? (
               <Box sx={{ minHeight: "50vh" }} mt={4}>
-                <Step2 />
               </Box>
             ) : stepper.step == 2 ? (
               <Box sx={{ minHeight: "50vh" }} mt={4}>
-                <Step3 />
-              </Box>
-            ) : stepper.step == 3 ? (
-              <Box sx={{ minHeight: "50vh" }} mt={4}>
-                <Step4 />
               </Box>
             ) : (
               <Box sx={{ minHeight: "50vh" }} mt={4}>
-                <Step5 />
               </Box>
-            )}
+            )} */}
           </OrderStepper>
         </Grid>
       </Grid>

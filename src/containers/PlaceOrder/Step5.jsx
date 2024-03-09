@@ -5,11 +5,14 @@ import UISimpleTextField from "@/components/UITextField/UISimpleTextField";
 import UITypography from "@/components/UITypography/UITypography";
 import { addOrderData } from "@/store/orderPlaceSlice";
 import { Checkbox, FormControlLabel, Grid, Paper, Radio } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import Invoice from "./Invoice";
+import { apiPost } from "@/auth/ApiRequest";
+import { ApiEndpoints } from "@/auth/apiEndpoints";
+import { toast } from "react-toastify";
 
 const Step5 = () => {
   const dispatch = useDispatch();
@@ -20,12 +23,17 @@ const Step5 = () => {
   const [additionalServices, setAdditionalServices] = useState({
     property: "",
     deliveryType: "",
+    promoCode: "",
+    promoDiscount: "",
   });
+
+ 
 
   const handleRadioChange = (e, price) => {
     setAdditionalServices({
       ...additionalServices,
       deliveryType: e.target.value,
+      deliveryPrice: price,
     });
 
     const dataObj = {
@@ -35,31 +43,46 @@ const Step5 = () => {
     dispatch(addOrderData(dataObj));
   };
 
-  const handleCheckbox = (e) => {
-    setAdditionalServices({ ...additionalServices, property: e.target.value });
-    const dataObj = {
-      propertyVideo: e.target.value,
-      propertyPrice: 20,
-    };
-    dispatch(addOrderData(dataObj));
+  const handlePromoCodeInput = (e) => {
+    setAdditionalServices({ ...additionalServices, promoCode: e.target.value });
   };
 
+  const promoCodeSubmit = () => {
+    const dataObj = {
+      code: additionalServices.promoCode,
+    };
+    apiPost(
+      `${ApiEndpoints.promoCode}`,
+      dataObj,
+      (res) => {
+        console.log("res", res);
+        if (!res.valid) {
+          toast.error("Promo code is not valid");
+        } else {
+          toast.success("Promo code is valid");
+          setAdditionalServices({
+            ...additionalServices,
+            promoDiscount: res.discount,
+          });
+          const dataObj = {
+            promoCodeDiscount: res.discount,
+          };
+          dispatch(addOrderData(dataObj));
+        }
+      },
+      (err) => {}
+    );
+  };
+
+  console.log("additionalServices", additionalServices);
+  console.log("orderPlaceReducer", orderPlaceReducer);
+
   return (
-    <Grid container justifyContent="space-around" gap={1}>
+    <Grid container justifyContent="space-between" gap={1} mt={5}>
       <Grid item xs={6}>
         <UITypography type="heading" title="Additional services" />
         <UITypography title="Your property is ready to be staged. Select any additional service to greatly boost your property's value." />
         <Grid container gap={3} mt={3}>
-          <Grid item xs={7}>
-            <UICheckbox
-              label="Property video"
-              onChange={handleCheckbox}
-              value="propertyVideo"
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <UITypography title="+$20.00" sx={{ fontWeight: "bold" }} />
-          </Grid>
           <Grid item xs={12}>
             <UITypography
               title="Choose Rapid delivery"
@@ -109,11 +132,22 @@ const Step5 = () => {
           <Grid item xs={12}>
             <UITypography title="Enter a coupon code" />
           </Grid>
-          <Grid item xs={12}>
-            <UISimpleTextField placeholder="H4qw34D" />
+          <Grid item xs={4}>
+            <UISimpleTextField
+              placeholder="H4qw34D"
+              value={additionalServices.promoCode}
+              onChange={handlePromoCodeInput}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <UIButton
+              variant="contained"
+              label="Apply coupon"
+              onClick={promoCodeSubmit}
+            />
           </Grid>
           <Grid item xs={12}>
-            <UIButton variant="contained" label="Apply coupon" />
+            <UIButton variant="contained" label="Make Payment" isDark={true} />
           </Grid>
         </Grid>
       </Grid>

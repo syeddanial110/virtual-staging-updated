@@ -1,9 +1,13 @@
 export const ApiEndpoints = {
-  login: "/auth/login",
+  login: "/login",
+  register: "/register",
   getFurnitureCategory: "/categories",
   uploadImage: "/upload",
   getFurnitureProducts: "/category/products/", // /products/categoryId
   getSingleFurnitureProduct: "/product/",
-  getPremadeCategory: "/category/premade-get",
-  getPremadeProduct: "/product/premade-get",
+  getPremadeCategory: "/premade/categories",
+  getPremadeProduct: "/premade/category/products/", // /category/products/premadeCategoryId
+  getSinglePremadeProduct: "/premade/product/", // /productId
+  curatedCollection: "/curated-collections",
+  promoCode: "/promocode/check",
 };

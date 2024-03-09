@@ -14,13 +14,7 @@ import {
   initialStepperValue,
 } from "@/store/stepperValueSlice";
 
-const steps = [
-  "Personal info",
-  "Select style",
-  "Upload photos",
-  "Photo details",
-  "Add extras",
-];
+const steps = ["Personal info", "Upload photos", "Photo details", "Add extras"];
 
 export default function OrderStepper(props) {
   const [activeStep, setActiveStep] = React.useState(0);

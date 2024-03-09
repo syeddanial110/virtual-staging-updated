@@ -6,6 +6,8 @@ const initalState = {
   name: "",
   email: "",
   phoneNumber: "",
+  serviceName: "",
+  servicePrice: "",
   styleName: "",
   styleImage: "",
   styleId: "",
@@ -25,10 +27,9 @@ const initalState = {
     // ],
     // },
   ],
-  propertyVideo: "",
-  propertyPrice: "",
   rapidDelivery: "",
-  deliveryPrice: ""
+  deliveryPrice: "",
+  promoCodeDiscount: "",
 };
 
 export const orderPlaceSlice = createSlice({
@@ -36,7 +37,6 @@ export const orderPlaceSlice = createSlice({
   initialState: initalState,
   reducers: {
     addOrderData(state, action) {
-      console.log("action.payload", action.payload);
       // if (action.payload?.clickedIndex) {
       //   const { clickedIndex, newData } = action.payload;
       //   const updatedUploadImageDetails = [...state.uploadImageDetails];

@@ -62,6 +62,9 @@ const Step3 = () => {
           roomArea: orderPlaceReducer.uploadImageDetails[i]?.roomArea
             ? orderPlaceReducer.uploadImageDetails[i]?.roomArea
             : "",
+          curatedId: orderPlaceReducer.uploadImageDetails[i]?.curatedId
+            ? orderPlaceReducer.uploadImageDetails[i]?.curatedId
+            : "",
           basicItems: orderPlaceReducer.uploadImageDetails[i]?.basicItems
             ? orderPlaceReducer.uploadImageDetails[i]?.basicItems
             : [],
@@ -69,7 +72,10 @@ const Step3 = () => {
             ?.otherBasicItems
             ? orderPlaceReducer.uploadImageDetails[i]?.otherBasicItems
             : "",
-          additionalServices: [],
+          additionalServices: orderPlaceReducer.uploadImageDetails[i]
+            ?.additionalServices
+            ? orderPlaceReducer.uploadImageDetails[i]?.additionalServices
+            : [],
         };
       });
       const dataObj = {
@@ -91,7 +97,7 @@ const Step3 = () => {
 
   return (
     <>
-      <Grid container gap={2}>
+      <Grid container gap={2} mt={5}>
         <Grid item xs={12}>
           <UITypography
             type="heading"

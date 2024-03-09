@@ -1,3 +1,5 @@
+import { apiGet } from "@/auth/ApiRequest";
+import { ApiEndpoints } from "@/auth/apiEndpoints";
 import UIFileButton from "@/components/UIButton/UIFileButton";
 import UICheckbox from "@/components/UICheckbox/UICheckbox";
 import UISelect from "@/components/UISelect/UISelect";
@@ -10,22 +12,37 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const Step4 = () => {
-  const [file, setFile] = useState(null);
-  const [fileDataURL, setFileDataURL] = useState([]);
   const [basicItemVal, setBasicItemVal] = useState([]);
-  const [additionalServicesVal, setAdditionalServicesVal] = useState([]);
+  const [additionalServicesVal, setAdditionalServicesVal] = useState([
+    // { title: "", price: "" },
+  ]);
   const [otherBasicItemsValue, setOtherBasicItemsValue] = useState("");
   const [basicItems, setBasicItems] = useState([]);
   const [uploadImageDetails, setUploadImageDetails] = useState([]);
 
+  const [curatedCollection, setCuratedCollection] = useState([]);
+
   const orderPlaceReducer = useSelector((state) => state?.orderPlaceReducer);
 
   let additionalItems = [
-    "Basic image editing - $1.50 extra",
-    "Clutter removal - $8.00 extra",
-    "Occupied to vacant - $15.00 extra",
-    "Image modification - $15.00 extra",
+    {
+      title: "Basic image editing",
+      price: "1.50",
+    },
+    {
+      title: "Clutter removal",
+      price: "8.00",
+    },
+    {
+      title: "Occupied to vacant",
+      price: "15.00",
+    },
+    {
+      title: "Image modification",
+      price: "15.00",
+    },
   ];
+  // "Clutter removal - $8.00 extra",
 
   let roomArea = [
     {
@@ -60,104 +77,103 @@ const Step4 = () => {
 
   const disptach = useDispatch();
 
-  const handleAdditionalServices = (e, i) => {
-    setAdditionalServicesVal([...additionalServicesVal, e.target.value]);
+  // additional services function
+  const handleAdditionalServices = (e, i, ind, price) => {
+    console.log('price', price)
+    const isChecked = e.target.checked;
+    const title = e.target.value;
 
-    setUploadImageDetails((prevState) => {
-      const newState = [...prevState];
-      newState[i] = {
-        ...newState[i],
-        additionalServices: [...newState[i].additionalServices, e.target.value],
-      };
-      return newState;
-    });
-  };
-
-  const _handleChangeImage = (e) => {
-    const file = e.target.files[0];
-
-    setFile(file);
-  };
-
-  const handleRemoveImage = (ind) => {
-    let x = [...fileDataURL];
-    x.splice(ind, 1);
-    setFileDataURL(x);
-    if (x.length == 0) {
-      const dataObj = {
-        uploadImageDetails: [],
-      };
-      disptach(addOrderData(dataObj));
-    }
-  };
-
-  // image file use Effect
-
-  useEffect(() => {
-    let fileReader,
-      isCancel = false;
-    if (file) {
-      fileReader = new FileReader();
-      fileReader.onload = (e) => {
-        const { result } = e.target;
-        if (result && !isCancel) {
-          setFileDataURL([...fileDataURL, result]);
-        }
-      };
-      fileReader.readAsDataURL(file);
-    }
-    return () => {
-      isCancel = true;
-      if (fileReader && fileReader.readyState === 1) {
-        fileReader.abort();
-      }
-    };
-  }, [file]);
-
-  useEffect(() => {
-    let y;
-    if (fileDataURL.length > 0) {
-      y = fileDataURL.map((item, i) => {
-        return {
-          image: item,
-          roomArea: orderPlaceReducer.uploadImageDetails[i]?.roomArea
-            ? orderPlaceReducer.uploadImageDetails[i]?.roomArea
-            : "",
-          basicItems: orderPlaceReducer.uploadImageDetails[i]?.basicItems
-            ? orderPlaceReducer.uploadImageDetails[i]?.basicItems
-            : [],
-          otherBasicItems: orderPlaceReducer.uploadImageDetails[i]
-            ?.otherBasicItems
-            ? orderPlaceReducer.uploadImageDetails[i]?.otherBasicItems
-            : "",
-          additionalServices: [],
+    if (isChecked) {
+      setAdditionalServicesVal((prevServices) => [
+        ...prevServices,
+        { title: e.target.value, price: price },
+      ]);
+      setUploadImageDetails((prevDetails) => {
+        const newState = [...prevDetails];
+        newState[i] = {
+          ...newState[i],
+          additionalServices: [
+            ...(newState[i].additionalServices || []),
+            { title: e.target.value, price: price },
+          ],
         };
+        return newState;
       });
-      const dataObj = {
-        uploadImageDetails: y,
-      };
-
-      disptach(addOrderData(dataObj));
+    } else {
+      setAdditionalServicesVal((prevServices) => [
+        ...prevServices,
+        { title: e.target.value, price: price },
+      ]);
+      const x = orderPlaceReducer?.uploadImageDetails[i]?.additionalServices;
+      let newX = x?.filter((item, index) => item.title !== e.target.value);
+      setUploadImageDetails((prevDetails) => {
+        const newState = [...prevDetails];
+        newState[i] = {
+          ...newState[i],
+          additionalServices: newX,
+        };
+        return newState;
+      });
     }
-  }, [fileDataURL.length]);
 
-  // image upload useEffect end
+    // setAdditionalServicesVal((prevServices) => [
+    //   ...prevServices,
+    //   { title: e.target.value, price: "$40" },
+    // ]);
+    // setUploadImageDetails((prevDetails) => {
+    //   const newState = [...prevDetails];
+    //   newState[i] = {
+    //     ...newState[i],
+    //     additionalServices: [
+    //       ...(newState[i].additionalServices || []),
+    //       { title: e.target.value, price: "$40" },
+    //     ],
+    //   };
+    //   return newState;
+    // });
+  };
+  // additional services function end
+
+  // curated collection api get
+  const getCuratedCollection = () => {
+    apiGet(
+      `${ApiEndpoints.curatedCollection}`,
+      (res) => {
+        console.log("res", res);
+        setCuratedCollection(res);
+      },
+      (err) => {
+        console.log("err", err);
+      }
+    );
+  };
+
+  useEffect(() => {
+    getCuratedCollection();
+  }, []);
+
+  // curated collection api get end
 
   // this set the value from reducer in useState
   useEffect(() => {
     setUploadImageDetails(orderPlaceReducer.uploadImageDetails);
   }, [orderPlaceReducer.uploadImageDetails.length]);
+  useEffect(() => {
+    setUploadImageDetails(orderPlaceReducer.uploadImageDetails);
+  }, []);
 
   //#region handle basic items
 
-  const handleChange = (e, i) => {
+  const handleChange = (e, i, elm) => {
     setBasicItemVal([...basicItemVal, e.target.value]);
+
+    // const filteredId =
 
     setUploadImageDetails((prevState) => {
       const newState = [...prevState];
       newState[i] = {
         ...newState[i],
-        basicItems: [...newState[i].basicItems, e.target.value],
+        basicItems: [...newState[i].basicItems, elm.id],
       };
       return newState;
     });
@@ -185,7 +201,7 @@ const Step4 = () => {
   // start handle other basic items
   const handleInputChange = (e, i) => {
     const { value } = e.target;
- 
+
     setOtherBasicItemsValue(value);
 
     setUploadImageDetails((prevState) => {
@@ -202,30 +218,34 @@ const Step4 = () => {
 
   // start => room area select
   const handleRoomAreaSelect = (e, i) => {
-    let filteredRoomArea = roomArea.filter((elm) => elm.name == e.target.value);
+    let filteredRoomArea = curatedCollection.filter(
+      (elm) => elm.title == e.target.value
+    );
 
     setUploadImageDetails((prevState) => {
       const newState = [...prevState];
       newState[i] = {
         ...newState[i],
         roomArea: e.target.value,
+        curatedId: filteredRoomArea[0].id,
       };
       return newState;
     });
 
-    setBasicItems(filteredRoomArea[0].basicItems);
+    setBasicItems(filteredRoomArea[0].choices);
   };
 
   useEffect(() => {
-    setBasicItems(roomArea[0].basicItems);
-  }, []);
+    if (curatedCollection.length > 0)
+      setBasicItems(curatedCollection[0].choices);
+  }, [curatedCollection.length]);
 
   // end room area select
 
- 
+  
 
   return (
-    <Grid container gap={3}>
+    <Grid container gap={3} mt={5}>
       <Grid item xs={12}>
         <UITypography type="heading" title="Add details about your photos*" />
       </Grid>
@@ -282,8 +302,8 @@ const Step4 = () => {
                     placeholder="Select One"
                     fullWidth
                   >
-                    {roomArea.map((item) => {
-                      return <MenuItem value={item.name}>{item.name}</MenuItem>;
+                    {curatedCollection.map((elm) => {
+                      return <MenuItem value={elm.title}>{elm.title}</MenuItem>;
                     })}
                   </UISelect>
                   <UITypography title="Would you like any of these items in your room?" />
@@ -292,13 +312,13 @@ const Step4 = () => {
                     sx={{ color: (theme) => theme.palette.primary.greyShade5 }}
                   />
                   <Grid container>
-                    {basicItems.map((item) => {
+                    {basicItems.map((elm) => {
                       return (
                         <Grid item xs={6}>
                           <UICheckbox
-                            onChange={(e) => handleChange(e, i)}
-                            value={item}
-                            label={item}
+                            onChange={(e) => handleChange(e, i, elm)}
+                            value={elm.title}
+                            label={elm.title}
                           />
                         </Grid>
                       );
@@ -311,7 +331,7 @@ const Step4 = () => {
                     rows={4}
                     fullWidth
                     // value={item.uploadImageDetails[i].otherBasicItems}
-                    handleChange={(e) => handleInputChange(e, i)}
+                    onChange={(e) => handleInputChange(e, i)}
                   />
                 </Stack>
               </Grid>
@@ -321,12 +341,15 @@ const Step4 = () => {
                     title="Additional services"
                     sx={{ fontSize: "18px !important" }}
                   />
-                  {additionalItems.map((item) => {
+                  {additionalItems.map((elm, ind) => {
                     return (
                       <UICheckbox
-                        value={item}
-                        label={item}
-                        onChange={(e) => handleAdditionalServices(e, i)}
+                        value={elm.title}
+                        // checked={}
+                        label={`${elm.title} - $${elm.price} extra`}
+                        onChange={(e) =>
+                          handleAdditionalServices(e, i, ind, elm.price)
+                        }
                       />
                     );
                   })}
