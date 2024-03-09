@@ -30,14 +30,12 @@ const FutureGallery = () => {
     apiGet(
       `${ApiEndpoints.getFurnitureCategory}`,
       (res) => {
-        console.log("res", res);
         setIsLoading(false);
         setCategoryData(res);
         setFilteredCategory(res);
       },
       (err) => {
         setIsLoading(false);
-        console.log("err", err);
       }
     );
   };

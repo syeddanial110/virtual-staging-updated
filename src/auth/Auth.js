@@ -1,9 +1,17 @@
-import Cookies from "js-cookie";
+import Cookies from 'js-cookie'
 
 export const setToken = (token) => {
-  return Cookies.set("token", token, { expires: 360 });
-};
+  return Cookies.set('token', token, { expires: 360 })
+}
 
 export const getToken = () => {
-  return Cookies.get("token");
-};
+  return Cookies.get('token')
+}
+
+export const setUserId = (userId) => {
+  return Cookies.set('userId', userId, { expires: 360 })
+}
+
+export const getUserId = () => {
+  return Cookies.get('userId')
+}

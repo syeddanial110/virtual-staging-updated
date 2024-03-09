@@ -13,6 +13,8 @@ import Invoice from "./Invoice";
 import { apiPost } from "@/auth/ApiRequest";
 import { ApiEndpoints } from "@/auth/apiEndpoints";
 import { toast } from "react-toastify";
+import { getToken, getUserId, setToken, setUserId } from "@/auth/Auth";
+import PaymentForm from "./PaymentForm";
 
 const Step5 = () => {
   const dispatch = useDispatch();
@@ -26,8 +28,6 @@ const Step5 = () => {
     promoCode: "",
     promoDiscount: "",
   });
-
- 
 
   const handleRadioChange = (e, price) => {
     setAdditionalServices({
@@ -74,8 +74,52 @@ const Step5 = () => {
     );
   };
 
-  console.log("additionalServices", additionalServices);
-  console.log("orderPlaceReducer", orderPlaceReducer);
+  const handleMakePayment = () => {
+    const orderItem = orderPlaceReducer?.uploadImageDetails.map((item) => {
+      return {
+        image: item.image,
+        curated_collection_id: `${item.curatedId}`,
+        choice_ids: item.basicItems,
+        additional_services: item.additionalServices.map((elm) => {
+          return {
+            service_name: elm.title,
+            service_price: elm.price,
+          };
+        }),
+        additional_notes: item.otherBasicItems,
+      };
+    });
+    const id = getUserId();
+    const token = getToken();
+
+    const dataObj = {
+      name: orderPlaceReducer.name,
+      email: orderPlaceReducer.email,
+      user_id: id === undefined ? null : id,
+      phone: orderPlaceReducer.phoneNumber,
+      service_name: orderPlaceReducer.serviceName,
+      service_price: parseInt(orderPlaceReducer.servicePrice),
+      total_price: parseFloat(orderPlaceReducer.total),
+      order_items: orderItem,
+    };
+    console.log("dataObj", dataObj);
+
+    apiPost(
+      `${ApiEndpoints.createOrder}`,
+      dataObj,
+      (res) => {
+        console.log("res", res);
+        toast.success(res.message);
+        if (id == undefined) {
+          setToken(res.token);
+          setUserId(res.user.id);
+        }
+      },
+      (err) => {
+        console.log("err", err);
+      }
+    );
+  };
 
   return (
     <Grid container justifyContent="space-between" gap={1} mt={5}>
@@ -83,52 +127,6 @@ const Step5 = () => {
         <UITypography type="heading" title="Additional services" />
         <UITypography title="Your property is ready to be staged. Select any additional service to greatly boost your property's value." />
         <Grid container gap={3} mt={3}>
-          <Grid item xs={12}>
-            <UITypography
-              title="Choose Rapid delivery"
-              sx={{ fontWeight: "bold" }}
-            />
-          </Grid>
-          <Grid item xs={7}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  icon={<RadioButtonUncheckedIcon />}
-                  checkedIcon={<RadioButtonCheckedIcon />}
-                  checked={
-                    additionalServices.deliveryType == "rapidDelivery" && true
-                  }
-                />
-              }
-              value="rapidDelivery"
-              onChange={(e) => handleRadioChange(e, 6)}
-              label="Rapid delivery (24 hours)"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  icon={<RadioButtonUncheckedIcon />}
-                  checkedIcon={<RadioButtonCheckedIcon />}
-                  checked={
-                    additionalServices.deliveryType == "superDelivery" && true
-                  }
-                />
-              }
-              value="superDelivery"
-              onChange={(e) => handleRadioChange(e, 12)}
-              label="Super Rapid delivery (12 hours)"
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <UITypography
-              title="+$6.00/image"
-              sx={{ paddingTop: "10px", fontWeight: "bold" }}
-            />
-            <UITypography
-              title="+$12.00/image"
-              sx={{ paddingTop: "14px", fontWeight: "bold" }}
-            />
-          </Grid>
           <Grid item xs={12}>
             <UITypography title="Enter a coupon code" />
           </Grid>
@@ -147,7 +145,15 @@ const Step5 = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <UIButton variant="contained" label="Make Payment" isDark={true} />
+            <StripeElement />
+          </Grid>
+          <Grid item xs={12}>
+            <UIButton
+              variant="contained"
+              label="Make Payment"
+              isDark={true}
+              onClick={handleMakePayment}
+            />
           </Grid>
         </Grid>
       </Grid>

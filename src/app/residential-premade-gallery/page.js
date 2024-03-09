@@ -1,44 +1,41 @@
-"use client";
+'use client'
 
-import { apiGet } from "@/auth/ApiRequest";
-import { ApiEndpoints } from "@/auth/apiEndpoints";
-import FurnitureCard from "@/components/FurnitreCard/FurnitureCard";
-import UILoader from "@/components/UILoader/UILoader";
-import UITypography from "@/components/UITypography/UITypography";
-import DefaultLayout from "@/layout/default-layout";
-import { pathLocations } from "@/utlils/pathLocations";
-import { Grid } from "@mui/material";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { ImageBASEURL, apiGet } from '@/auth/ApiRequest'
+import { ApiEndpoints } from '@/auth/apiEndpoints'
+import FurnitureCard from '@/components/FurnitreCard/FurnitureCard'
+import UILoader from '@/components/UILoader/UILoader'
+import UITypography from '@/components/UITypography/UITypography'
+import DefaultLayout from '@/layout/default-layout'
+import { pathLocations } from '@/utlils/pathLocations'
+import { Grid } from '@mui/material'
+import { useRouter } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
 
 const ResidentialGallery = () => {
-  const router = useRouter();
+  const router = useRouter()
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true)
 
-  const [premadeCategory, setPremadeCategory] = useState([]);
+  const [premadeCategory, setPremadeCategory] = useState([])
 
   const getPremadeCategory = () => {
     apiGet(
       `${ApiEndpoints.getPremadeCategory}`,
       (res) => {
-        console.log("res", res);
-        setIsLoading(false);
-        if (res.success) {
-          setPremadeCategory(res.data);
-        }
+        console.log('res', res)
+        setIsLoading(false)
+        setPremadeCategory(res)
       },
       (err) => {
-        console.log("err", err);
-      }
-    );
-  };
+        console.log('err', err)
+      },
+    )
+  }
 
   useEffect(() => {
-    getPremadeCategory();
-  }, []);
+    getPremadeCategory()
+  }, [])
 
-  console.log('premadeCategory', premadeCategory)
 
   return (
     <DefaultLayout>
@@ -85,21 +82,21 @@ const ResidentialGallery = () => {
                           sm={5}
                           md={3.5}
                           lg={3.8}
-                          key={`${item.categoryName}-${i}`}
+                          key={`${item.title}-${i}`}
                         >
                           <FurnitureCard
-                            img={`${item.image}`}
-                            title={item.categoryName}
+                            img={`${ImageBASEURL}${item.image}`}
+                            title={item.title}
                             onClick={() => {
                               router.push(
-                                `${pathLocations.premadeGallery}/${item._id}`
-                              );
+                                `${pathLocations.premadeGallery}/${item.id}`,
+                              )
                             }}
                             imgObjectFit="cover"
                           />
                         </Grid>
                       </>
-                    );
+                    )
                   })
                 ) : (
                   <Grid item xs={12}>
@@ -112,7 +109,7 @@ const ResidentialGallery = () => {
         </Grid>
       </Grid>
     </DefaultLayout>
-  );
-};
+  )
+}
 
-export default ResidentialGallery;
+export default ResidentialGallery

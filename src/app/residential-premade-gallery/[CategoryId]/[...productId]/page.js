@@ -1,47 +1,47 @@
-"use client";
+'use client'
 
-import DefaultLayout from "@/layout/default-layout";
-import { Breadcrumbs, Grid } from "@mui/material";
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import UITypography from "@/components/UITypography/UITypography";
-import { pathLocations } from "@/utlils/pathLocations";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { accesoriesArr } from "@/utlils/data";
-import { ImageBASEURL, apiGet } from "@/auth/ApiRequest";
-import { ApiEndpoints } from "@/auth/apiEndpoints";
+import DefaultLayout from '@/layout/default-layout'
+import { Breadcrumbs, Grid } from '@mui/material'
+import Image from 'next/image'
+import React, { useEffect, useState } from 'react'
+import UITypography from '@/components/UITypography/UITypography'
+import { pathLocations } from '@/utlils/pathLocations'
+import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
+import { accesoriesArr } from '@/utlils/data'
+import { ImageBASEURL, apiGet } from '@/auth/ApiRequest'
+import { ApiEndpoints } from '@/auth/apiEndpoints'
 
 const FurnitureId = () => {
-  const pathname = usePathname();
-  const router = useRouter();
+  const pathname = usePathname()
+  const router = useRouter()
 
   const [productsData, setProductsData] = useState({
-    productName: "",
-    image: "",
-  });
+    productName: '',
+    image: '',
+  })
 
   const getProduct = () => {
-    const x = pathname.split("/");
+    const x = pathname.split('/')
 
     if (x.length > 0)
       apiGet(
-        `${ApiEndpoints.getPremadeProduct}/${x[3]}`,
+        `${ApiEndpoints.getSinglePremadeProduct}${x[3]}`,
         (res) => {
           setProductsData({
-            productName: res.data.productName,
-            image: res.data.image,
-          });
+            productName: res.title,
+            image: res.image,
+          })
         },
         (err) => {
-          console.log("err", err);
-        }
-      );
-  };
+          console.log('err', err)
+        },
+      )
+  }
 
   useEffect(() => {
-    getProduct();
-  }, []);
+    getProduct()
+  }, [])
 
   return (
     <DefaultLayout>
@@ -58,7 +58,7 @@ const FurnitureId = () => {
               underline="hover"
               color="inherit"
               href={pathLocations?.premadeGallery}
-              style={{ color: "#3C828E" }}
+              style={{ color: '#3C828E' }}
             >
               Premade Gallery
             </Link>
@@ -68,20 +68,20 @@ const FurnitureId = () => {
               // }
               title={productsData.productName}
               sx={{
-                "&:hover": {
-                  cursor: "pointer",
+                '&:hover': {
+                  cursor: 'pointer',
                 },
               }}
             />
           </Breadcrumbs>
         </Grid>
         <Grid item xs={11} md={4}>
-          <Image
-            src={`${productsData?.image}`}
+          <img
+            src={`${ImageBASEURL}${productsData?.image}`}
             alt="furniture-img"
             height={500}
             width={500}
-            style={{ width: "100%", objectFit: "cover" }}
+            style={{ width: '100%', objectFit: 'cover' }}
           />
         </Grid>
         <Grid item xs={11} md={5}>
@@ -93,7 +93,7 @@ const FurnitureId = () => {
         </Grid>
       </Grid>
     </DefaultLayout>
-  );
-};
+  )
+}
 
-export default FurnitureId;
+export default FurnitureId

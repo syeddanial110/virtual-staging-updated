@@ -21,25 +21,19 @@ const Step4 = () => {
   const [uploadImageDetails, setUploadImageDetails] = useState([]);
 
   const [curatedCollection, setCuratedCollection] = useState([]);
+  const [isCuratedCollection, setIsCuratedCollection] = useState(true);
+  const [curatedCollectionVal, setCuratedCollectionVal] = useState("");
 
   const orderPlaceReducer = useSelector((state) => state?.orderPlaceReducer);
 
   let additionalItems = [
     {
-      title: "Basic image editing",
-      price: "1.50",
+      title: "Object Removal ",
+      price: "8",
     },
     {
-      title: "Clutter removal",
-      price: "8.00",
-    },
-    {
-      title: "Occupied to vacant",
-      price: "15.00",
-    },
-    {
-      title: "Image modification",
-      price: "15.00",
+      title: "Occupied to Vacant",
+      price: "15",
     },
   ];
   // "Clutter removal - $8.00 extra",
@@ -67,19 +61,10 @@ const Step4 = () => {
     },
   ];
 
-  // let basicItems = [
-  //   "Closet",
-  //   "Gym",
-  //   "Hobby/Craft room",
-  //   "Laundry room",
-  //   "Play Area",
-  // ];
-
   const disptach = useDispatch();
 
   // additional services function
   const handleAdditionalServices = (e, i, ind, price) => {
-    console.log('price', price)
     const isChecked = e.target.checked;
     const title = e.target.value;
 
@@ -169,21 +154,47 @@ const Step4 = () => {
 
     // const filteredId =
 
-    setUploadImageDetails((prevState) => {
-      const newState = [...prevState];
-      newState[i] = {
-        ...newState[i],
-        basicItems: [...newState[i].basicItems, elm.id],
-      };
-      return newState;
-    });
+    // setUploadImageDetails((prevState) => {
+    //   const newState = [...prevState];
+    //   newState[i] = {
+    //     ...newState[i],
+    //     basicItems: [...newState[i].basicItems, elm.id],
+    //   };
+    //   return newState;
+    // });
+
+    const isChecked = e.target.checked;
+    const value = e.target.value;
+
+    if (isChecked) {
+      setUploadImageDetails((prevDetails) => {
+        const newState = [...prevDetails];
+        newState[i] = {
+          ...newState[i],
+          basicItems: [...newState[i].basicItems, elm.id],
+        };
+        return newState;
+      });
+    } else {
+      const x = orderPlaceReducer?.uploadImageDetails[i]?.basicItems;
+      let newX = x?.filter((item, index) => item !== elm.id);
+      setUploadImageDetails((prevDetails) => {
+        const newState = [...prevDetails];
+        newState[i] = {
+          ...newState[i],
+          basicItems: newX,
+        };
+        return newState;
+      });
+    }
   };
 
   useEffect(() => {
     if (
       basicItemVal.length > 0 ||
       otherBasicItemsValue.length > 0 ||
-      additionalServicesVal.length > 0
+      additionalServicesVal.length > 0 ||
+      curatedCollectionVal.length > 0
     ) {
       const dataObj = {
         uploadImageDetails: uploadImageDetails,
@@ -194,6 +205,7 @@ const Step4 = () => {
     basicItemVal.length,
     otherBasicItemsValue.length,
     additionalServicesVal.length,
+    curatedCollectionVal.length,
   ]);
 
   //#endregion handle basic items end
@@ -222,6 +234,8 @@ const Step4 = () => {
       (elm) => elm.title == e.target.value
     );
 
+    setCuratedCollectionVal(e.target.value);
+
     setUploadImageDetails((prevState) => {
       const newState = [...prevState];
       newState[i] = {
@@ -240,9 +254,21 @@ const Step4 = () => {
       setBasicItems(curatedCollection[0].choices);
   }, [curatedCollection.length]);
 
+  useEffect(() => {
+    if (
+      orderPlaceReducer?.serviceName == "Virtual Twilights" ||
+      orderPlaceReducer?.serviceName == "Commercial Virtual Staging" ||
+      orderPlaceReducer?.serviceName == "Commercial Virtual Renovation"
+    ) {
+      setIsCuratedCollection(false);
+    } else {
+      setIsCuratedCollection(true);
+    }
+  }, [orderPlaceReducer?.serviceName]);
+
   // end room area select
 
-  
+  console.log("uploadImageDetails", uploadImageDetails);
 
   return (
     <Grid container gap={3} mt={5}>
@@ -289,72 +315,90 @@ const Step4 = () => {
                   borderRightColor: (theme) => theme.palette.primary.greyShade3,
                   borderRightStyle: "solid",
                   paddingRight: "12px",
+                  py: 2,
                 }}
               >
-                <Stack gap={2} py={2}>
-                  <UITypography
-                    title="Room/Area*"
-                    sx={{ fontSize: "18px !important" }}
-                  />
-                  <UISelect
-                    onChange={(e) => handleRoomAreaSelect(e, i)}
-                    // defaultValue={roomArea[0].name}
-                    placeholder="Select One"
-                    fullWidth
-                  >
-                    {curatedCollection.map((elm) => {
-                      return <MenuItem value={elm.title}>{elm.title}</MenuItem>;
-                    })}
-                  </UISelect>
-                  <UITypography title="Would you like any of these items in your room?" />
-                  <UITypography
-                    title="(Basic items will be added)"
-                    sx={{ color: (theme) => theme.palette.primary.greyShade5 }}
-                  />
-                  <Grid container>
-                    {basicItems.map((elm) => {
+                {isCuratedCollection ? (
+                  <Stack gap={2} py={2}>
+                    <UITypography
+                      title="Room/Area*"
+                      sx={{ fontSize: "18px !important" }}
+                    />
+                    <UISelect
+                      onChange={(e) => handleRoomAreaSelect(e, i)}
+                      // defaultValue={roomArea[0].name}
+                      placeholder="Select One"
+                      fullWidth
+                    >
+                      {curatedCollection.map((elm) => {
+                        return (
+                          <MenuItem value={elm.title}>{elm.title}</MenuItem>
+                        );
+                      })}
+                    </UISelect>
+                    <UITypography title="Would you like any of these items in your room?" />
+                    <UITypography
+                      title="(Basic items will be added)"
+                      sx={{
+                        color: (theme) => theme.palette.primary.greyShade5,
+                      }}
+                    />
+                    <Grid container>
+                      {basicItems.map((elm) => {
+                        return (
+                          <Grid item xs={6}>
+                            <UICheckbox
+                              onChange={(e) => handleChange(e, i, elm)}
+                              value={elm.title}
+                              label={elm.title}
+                            />
+                          </Grid>
+                        );
+                      })}
+                    </Grid>
+                  </Stack>
+                ) : (
+                  <></>
+                )}
+                <UITypography
+                  title="Not mentioned? Type them in here"
+                  sx={{ pt: 2 }}
+                />
+                <UISimpleTextField
+                  placeholder="Stydy, Chair, desswer etc"
+                  multiline
+                  rows={4}
+                  fullWidth
+                  // value={item.uploadImageDetails[i].otherBasicItems}
+                  onChange={(e) => handleInputChange(e, i)}
+                />
+              </Grid>
+              {orderPlaceReducer?.serviceName !== "Virtual Twilights" ? (
+                <Grid item xs={3.5}>
+                  <Stack gap={1} py={2}>
+                    <UITypography
+                      title="Additional services"
+                      sx={{ fontSize: "18px !important" }}
+                    />
+                    {additionalItems.map((elm, ind) => {
                       return (
-                        <Grid item xs={6}>
-                          <UICheckbox
-                            onChange={(e) => handleChange(e, i, elm)}
-                            value={elm.title}
-                            label={elm.title}
-                          />
-                        </Grid>
+                        <UICheckbox
+                          value={elm.title}
+                          // checked={}
+                          label={`${elm.title} - $${elm.price} extra`}
+                          onChange={(e) =>
+                            handleAdditionalServices(e, i, ind, elm.price)
+                          }
+                        />
                       );
                     })}
-                  </Grid>
-                  <UITypography title="Not mentioned? Type them in here" />
-                  <UISimpleTextField
-                    placeholder="Stydy, Chair, desswer etc"
-                    multiline
-                    rows={4}
-                    fullWidth
-                    // value={item.uploadImageDetails[i].otherBasicItems}
-                    onChange={(e) => handleInputChange(e, i)}
-                  />
-                </Stack>
-              </Grid>
-              <Grid item xs={3.5}>
-                <Stack gap={1} py={2}>
-                  <UITypography
-                    title="Additional services"
-                    sx={{ fontSize: "18px !important" }}
-                  />
-                  {additionalItems.map((elm, ind) => {
-                    return (
-                      <UICheckbox
-                        value={elm.title}
-                        // checked={}
-                        label={`${elm.title} - $${elm.price} extra`}
-                        onChange={(e) =>
-                          handleAdditionalServices(e, i, ind, elm.price)
-                        }
-                      />
-                    );
-                  })}
-                </Stack>
-              </Grid>
+                  </Stack>
+                </Grid>
+              ) : (
+                <Box pt={4}>
+                  <UITypography title="No Additional Services" />
+                </Box>
+              )}
             </Grid>
           );
         })}

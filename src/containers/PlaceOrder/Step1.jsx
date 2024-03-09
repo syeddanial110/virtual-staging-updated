@@ -84,7 +84,6 @@ const Step1 = () => {
     }
   }, []);
 
-  console.log("orderPlaceReducer", orderPlaceReducer);
 
   return (
     <>

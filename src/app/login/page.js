@@ -1,17 +1,21 @@
-"use client";
+'use client'
 
-import UITypography from "@/components/UITypography/UITypography";
-import { FormWrapper, LoginWrapper } from "@/containers/Login/ui";
-import { Grid, InputAdornment } from "@mui/material";
-import React from "react";
-import EmailIcon from "@mui/icons-material/Email";
-import UITextField from "@/components/UITextField/UITextField";
-import UIButton from "@/components/UIButton/UIButton";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { loginSchema } from "@/schema/schema";
-import { useRouter } from "next/navigation";
-import { pathLocations } from "@/utlils/pathLocations";
+import UITypography from '@/components/UITypography/UITypography'
+import { FormWrapper, LoginWrapper } from '@/containers/Login/ui'
+import { Grid, InputAdornment } from '@mui/material'
+import React from 'react'
+import EmailIcon from '@mui/icons-material/Email'
+import UITextField from '@/components/UITextField/UITextField'
+import UIButton from '@/components/UIButton/UIButton'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { loginSchema } from '@/schema/schema'
+import { useRouter } from 'next/navigation'
+import { pathLocations } from '@/utlils/pathLocations'
+import { apiPost } from '../../auth/ApiRequest'
+import { ApiEndpoints } from '../../auth/apiEndpoints'
+import { toast } from 'react-toastify'
+import { setToken, setUserId } from '@/auth/Auth'
 
 const Login = () => {
   const {
@@ -20,19 +24,33 @@ const Login = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(loginSchema),
-    defaultValues: { email: "", password: "" },
-  });
+    defaultValues: { email: '', password: '' },
+  })
 
-  const router = useRouter();
+  const router = useRouter()
 
   const handleLogin = async (data) => {
     const dataObj = {
       email: data.email,
       password: data.password,
-      role: "admin",
-    };
-    router.push(pathLocations.home);
-  };
+    }
+
+    apiPost(
+      `${ApiEndpoints.login}`,
+      dataObj,
+      (res) => {
+        console.log('res', res)
+        setToken(res.token)
+        setUserId(res?.user?.id)
+        toast.success('Successfully login')
+        router.push(pathLocations.home)
+      },
+      (err) => {
+        console.log('err', err)
+        toast.error(err?.response?.data?.error)
+      },
+    )
+  }
   return (
     <LoginWrapper>
       <Grid container justifyContent="center" alignItems="center">
@@ -45,7 +63,7 @@ const Login = () => {
                     type="heading"
                     title="Login"
                     textAlign="center"
-                    sx={{ color: "white" }}
+                    sx={{ color: 'white' }}
                   />
                 </Grid>
                 <Grid item xs={6}>
@@ -89,9 +107,9 @@ const Login = () => {
                     sx={{
                       color: (theme) => theme.palette.primary.greyShade7,
                       mt: 1,
-                      textDecoration: "underline",
-                      "&:hover": {
-                        cursor: "pointer",
+                      textDecoration: 'underline',
+                      '&:hover': {
+                        cursor: 'pointer',
                       },
                     }}
                     textAlign="end"
@@ -113,7 +131,7 @@ const Login = () => {
         </Grid>
       </Grid>
     </LoginWrapper>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

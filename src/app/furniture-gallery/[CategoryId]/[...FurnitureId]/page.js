@@ -24,13 +24,11 @@ const FurnitureId = () => {
 
   const getProduct = () => {
     const x = pathname.split("/");
-    console.log("x", x);
 
     if (x.length > 0)
       apiGet(
         `${ApiEndpoints.getSingleFurnitureProduct}${x[3]}`,
         (res) => {
-          console.log("res", res);
           setProductsData({
             productName: res.title,
             image: res.image,
@@ -47,7 +45,6 @@ const FurnitureId = () => {
     getProduct();
   }, []);
 
-  console.log("productsData", productsData);
 
   return (
     <DefaultLayout>

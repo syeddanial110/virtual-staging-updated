@@ -1,18 +1,21 @@
-"use client";
+'use client'
 
-import UITypography from "@/components/UITypography/UITypography";
-import { FormWrapper, LoginWrapper } from "@/containers/Login/ui";
-import { Grid, InputAdornment } from "@mui/material";
-import React from "react";
-import EmailIcon from "@mui/icons-material/Email";
-import UITextField from "@/components/UITextField/UITextField";
-import UIButton from "@/components/UIButton/UIButton";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useRouter } from "next/navigation";
-import { pathLocations } from "@/utlils/pathLocations";
-import PersonIcon from "@mui/icons-material/Person";
-import { signupSchema } from "@/schema/schema";
+import UITypography from '@/components/UITypography/UITypography'
+import { FormWrapper, LoginWrapper } from '@/containers/Login/ui'
+import { Grid, InputAdornment } from '@mui/material'
+import React from 'react'
+import EmailIcon from '@mui/icons-material/Email'
+import UITextField from '@/components/UITextField/UITextField'
+import UIButton from '@/components/UIButton/UIButton'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useRouter } from 'next/navigation'
+import { pathLocations } from '@/utlils/pathLocations'
+import PersonIcon from '@mui/icons-material/Person'
+import { signupSchema } from '@/schema/schema'
+import { ApiEndpoints } from '@/auth/apiEndpoints'
+import { apiPost } from '@/auth/ApiRequest'
+import { toast } from 'react-toastify'
 
 const Signup = () => {
   const {
@@ -21,18 +24,30 @@ const Signup = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(signupSchema),
-    defaultValues: { name: "", email: "", password: "", confirmPassword: "" },
-  });
+    defaultValues: { name: '', email: '', password: '', confirmPassword: '' },
+  })
 
-  const router = useRouter();
+  const router = useRouter()
 
   const handleLogin = async (data) => {
     const dataObj = {
+      name: data.name,
       email: data.email,
       password: data.password,
-    };
-    router.push(pathLocations.login);
-  };
+    }
+    apiPost(
+      `${ApiEndpoints.register}`,
+      dataObj,
+      (res) => {
+        toast.success(res.message)
+        router.push(pathLocations.login)
+      },
+      (err) => {
+        console.log('err', err)
+        toast.error('Email already exist')
+      },
+    )
+  }
   return (
     <LoginWrapper>
       <Grid container justifyContent="center" alignItems="center">
@@ -45,7 +60,7 @@ const Signup = () => {
                     type="heading"
                     title="Sign Up"
                     textAlign="center"
-                    sx={{ color: "white" }}
+                    sx={{ color: 'white' }}
                   />
                 </Grid>
                 <Grid item xs={6}>
@@ -136,7 +151,7 @@ const Signup = () => {
         </Grid>
       </Grid>
     </LoginWrapper>
-  );
-};
+  )
+}
 
-export default Signup;
+export default Signup

@@ -4,20 +4,21 @@ import { Grid, Paper } from "@mui/material";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import paymentImg from "../../assets/images/paymentImg.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addOrderData } from "@/store/orderPlaceSlice";
 
 const Invoice = () => {
+  const dispatch = useDispatch();
+
   const orderPlaceReducer = useSelector((state) => state?.orderPlaceReducer);
   const [totalPrice, setTotalPrice] = useState("");
   const [additionalServicePrice, setAdditionalServicePrice] = useState("");
 
   useEffect(() => {
-    let x =
-      parseInt(orderPlaceReducer?.servicePrice) +
-      orderPlaceReducer?.deliveryPrice;
+    let x = parseInt(orderPlaceReducer?.servicePrice);
 
     setTotalPrice(x);
-  }, [orderPlaceReducer?.servicePrice, orderPlaceReducer?.deliveryPrice]);
+  }, [orderPlaceReducer?.servicePrice]);
 
   useEffect(() => {
     let z = 0;
@@ -36,6 +37,14 @@ const Invoice = () => {
 
     setTotalPrice(totalPrice - x);
   }, [orderPlaceReducer?.promoCodeDiscount]);
+
+  useEffect(() => {
+    const dataObj = {
+      total: totalPrice,
+    };
+
+    dispatch(addOrderData(dataObj));
+  }, [totalPrice]);
 
   return (
     <Paper elevation={10}>
@@ -60,16 +69,6 @@ const Invoice = () => {
           />
           <UITypography
             title={`$${additionalServicePrice}`}
-            sx={{ fontSize: "14px !important" }}
-          />
-        </Grid>
-        <Grid item xs={12} display="flex" justifyContent="space-between">
-          <UITypography
-            title="Rapid Delivery"
-            sx={{ fontSize: "14px !important" }}
-          />
-          <UITypography
-            title={`$${orderPlaceReducer?.deliveryPrice}`}
             sx={{ fontSize: "14px !important" }}
           />
         </Grid>

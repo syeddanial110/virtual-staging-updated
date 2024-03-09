@@ -102,7 +102,7 @@ export async function fileUpload(endpoint, file) {
   myHeaders.append("Contect-Type", "multipart/form-data");
   // myHeaders.append("Authorization", "Bearer " + token);
   var formdata = new FormData();
-  formdata.append("file", file);
+  formdata.append("image", file);
   var requestOptions = {
     method: "POST",
     headers: myHeaders,

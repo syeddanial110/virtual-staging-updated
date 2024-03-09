@@ -21,10 +21,8 @@ import SearchIcon from "@mui/icons-material/Search";
 const BlogById = (props) => {
   const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(true);
-  console.log("pathName", pathname);
 
   const id = pathname.split("/")[2];
-  console.log("id", id);
 
   const filteredBlog = blogData.filter((item) => item.id == id);
   const [blog, setBlog] = useState({});
@@ -35,7 +33,6 @@ const BlogById = (props) => {
     }, 2000);
   }, []);
 
-  console.log("blog", blog);
 
   return (
     <DefaultLayout>

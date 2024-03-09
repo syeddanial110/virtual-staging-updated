@@ -44,7 +44,6 @@ const Profile = () => {
     };
   }, [file]);
 
-  console.log("fileDataURL", fileDataURL);
 
   return (
     <DefaultLayout>

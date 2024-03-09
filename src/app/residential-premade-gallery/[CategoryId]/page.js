@@ -1,67 +1,53 @@
-"use client";
+'use client'
 
-import { ImageBASEURL, apiGet } from "@/auth/ApiRequest";
-import { ApiEndpoints } from "@/auth/apiEndpoints";
-import FurnitureCard from "@/components/FurnitreCard/FurnitureCard";
-import UIButton from "@/components/UIButton/UIButton";
-import UILoader from "@/components/UILoader/UILoader";
-import UITypography from "@/components/UITypography/UITypography";
-import DefaultLayout from "@/layout/default-layout";
-import { accesoriesArr } from "@/utlils/data";
-import { pathLocations } from "@/utlils/pathLocations";
-import { SettingsOutlined } from "@mui/icons-material";
-import { Grid } from "@mui/material";
-import { usePathname, useRouter } from "next/navigation";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import { ImageBASEURL, apiGet } from '@/auth/ApiRequest'
+import { ApiEndpoints } from '@/auth/apiEndpoints'
+import FurnitureCard from '@/components/FurnitreCard/FurnitureCard'
+import UIButton from '@/components/UIButton/UIButton'
+import UILoader from '@/components/UILoader/UILoader'
+import UITypography from '@/components/UITypography/UITypography'
+import DefaultLayout from '@/layout/default-layout'
+import { accesoriesArr } from '@/utlils/data'
+import { pathLocations } from '@/utlils/pathLocations'
+import { SettingsOutlined } from '@mui/icons-material'
+import { Grid } from '@mui/material'
+import { usePathname, useRouter } from 'next/navigation'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 
 const FurnitureCategory = () => {
-  const pathname = usePathname();
-  const router = useRouter();
+  const pathname = usePathname()
+  const router = useRouter()
   const [categoryData, setCategoryData] = useState({
-    title: "",
-    image: "",
-  });
+    title: '',
+    image: '',
+  })
 
-  const [productsData, setProductsData] = useState([]);
+  const [productsData, setProductsData] = useState([])
 
-  const [isLoading, setIsLoading] = useState(true);
-
-  const getCategoryProducts = () => {
-    const id = pathname.split("/");
-    apiGet(
-      `${ApiEndpoints.getPremadeCategory}/${id[2]}`,
-      (res) => {
-        console.log("res", res);
-        setCategoryData({
-          title: res.data.categoryName,
-          image: res.data.image,
-        });
-      },
-      (err) => {
-        console.log("err", err);
-      }
-    );
-  };
+  const [isLoading, setIsLoading] = useState(true)
 
   const getProductsByCategory = () => {
-    const id = pathname.split("/");
+    const id = pathname.split('/')
     apiGet(
-      `${ApiEndpoints.getPremadeProduct}/?category=${id[2]}`,
+      `${ApiEndpoints.getPremadeProduct}${id[2]}`,
       (res) => {
-        setProductsData(res.data);
-        setIsLoading(false);
+        setCategoryData({
+          title: res.title,
+        })
+        setProductsData(res.products)
+        setIsLoading(false)
       },
       (err) => {
-        console.log("err", err);
-        setIsLoading(false);
-      }
-    );
-  };
+        console.log('err', err)
+        setIsLoading(false)
+      },
+    )
+  }
 
   useEffect(() => {
-    getCategoryProducts();
-    getProductsByCategory();
-  }, []);
+    // getCategoryProducts();
+    getProductsByCategory()
+  }, [])
 
   return (
     <DefaultLayout>
@@ -70,7 +56,7 @@ const FurnitureCategory = () => {
           <UITypography
             type="heading"
             title={`${categoryData.title} Set`}
-            sx={{ textTransform: "uppercase" }}
+            sx={{ textTransform: 'uppercase' }}
             textAlign="center"
           />
         </Grid>
@@ -81,9 +67,9 @@ const FurnitureCategory = () => {
           <Grid
             container
             gap={3}
-            justifyContent={{ xs: "center", sm: "flex-start" }}
+            justifyContent={{ xs: 'center', sm: 'flex-start' }}
           >
-            {productsData.map((item, i) => {
+            {productsData?.map((item, i) => {
               return (
                 <Grid
                   item
@@ -94,21 +80,23 @@ const FurnitureCategory = () => {
                   key={`${item.title}-${i}`}
                 >
                   <FurnitureCard
-                    img={`${item.image}`}
-                    title={item.productName}
-                    imgStyle={{
-                      border: `1px solid #3C828E`,
-                      borderRadius: "30px",
-                    }}
+                    img={`${ImageBASEURL}${item.image}`}
+                    title={item.title}
+                    imgStyle={
+                      {
+                        // border: `1px solid #3C828E`,
+                        // borderRadius: "30px",
+                      }
+                    }
                     onClick={() =>
                       router.push(
-                        `${pathLocations.premadeGallery}/${item.productName}/${item._id}`
+                        `${pathLocations.premadeGallery}/${item.title}/${item.id}`,
                       )
                     }
                     imgObjectFit="cover"
                   />
                 </Grid>
-              );
+              )
             })}
           </Grid>
         </Grid>
@@ -124,7 +112,7 @@ const FurnitureCategory = () => {
         </Grid>
       </Grid>
     </DefaultLayout>
-  );
-};
+  )
+}
 
-export default FurnitureCategory;
+export default FurnitureCategory

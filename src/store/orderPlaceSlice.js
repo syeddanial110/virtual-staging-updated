@@ -30,6 +30,7 @@ const initalState = {
   rapidDelivery: "",
   deliveryPrice: "",
   promoCodeDiscount: "",
+  total: ""
 };
 
 export const orderPlaceSlice = createSlice({

@@ -22,7 +22,6 @@ const ContactForm = () => {
     },
   });
   const handleContact = (data) => {
-    console.log("data", data);
     router.push("/home");
     toast.success("Successfully Login");
   };

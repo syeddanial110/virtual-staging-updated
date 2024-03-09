@@ -17,8 +17,6 @@ const Blogs = () => {
   const [page, setPage] = useState(1);
 
   const handlePagination = (e, val) => {
-    console.log("e", e);
-    console.log("val", val);
   };
 
   return (

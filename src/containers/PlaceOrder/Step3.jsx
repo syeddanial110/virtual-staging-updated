@@ -6,18 +6,36 @@ import React, { useEffect, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
 import { addOrderData } from "@/store/orderPlaceSlice";
+import { ApiEndpoints } from "@/auth/apiEndpoints";
+import { fileUpload } from "@/auth/ApiRequest";
+import { toast } from "react-toastify";
 
 const Step3 = () => {
   const [file, setFile] = useState(null);
   const [fileDataURL, setFileDataURL] = useState([]);
+  const [isImageUploading, setIsImageUploading] = useState(false);
 
   const disptach = useDispatch();
   const orderPlaceReducer = useSelector((state) => state?.orderPlaceReducer);
 
-  const _handleChangeImage = (e) => {
-    const file = e.target.files[0];
+  // const _handleChangeImage = (e) => {
+  //   const file = e.target.files[0];
 
-    setFile(file);
+  //   setFile(file);
+  // };
+
+  const _handleChangeImage = (e) => {
+    setIsImageUploading(true);
+    if (e.target.files[0]) {
+      fileUpload(`${ApiEndpoints.uploadImage}`, e.target.files[0])
+        .then((res) => {
+          console.log("res", res);
+          setIsImageUploading(false);
+          setFileDataURL([...fileDataURL, res.url]);
+          toast.success(res.message);
+        })
+        .catch((err) => {});
+    }
   };
 
   const handleRemoveImage = (ind) => {
@@ -32,26 +50,26 @@ const Step3 = () => {
     }
   };
 
-  useEffect(() => {
-    let fileReader,
-      isCancel = false;
-    if (file) {
-      fileReader = new FileReader();
-      fileReader.onload = (e) => {
-        const { result } = e.target;
-        if (result && !isCancel) {
-          setFileDataURL([...fileDataURL, result]);
-        }
-      };
-      fileReader.readAsDataURL(file);
-    }
-    return () => {
-      isCancel = true;
-      if (fileReader && fileReader.readyState === 1) {
-        fileReader.abort();
-      }
-    };
-  }, [file]);
+  // useEffect(() => {
+  //   let fileReader,
+  //     isCancel = false;
+  //   if (file) {
+  //     fileReader = new FileReader();
+  //     fileReader.onload = (e) => {
+  //       const { result } = e.target;
+  //       if (result && !isCancel) {
+  //         setFileDataURL([...fileDataURL, result]);
+  //       }
+  //     };
+  //     fileReader.readAsDataURL(file);
+  //   }
+  //   return () => {
+  //     isCancel = true;
+  //     if (fileReader && fileReader.readyState === 1) {
+  //       fileReader.abort();
+  //     }
+  //   };
+  // }, [file]);
 
   useEffect(() => {
     let y;
@@ -86,14 +104,7 @@ const Step3 = () => {
     }
   }, [fileDataURL.length]);
 
-  useEffect(() => {
-    if (orderPlaceReducer?.uploadImageDetails.length > 0) {
-      let x = orderPlaceReducer.uploadImageDetails.map((item) => {
-        return item.image;
-      });
-      setFileDataURL(x);
-    }
-  }, []);
+  console.log("fileDataURL", fileDataURL);
 
   return (
     <>
