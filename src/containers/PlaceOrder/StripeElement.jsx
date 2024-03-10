@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import PaymentForm from "./PaymentForm";
+import CheckoutForm from "./PaymentForm";
+import axios from "axios";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -10,14 +11,46 @@ const stripePromise = loadStripe(
 );
 
 const StripeElement = () => {
+  const [clientSecret, setClientSecret] = useState("");
+  const fetchPaymnetIntent = async () => {
+    const response = await axios.post("/api", {
+      items: [{ id: "12343" }],
+    });
+    // const response = await fetch("/api", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({ items: [{ id: "12343" }] }),
+    // });
+    console.log("response", response);
+    setClientSecret(response.data.clientSecret);
+    // return response;
+  };
+
+  useEffect(() => {
+    fetchPaymnetIntent();
+  }, []);
+
+  const apprearance = {
+    theme: "stripe",
+  };
   const options = {
     // passing the client secret obtained from the server
-    clientSecret: "sk_test_51OsUlFFYduu8dqNH22lrNcu1EwzbFax2o8zOz3NlO6Wxhn4xCrElj0A8w3cu469RJSdhqSPgq9J7wvvPU8wwAnne00cytOaO1W",
+    clientSecret,
+    apprearance,
   };
+
+  console.log("clientSecret", clientSecret);
+
   return (
-    <Elements stripe={stripePromise} options={options}>
-      <PaymentForm />
-    </Elements>
+    <div className="App">
+      {clientSecret && (
+        <Elements stripe={stripePromise} options={options}>
+          <CheckoutForm clientSecret={clientSecret} />
+        </Elements>
+      )}
+    </div>
   );
 };
 
