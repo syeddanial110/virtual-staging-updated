@@ -28,7 +28,7 @@ const StripeElement = () => {
     // return response;
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     fetchPaymnetIntent();
   }, []);
 

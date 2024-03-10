@@ -647,3 +647,12 @@ select:-webkit-autofill:focus {
 
   transition: background-color 5000s ease-in-out 0s;
 }
+
+.paymentButton {
+  background-color: #3c828e !important;
+  color: white !important;
+  padding: 10px 26px;
+  border: 0px solid red !important;
+  border-radius: 16px;
+  margin-top: 30px;
+}

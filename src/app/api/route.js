@@ -26,7 +26,7 @@ export async function POST(req, res) {
   const paymentIntent = await stripe.paymentIntents.create({
     // amount: calculateOrderAmount([{ id: "12343" }]),
     currency: "usd",
-    amount: 1400,
+    amount: 14,
     automatic_payment_methods: {
       enabled: true,
     },

@@ -25,6 +25,7 @@ import PaymentForm from "./PaymentForm";
 import StripeElement from "./StripeElement";
 import { pathLocations } from "@/utlils/pathLocations";
 import { useRouter } from "next/navigation";
+import PaymentHome from "../Payment/PaymentHome";
 
 const Step5 = () => {
   const dispatch = useDispatch();
@@ -156,17 +157,21 @@ const Step5 = () => {
               onClick={promoCodeSubmit}
             />
           </Grid>
-          {/* <Grid item xs={12}>
-            <StripeElement />
-          </Grid> */}
           <Grid item xs={12}>
+            <PaymentHome />
+            {/* <StripeElement /> */}
+            {/* <form onSubmit={handleCheckout}>
+              <button type="submit">Checkout</button>
+            </form> */}
+          </Grid>
+          {/* <Grid item xs={12}>
             <UIButton
               variant="contained"
               label="Make Payment"
               isDark={true}
               onClick={handleMakePayment}
             />
-          </Grid>
+          </Grid> */}
         </Grid>
       </Grid>
       <Grid item xs={4}>
