@@ -146,7 +146,7 @@ const Step5 = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <StripeElement />
+            <PaymentForm />
           </Grid>
           <Grid item xs={12}>
             <UIButton

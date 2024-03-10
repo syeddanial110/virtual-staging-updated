@@ -1,21 +1,24 @@
-import "./globals.css";
-import theme from "@/theme/theme";
-import favIcon from "../../public/favicon.png";
-import Head from "next/head";
-import Providers from "@/store/Provider";
-import ThemeWrapper from "@/components/ThemeWrapper/ThemeWrapper";
-import { ToastContainer } from "react-toastify";
+import './globals.css'
+import theme from '@/theme/theme'
+import favIcon from '../../public/favicon.png'
+import Head from 'next/head'
+import Providers from '@/store/Provider'
+import ThemeWrapper from '@/components/ThemeWrapper/ThemeWrapper'
+import { ToastContainer } from 'react-toastify'
 
-import "react-toastify/dist/ReactToastify.css";
+import 'react-toastify/dist/ReactToastify.css'
 
 export const metadata = {
-  title: "Chris",
-  description: "",
-};
+  title: 'Chris',
+  description: '',
+}
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <Head>
+        <script src="https://js.stripe.com/v3/"></script>
+      </Head>
       <body>
         <Providers>
           <ToastContainer
@@ -34,5 +37,5 @@ export default function RootLayout({ children }) {
         </Providers>
       </body>
     </html>
-  );
+  )
 }
