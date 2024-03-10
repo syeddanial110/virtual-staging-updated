@@ -13,4 +13,5 @@ export const ApiEndpoints = {
   userById: '/user/',
   createOrder: '/create-order',
   uploadImage: '/order/generate-image-url',
+  getSingleOrder: '/order/',
 }

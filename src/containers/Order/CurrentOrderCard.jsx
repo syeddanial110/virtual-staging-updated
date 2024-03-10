@@ -5,9 +5,12 @@ import UITypography from "@/components/UITypography/UITypography";
 import Image from "next/image";
 import { pathLocations } from "@/utlils/pathLocations";
 import { useRouter } from "next/navigation";
+import { getUserId } from "@/auth/Auth";
 
-const CurrentOrderCard = () => {
+const CurrentOrderCard = ({ img, serviceName, price, id, status }) => {
   const router = useRouter();
+
+
   return (
     <Box
       sx={{
@@ -19,8 +22,8 @@ const CurrentOrderCard = () => {
       }}
     >
       <Box>
-        <Image
-          src={orderImg}
+        <img
+          src={img}
           alt="order-img"
           height={150}
           width={150}
@@ -35,14 +38,14 @@ const CurrentOrderCard = () => {
         }}
       >
         <Box>
-          <UITypography title="Virtual Staging" />
-          <UITypography title="Contemporary" />
-          <UITypography title="$23" />
+          <UITypography title={serviceName} />
+          <UITypography title={price} />
+          <UITypography title={status} />
         </Box>
         <UITypography
           title="View Detail"
           sx={{ textDecoration: "underline", "&:hover": { cursor: "pointer" } }}
-          onClick={() => router.push(`${pathLocations.order}/1`)}
+          onClick={() => router.push(`${pathLocations.order}/${id}`)}
         />
       </Box>
     </Box>

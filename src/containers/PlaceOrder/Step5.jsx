@@ -13,12 +13,22 @@ import Invoice from "./Invoice";
 import { apiPost } from "@/auth/ApiRequest";
 import { ApiEndpoints } from "@/auth/apiEndpoints";
 import { toast } from "react-toastify";
-import { getToken, getUserId, setToken, setUserId } from "@/auth/Auth";
+import {
+  getToken,
+  getUserId,
+  removeToken,
+  removeUserId,
+  setToken,
+  setUserId,
+} from "@/auth/Auth";
 import PaymentForm from "./PaymentForm";
 import StripeElement from "./StripeElement";
+import { pathLocations } from "@/utlils/pathLocations";
+import { useRouter } from "next/navigation";
 
 const Step5 = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const orderPlaceReducer = useSelector((state) => state?.orderPlaceReducer);
 
@@ -103,7 +113,6 @@ const Step5 = () => {
       total_price: parseFloat(orderPlaceReducer.total),
       order_items: orderItem,
     };
-    console.log("dataObj", dataObj);
 
     apiPost(
       `${ApiEndpoints.createOrder}`,
@@ -111,6 +120,7 @@ const Step5 = () => {
       (res) => {
         console.log("res", res);
         toast.success(res.message);
+        router.push(pathLocations.order);
         if (id == undefined) {
           setToken(res.token);
           setUserId(res.user.id);
@@ -118,6 +128,7 @@ const Step5 = () => {
       },
       (err) => {
         console.log("err", err);
+        toast.error("All fields are required");
       }
     );
   };
@@ -145,9 +156,9 @@ const Step5 = () => {
               onClick={promoCodeSubmit}
             />
           </Grid>
-          <Grid item xs={12}>
-            <StripeElement /> 
-          </Grid>
+          {/* <Grid item xs={12}>
+            <StripeElement />
+          </Grid> */}
           <Grid item xs={12}>
             <UIButton
               variant="contained"
