@@ -656,3 +656,10 @@ select:-webkit-autofill:focus {
   border-radius: 16px;
   margin-top: 30px;
 }
+
+.ElementsApp > .CardField > .CardBrandIcon-container {
+  display: none !important;
+}
+.CardField-input-wrapper {
+  left: 0 !important;
+}

@@ -11,35 +11,35 @@ const PaymentHome = () => {
   const [clientSecret, setClientSecret] = useState('')
   const orderPlaceReducer = useSelector((state) => state?.orderPlaceReducer)
 
-  const fetchPaymnetIntent = async () => {
-    // const response = await axios.post(`${apiBaseUrl}/payment-intent`, {
-    //   amount: 20,
-    // })
-    apiPost(
-      `/payment-intent`,
-      { amount: orderPlaceReducer.total * 100 },
-      (res) => {
-        console.log('res', res)
-        setClientSecret(res.paymentIntentId)
-      },
-      (err) => {
-        console.log('err', err)
-      },
-    )
-    // const response = await fetch("/api", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({ items: [{ id: "12343" }] }),
-    // });
-    // console.log('response-------', response)
-    // return response;
-  }
+  // const fetchPaymnetIntent = async () => {
+  //   // const response = await axios.post(`${apiBaseUrl}/payment-intent`, {
+  //   //   amount: 20,
+  //   // })
+  //   apiPost(
+  //     `/payment-intent`,
+  //     { amount: orderPlaceReducer.total * 100 },
+  //     (res) => {
+  //       console.log('res', res)
+  //       setClientSecret(res.paymentIntentId)
+  //     },
+  //     (err) => {
+  //       console.log('err', err)
+  //     },
+  //   )
+  //   // const response = await fetch("/api", {
+  //   //   method: "POST",
+  //   //   headers: {
+  //   //     "Content-Type": "application/json",
+  //   //   },
+  //   //   body: JSON.stringify({ items: [{ id: "12343" }] }),
+  //   // });
+  //   // console.log('response-------', response)
+  //   // return response;
+  // }
 
-  useEffect(() => {
-    if (orderPlaceReducer.servicePrice != '') fetchPaymnetIntent()
-  }, [orderPlaceReducer.total, orderPlaceReducer.servicePrice])
+  // useEffect(() => {
+  //   if (orderPlaceReducer.servicePrice != '') fetchPaymnetIntent()
+  // }, [orderPlaceReducer.total, orderPlaceReducer.servicePrice])
 
   const apprearance = {
     theme: 'stripe',
@@ -51,7 +51,6 @@ const PaymentHome = () => {
   }
   return (
     <div>
-      <h1>Custom Payment Page</h1>
       <Elements stripe={stripePromise} options={options}>
         <PaymentForm clientSecret={clientSecret} />
       </Elements>

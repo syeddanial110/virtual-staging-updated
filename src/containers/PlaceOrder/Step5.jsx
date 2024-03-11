@@ -152,14 +152,14 @@ const Step5 = () => {
               onChange={handlePromoCodeInput}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={5}>
             <UIButton
               variant="contained"
               label="Apply coupon"
               onClick={promoCodeSubmit}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} mt={4}>
             <PaymentHome />
             {/* <StripeElement /> */}
             {/* <form onSubmit={handleCheckout}>
