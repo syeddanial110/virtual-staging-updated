@@ -134,6 +134,8 @@ const Step5 = () => {
     );
   };
 
+  console.log('orderPlaceReducer', orderPlaceReducer)
+
   return (
     <Grid container justifyContent="space-between" gap={1} mt={5}>
       <Grid item xs={6}>

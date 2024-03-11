@@ -29,11 +29,12 @@ const Invoice = () => {
       });
       return y;
     });
+    console.log("z, x", z, x);
     setAdditionalServicePrice(z);
   }, [orderPlaceReducer.uploadImageDetails]);
 
   useEffect(() => {
-    let x = totalPrice / orderPlaceReducer.promoCodeDiscount;
+    let x = totalPrice / parseInt(orderPlaceReducer.promoCodeDiscount);
 
     setTotalPrice(totalPrice - x);
   }, [orderPlaceReducer?.promoCodeDiscount]);
