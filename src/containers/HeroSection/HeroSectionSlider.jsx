@@ -175,6 +175,9 @@ const HeroSectionSlider = () => {
                         />
                         <UIButton
                           label="Explore Gallery"
+                          onClick={() =>
+                            router.push(pathLocations.furnitureGallery)
+                          }
                           sx={{
                             marginLeft: { xs: "0px", sm: "10px" },
                             marginTop: { xs: "10px", sm: "0px" },
