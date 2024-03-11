@@ -38,8 +38,8 @@ const PaymentHome = () => {
   }
 
   useEffect(() => {
-    fetchPaymnetIntent()
-  }, [])
+    if (orderPlaceReducer.servicePrice != '') fetchPaymnetIntent()
+  }, [orderPlaceReducer.total, orderPlaceReducer.servicePrice])
 
   const apprearance = {
     theme: 'stripe',
