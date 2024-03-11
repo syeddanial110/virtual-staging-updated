@@ -326,7 +326,7 @@ const Step4 = () => {
                     />
                     <UISelect
                       onChange={(e) => handleRoomAreaSelect(e, i)}
-                      // defaultValue={roomArea[0].name}
+                      // value={roomArea[0].name}
                       placeholder="Select One"
                       fullWidth
                     >

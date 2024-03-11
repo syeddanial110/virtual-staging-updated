@@ -3,6 +3,7 @@ import ThemeWrapper from "@/components/ThemeWrapper/ThemeWrapper";
 import Footer from "@/containers/Footer/Footer";
 import Providers from "@/store/Provider";
 import { Grid } from "@mui/material";
+import dynamic from "next/dynamic";
 
 const DefaultLayout = ({ children }) => {
   //   const [isLoading, setIsLoading] = useState(true);
@@ -55,4 +56,4 @@ const DefaultLayout = ({ children }) => {
   );
 };
 
-export default DefaultLayout;
+export default dynamic(() => Promise.resolve(DefaultLayout), { ssr: false });

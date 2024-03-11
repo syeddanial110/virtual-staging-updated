@@ -7,12 +7,16 @@ import { pathLocations } from "@/utlils/pathLocations";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { getToken, getUserId, setToken, setUserId } from "@/auth/Auth";
+import { Box, Grid, Modal } from "@mui/material";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import UITypography from "../../components/UITypography/UITypography";
 
 const PaymentForm = ({ clientSecret }) => {
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
-  const router = useRouter();
+
+  const [isOrderCreated, setIsOrderCreated] = useState(false);
 
   const orderPlaceReducer = useSelector((state) => state?.orderPlaceReducer);
 
@@ -51,7 +55,14 @@ const PaymentForm = ({ clientSecret }) => {
       (res) => {
         console.log("res", res);
         toast.success(res.message);
-        router.push(pathLocations.order);
+
+        setInterval(
+          () => {
+            setIsOrderCreated(false);
+            window.location.href = pathLocations.order;
+          },
+          token ? 100 : 3000
+        );
         if (id == undefined) {
           setToken(res.token);
           setUserId(res.user.id);
@@ -64,31 +75,30 @@ const PaymentForm = ({ clientSecret }) => {
     );
   };
 
-  
-
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const token = getToken();
     setLoading(true);
 
     apiPost(
       `/payment-intent`,
       { amount: orderPlaceReducer.total * 100 },
       async (res) => {
-        console.log('res', res)
+        console.log("res", res);
 
         if (!stripe || !elements) {
           return;
         }
-    
+
         const cardElement = elements.getElement(CardElement);
-    
+
         const x = await stripe.createPaymentMethod({
           type: "card",
           card: cardElement,
         });
-    
+
         console.log("x", x);
-    
+
         if (x.error) {
           console.error(error);
           setLoading(false);
@@ -101,39 +111,73 @@ const PaymentForm = ({ clientSecret }) => {
               payment_method_id: x.paymentMethod.id,
             }), // Change amount as needed
           });
-    
+
           const data = await response.json();
-    
+
           if (data.success) {
             console.log("Payment successful");
             toast.success("Payment successful");
             handleMakePayment();
+            if (!token) {
+              setIsOrderCreated(true);
+            }
           } else {
             console.error("Payment failed:", data.message);
           }
-    
+
           setLoading(false);
         }
       },
       (err) => {
-        console.log('err', err)
-      },
-    )
-
-    
+        console.log("err", err);
+      }
+    );
   };
 
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "0px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
+
+  const handleClose = () => setIsOrderCreated(false);
+
   return (
-    <form onSubmit={handleSubmit}>
-      <CardElement />
-      <button
-        type="submit"
-        disabled={!stripe || loading}
-        className="paymentButton"
-      >
-        {loading ? "Processing..." : "Make Payment"}
-      </button>
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <CardElement />
+        <button
+          type="submit"
+          disabled={!stripe || loading}
+          className="paymentButton"
+        >
+          {loading ? "Processing..." : "Make Payment"}
+        </button>
+      </form>
+      <Modal open={isOrderCreated} onClose={handleClose}>
+        <Box sx={style}>
+          <Grid container justifyContent="center">
+            <Grid item xs={3}>
+              <CheckCircleIcon
+                sx={{
+                  color: (theme) => theme.palette.primary.main,
+                  fontSize: "80px",
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <UITypography title="Your account created successfully and your account details send it to your email" />
+            </Grid>
+          </Grid>
+        </Box>
+      </Modal>
+    </>
   );
 };
 

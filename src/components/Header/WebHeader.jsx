@@ -26,10 +26,15 @@ import UITypography from "../UITypography/UITypography";
 import Dropdown from "react-multilevel-dropdown";
 import UIDivider from "../UIDivider";
 import { useRouter } from "next/navigation";
+import { getToken, removeToken, removeUserId } from "@/auth/Auth";
+import UIButton from "../UIButton/UIButton";
+import { pathLocations } from "@/utlils/pathLocations";
 
 const WebHeader = () => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
+
+  const token = getToken();
 
   const [menuAnchorEl, setMenuAnchorEl] = useState(null);
   const menuOpen = Boolean(menuAnchorEl);
@@ -246,23 +251,32 @@ const WebHeader = () => {
         </List>
       </Grid>
       <Grid item xs={1} display="flex" justifyContent="center">
-        <Box
-          sx={{
-            "&:hover": {
-              cursor: "pointer",
-            },
-          }}
-          onClick={handleMenuClick}
-        >
-          <Image
-            src={avatar}
-            alt="avatar"
-            height={20}
-            style={{
-              marginRight: 14,
+        {token ? (
+          <Box
+            sx={{
+              "&:hover": {
+                cursor: "pointer",
+              },
             }}
-          />
-        </Box>
+            onClick={handleMenuClick}
+          >
+            <Image
+              src={avatar}
+              alt="avatar"
+              height={20}
+              style={{
+                marginRight: 14,
+              }}
+            />
+          </Box>
+        ) : (
+          <Box sx={{ marginRight: 14 }}>
+            <UIButton
+              label="Register"
+              onClick={() => router.push(pathLocations.login)}
+            />
+          </Box>
+        )}
         {/* <Box
           sx={{
             "&:hover": {
@@ -301,54 +315,18 @@ const WebHeader = () => {
                 <UITypography
                   title={item.title}
                   sx={{ color: "#4b4b4b" }}
-                  onClick={() => router.push(item.link)}
+                  onClick={() => {
+                    if (item.title == "Logout") {
+                      removeToken();
+                      removeUserId();
+                    }
+                    router.push(item.link);
+                  }}
                 />
               </Box>
             );
           })}
         </Popover>
-
-        {/* <Menu
-          id="basic-menu"
-          anchorEl={menuAnchorEl}
-          open={menuOpen}
-          onClose={handleMenuClose}
-          MenuListProps={{
-            "aria-labelledby": "basic-button",
-          }}
-          PaperProps={{
-            elevation: 0,
-            sx: {
-              overflow: "visible",
-              filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-              mt: 1.5,
-              "& .MuiAvatar-root": {
-                width: 32,
-                height: 32,
-                ml: -0.5,
-                mr: 1,
-              },
-              "&::before": {
-                content: '""',
-                display: "block",
-                position: "absolute",
-                top: 0,
-                right: 14,
-                width: 10,
-                height: 10,
-                bgcolor: "background.paper",
-                transform: "translateY(-50%) rotate(45deg)",
-                zIndex: 0,
-              },
-            },
-          }}
-          transformOrigin={{ horizontal: "right", vertical: "top" }}
-          anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-        >
-          <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-          <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-          <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
-        </Menu> */}
       </Grid>
     </Grid>
   );
