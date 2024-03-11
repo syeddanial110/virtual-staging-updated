@@ -17,7 +17,7 @@ const PaymentHome = () => {
     // })
     apiPost(
       `/payment-intent`,
-      { amount: 4000 },
+      { amount: orderPlaceReducer.total * 100 },
       (res) => {
         console.log('res', res)
         setClientSecret(res.paymentIntentId)
