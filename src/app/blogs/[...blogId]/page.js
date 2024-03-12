@@ -78,11 +78,11 @@ const BlogById = (props) => {
                     paddingLeft: "10px",
                   }}
                 >
-                  <Grid item xs={6} display="flex" alignItems="center">
+                  <Grid item xs={7} display="flex" alignItems="center">
                     <Avatar />
                     <Box pl={2}>
                       <UITypography
-                        title="Author Name"
+                        title="Author Name: Picture Perfect Virtual Staging"
                         sx={{ fontWeight: "bold" }}
                       />
                       <UITypography title="Designation" />
@@ -90,7 +90,7 @@ const BlogById = (props) => {
                   </Grid>
                   <Grid
                     item
-                    xs={6}
+                    xs={5}
                     display="flex"
                     justifyContent="flex-end"
                     alignItems="center"
