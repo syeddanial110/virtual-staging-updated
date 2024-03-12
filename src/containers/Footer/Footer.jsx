@@ -120,7 +120,10 @@ const Footer = () => {
               </Link>
             </Grid>
             <Grid item xs={1.5} display="flex" alignItems="center">
-              <Link href="https://www.tiktok.com/en/" target="_blank">
+              <Link
+                href="https://www.tiktok.com/@pictureperfectvstaging"
+                target="_blank"
+              >
                 <Image
                   src={TiktokIcon}
                   alt="socialTiktok"
