@@ -38,7 +38,6 @@ export default function OrderStepper(props) {
   };
 
   const handleFinish = () => {
-    console.log("finsh");
   };
 
   const handleReset = () => {

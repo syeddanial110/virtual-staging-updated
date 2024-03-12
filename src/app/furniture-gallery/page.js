@@ -126,7 +126,14 @@ const FutureGallery = () => {
       </Grid>
       <Grid container justifyContent="center" mt={8} gap={5}>
         <Grid item xs={11}>
-          {isLoading && <UILoader />}
+          {isLoading && (
+            <Grid container display="flex" justifyContent="center">
+              <Grid item xs={3}>
+                <UILoader />
+              </Grid>
+            </Grid>
+          )}
+
           <Grid container gap={3} justifyContent="center">
             {!isLoading && (
               <>

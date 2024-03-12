@@ -205,7 +205,7 @@ const Step4 = () => {
     basicItemVal.length,
     otherBasicItemsValue.length,
     additionalServicesVal.length,
-    curatedCollectionVal.length,
+    curatedCollectionVal,
   ]);
 
   //#endregion handle basic items end
@@ -230,14 +230,15 @@ const Step4 = () => {
 
   // start => room area select
   const handleRoomAreaSelect = (e, i) => {
+    setCuratedCollectionVal("");
     let filteredRoomArea = curatedCollection.filter(
       (elm) => elm.title == e.target.value
     );
 
     setCuratedCollectionVal(e.target.value);
-
+    let newState;
     setUploadImageDetails((prevState) => {
-      const newState = [...prevState];
+      newState = [...prevState];
       newState[i] = {
         ...newState[i],
         roomArea: e.target.value,
@@ -245,6 +246,7 @@ const Step4 = () => {
       };
       return newState;
     });
+    console.log("newState", newState);
 
     setBasicItems(filteredRoomArea[0].choices);
   };
@@ -269,6 +271,7 @@ const Step4 = () => {
   // end room area select
 
   console.log("uploadImageDetails", uploadImageDetails);
+  console.log("orderPlaceReducer------------", orderPlaceReducer);
 
   return (
     <Grid container gap={3} mt={5}>
@@ -327,6 +330,7 @@ const Step4 = () => {
                     <UISelect
                       onChange={(e) => handleRoomAreaSelect(e, i)}
                       // value={roomArea[0].name}
+                      // value={curatedCollectionVal}
                       placeholder="Select One"
                       fullWidth
                     >

@@ -25,9 +25,14 @@ import sofa from "../../assets/images/Sofa.jpg";
 import table from "../../assets/images/table.jpg";
 import { useRouter } from "next/navigation";
 import { pathLocations } from "@/utlils/pathLocations";
+import { addOrderData } from "@/store/orderPlaceSlice";
+import { useDispatch } from "react-redux";
 
 const HeroSectionSlider = () => {
   const router = useRouter();
+
+  const dispatch = useDispatch();
+
   const arr = [
     {
       heading1: "Welcome ",
@@ -171,7 +176,14 @@ const HeroSectionSlider = () => {
                         <UIButton
                           isDark={true}
                           label="Place Order"
-                          onClick={() => router.push(pathLocations.placeOrder)}
+                          onClick={() => {
+                            const dataObj = {
+                              serviceName: "",
+                              servicePrice: "",
+                            };
+                            dispatch(addOrderData(dataObj));
+                            router.push(pathLocations.placeOrder);
+                          }}
                         />
                         <UIButton
                           label="Explore Gallery"

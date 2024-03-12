@@ -1,3 +1,5 @@
+"use client";
+
 import UIButton from "@/components/UIButton/UIButton";
 import UITypography from "@/components/UITypography/UITypography";
 import { BannerWrapper } from "@/containers/AboutUs/ui";
@@ -5,8 +7,23 @@ import DefaultLayout from "@/layout/default-layout";
 import { Grid } from "@mui/material";
 import React from "react";
 import virtualTwilightImg from "../../../assets/images/virtualTwilightBanner.jpg";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
+import { addOrderData } from "@/store/orderPlaceSlice";
+import { pathLocations } from "@/utlils/pathLocations";
 
 const VirtualTwilights = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleServiceRedirect = () => {
+    const dataObj = {
+      serviceName: "Virtual Twilights",
+      servicePrice: "15",
+    };
+    dispatch(addOrderData(dataObj));
+    router.push(pathLocations.placeOrder);
+  };
   return (
     <DefaultLayout>
       <Grid container justifyContent="center" gap={3} my={3}>
@@ -39,7 +56,11 @@ const VirtualTwilights = () => {
         </Grid>
 
         <Grid item xs={11}>
-          <UIButton variant="contained" label="Order now" />
+          <UIButton
+            variant="contained"
+            label="Order now"
+            onClick={handleServiceRedirect}
+          />
         </Grid>
       </Grid>
     </DefaultLayout>

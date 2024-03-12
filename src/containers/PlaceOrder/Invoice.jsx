@@ -29,7 +29,6 @@ const Invoice = () => {
       });
       return y;
     });
-    console.log("z, x", z, x);
     setAdditionalServicePrice(z);
   }, [orderPlaceReducer.uploadImageDetails]);
 

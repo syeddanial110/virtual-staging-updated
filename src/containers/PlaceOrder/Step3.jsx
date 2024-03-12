@@ -9,6 +9,8 @@ import { addOrderData } from "@/store/orderPlaceSlice";
 import { ApiEndpoints } from "@/auth/apiEndpoints";
 import { fileUpload } from "@/auth/ApiRequest";
 import { toast } from "react-toastify";
+import { addStepperValue, backStepperValue } from "@/store/stepperValueSlice";
+import UILoader from "@/components/UILoader/UILoader";
 
 const Step3 = () => {
   const [file, setFile] = useState(null);
@@ -33,6 +35,7 @@ const Step3 = () => {
           setIsImageUploading(false);
           setFileDataURL([...fileDataURL, res.url]);
           toast.success(res.message);
+          // disptach(addStepperValue(1));
         })
         .catch((err) => {});
     }
@@ -47,6 +50,7 @@ const Step3 = () => {
         uploadImageDetails: [],
       };
       disptach(addOrderData(dataObj));
+      // disptach(backStepperValue(1));
     }
   };
 
@@ -167,6 +171,11 @@ const Step3 = () => {
                   </Grid>
                 );
               })}
+            {isImageUploading && (
+              <Grid item xs={3.5}>
+                <UILoader />
+              </Grid>
+            )}
           </Grid>
         </Grid>
       </Grid>

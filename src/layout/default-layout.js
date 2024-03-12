@@ -43,8 +43,21 @@ const DefaultLayout = ({ children }) => {
   //     };
   //   }, []);
 
+  // const [isLoading, setIsLoading] = useState(true);
+  // let x = document.readyState;
+  // useEffect(() => {
+  //   console.log("document.readyState", document.readyState);
+  //   if (
+  //     document.readyState == "interactive" ||
+  //     document.readyState == "complete"
+  //   ) {
+  //     setIsLoading(false);
+  //   }
+  // }, [document.readyState]);
+
   return (
     <>
+      {/* {isLoading && <UILoader />} */}
       <Header />
       <div>{children}</div>
       <Grid container>

@@ -656,6 +656,9 @@ select:-webkit-autofill:focus {
   border-radius: 16px;
   margin-top: 30px;
 }
+.paymentButton:hover {
+  cursor: pointer !important;
+}
 
 .ElementsApp > .CardField > .CardBrandIcon-container {
   display: none !important;

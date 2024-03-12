@@ -112,13 +112,18 @@ import commercialRenovationAfter4 from "../../assets/images/services/commercialR
 import commercialRenovationBefore4 from "../../assets/images/services/commercialReno/Commercial Reno 4 Before.jpg";
 import commercialRenovationAfter5 from "../../assets/images/services/commercialReno/commercial reno 5 after.jpg";
 import commercialRenovationBefore5 from "../../assets/images/services/commercialReno/Commercial reno 5 before.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { addOrderData } from "@/store/orderPlaceSlice";
+import { pathLocations } from "@/utlils/pathLocations";
+import { useRouter } from "next/navigation";
 
 const TabSection = () => {
+
   const tabArr = [
     {
       label: "Virtual Staging",
       a11yPropsIndex: 0,
-      price: "$24",
+      price: "24",
       imagesArr: [
         {
           afterImg: virtualStagingImgAfter1,
@@ -197,7 +202,7 @@ const TabSection = () => {
     {
       label: "Virtual Renovation",
       a11yPropsIndex: 1,
-      price: "$69",
+      price: "69",
       imagesArr: [
         {
           afterImg: virtalRenovtionAfter1,
@@ -252,7 +257,7 @@ const TabSection = () => {
     {
       label: "Virtual Twilights",
       a11yPropsIndex: 2,
-      price: "$15",
+      price: "15",
       imagesArr: [
         {
           afterImg: virtualTwilightsAfter1,
@@ -299,7 +304,7 @@ const TabSection = () => {
     {
       label: "Commercial Virtual Staging",
       a11yPropsIndex: 3,
-      price: "$75",
+      price: "75",
       imagesArr: [
         {
           afterImg: commercialVirtualStagingAfter1,
@@ -334,7 +339,7 @@ const TabSection = () => {
     {
       label: "Commercial Virtual Renovation",
       a11yPropsIndex: 4,
-      price: "$99",
+      price: "99",
       imagesArr: [
         {
           beforeImg: commercialRenovationBefore1,
@@ -385,6 +390,19 @@ const TabSection = () => {
     setInterval(() => {
       setIsLoading(false);
     }, 2000);
+  };
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleServiceRedirect = (name, price) => {
+   
+    const dataObj = {
+      serviceName: name,
+      servicePrice: price,
+    };
+    dispatch(addOrderData(dataObj));
+    router.push(pathLocations.placeOrder);
   };
 
   return (
@@ -474,7 +492,7 @@ const TabSection = () => {
                         <Box>
                           <UITypography
                             type="heading"
-                            title={`${item.price}/`}
+                            title={`$${item.price}/`}
                             sx={{
                               display: "inline",
                               color: (theme) => theme.palette.primary.main,
@@ -495,7 +513,13 @@ const TabSection = () => {
                   </Grid>
                   <Grid container justifyContent="center">
                     <Grid item xs={12} sm={6} lg={5} mt={2}>
-                      <UIButton isDark={false} label="Place order" />
+                      <UIButton
+                        isDark={false}
+                        label="Place order"
+                        onClick={() =>
+                          handleServiceRedirect(item.label, item.price)
+                        }
+                      />
                     </Grid>
                   </Grid>
                 </CustomTabPanel>

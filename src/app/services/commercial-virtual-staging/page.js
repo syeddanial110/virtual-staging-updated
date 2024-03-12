@@ -1,12 +1,30 @@
-import UIButton from '@/components/UIButton/UIButton'
-import UITypography from '@/components/UITypography/UITypography'
-import { BannerWrapper } from '@/containers/AboutUs/ui'
-import DefaultLayout from '@/layout/default-layout'
-import { Grid } from '@mui/material'
-import React from 'react'
-import commercialStagingImg from '../../../assets/images/comercialStagingBanner.jpg'
+"use client"
+
+import UIButton from "@/components/UIButton/UIButton";
+import UITypography from "@/components/UITypography/UITypography";
+import { BannerWrapper } from "@/containers/AboutUs/ui";
+import DefaultLayout from "@/layout/default-layout";
+import { Grid } from "@mui/material";
+import React from "react";
+import commercialStagingImg from "../../../assets/images/comercialStagingBanner.jpg";
+import { addOrderData } from "@/store/orderPlaceSlice";
+import { pathLocations } from "@/utlils/pathLocations";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
 
 const CommercialVirtualStaging = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleServiceRedirect = () => {
+    const dataObj = {
+      serviceName: "Commercial Virtual Staging",
+      servicePrice: "75",
+    };
+    dispatch(addOrderData(dataObj));
+    router.push(pathLocations.placeOrder);
+  };
+
   return (
     <DefaultLayout>
       <Grid container justifyContent="center" gap={3} my={3}>
@@ -16,11 +34,11 @@ const CommercialVirtualStaging = () => {
               type="mainHeading"
               title="Commercial Virtual Staging"
               sx={{
-                color: 'white',
-                fontSize: { xs: '40px', md: '60px !important' },
-                fontWeight: 'regular',
-                mb: '13px',
-                ml: { xs: '30px', md: '60px' },
+                color: "white",
+                fontSize: { xs: "40px", md: "60px !important" },
+                fontWeight: "regular",
+                mb: "13px",
+                ml: { xs: "30px", md: "60px" },
               }}
             />
           </BannerWrapper>
@@ -44,11 +62,15 @@ const CommercialVirtualStaging = () => {
           />
         </Grid>
         <Grid item xs={11}>
-          <UIButton variant="contained" label="Order now" />
+          <UIButton
+            variant="contained"
+            label="Order now"
+            onClick={handleServiceRedirect}
+          />
         </Grid>
       </Grid>
     </DefaultLayout>
-  )
-}
+  );
+};
 
-export default CommercialVirtualStaging
+export default CommercialVirtualStaging;

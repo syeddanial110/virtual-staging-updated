@@ -75,6 +75,7 @@ const TestimonialSlider = ({ arr }) => {
                     heading={item.name}
                     authorName={item.date}
                     description={item.description}
+                    ratingVal={item.rating}
                   />
                 </Grid>
               </Grid>

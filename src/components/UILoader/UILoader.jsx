@@ -8,7 +8,7 @@ const UILoader = () => {
     <Box display="flex" justifyContent="center">
       <div
         style={{
-          width: "20%",
+          width: "100%",
         }}
       >
         <Lottie animationData={loaderAnim} loop={true} />

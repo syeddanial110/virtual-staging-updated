@@ -82,15 +82,16 @@ const Step1 = () => {
         phoneNumber: orderPlaceReducer.phoneNumber,
       });
     }
-
-    const dataObj = {
-      serviceName: "Virtual Staging",
-      servicePrice: "69",
-    };
-    dispatch(addOrderData(dataObj));
+    if (orderPlaceReducer.serviceName == "") {
+      const dataObj = {
+        serviceName: "Virtual Staging",
+        servicePrice: "69",
+      };
+      dispatch(addOrderData(dataObj));
+    }
   }, []);
 
-  console.log("orderPlaceReducer", orderPlaceReducer);
+  console.log('orderPlaceReducer', orderPlaceReducer)
 
   return (
     <>

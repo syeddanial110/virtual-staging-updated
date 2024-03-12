@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -14,10 +14,13 @@ import {
   initialStepperValue,
 } from "@/store/stepperValueSlice";
 
-const steps = ["Personal info", "Upload photos", "Photo details", "Add extras"];
+const steps = ["Personal info", "Upload photos", "Payment Details"];
 
 export default function OrderStepper(props) {
-  const [activeStep, setActiveStep] = React.useState(0);
+  const stepper = useSelector((state) => state?.stepperValueReducer);
+  const orderPlaceReducer = useSelector((state) => state?.orderPlaceReducer);
+
+  const [activeStep, setActiveStep] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -32,17 +35,43 @@ export default function OrderStepper(props) {
   };
 
   const handleFinish = () => {
-    console.log("finsh");
   };
 
   const handleReset = () => {
     setActiveStep(0);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(initialStepperValue(0));
   }, []);
 
+  useEffect(() => {
+    setActiveStep(stepper.step);
+  }, [stepper.step]);
+
+  useEffect(() => {
+    if (
+      orderPlaceReducer.name != "" &&
+      orderPlaceReducer?.email != "" &&
+      orderPlaceReducer?.phoneNumber != ""
+    ) {
+      setActiveStep(1);
+    }
+    if (orderPlaceReducer?.uploadImageDetails.length > 0) {
+      setActiveStep(2);
+    }
+    if (orderPlaceReducer.uploadImageDetails.length < 0) {
+      setActiveStep(1);
+    }
+  }, [
+    orderPlaceReducer?.name,
+    orderPlaceReducer?.email,
+    orderPlaceReducer?.phoneNumber,
+    orderPlaceReducer?.uploadImageDetails.length,
+  ]);
+
+  console.log("stepper", stepper);
+  console.log("orderPlaceReducer", orderPlaceReducer);
   return (
     <Box sx={{ width: "100%" }}>
       <Stepper activeStep={activeStep}>
@@ -56,21 +85,11 @@ export default function OrderStepper(props) {
           );
         })}
       </Stepper>
-      {activeStep === steps.length ? (
-        <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
-          </Typography>
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Box sx={{ flex: "1 1 auto" }} />
-            <Button onClick={handleReset}>Reset</Button>
-          </Box>
-        </React.Fragment>
-      ) : (
-        <React.Fragment>
-          {/* <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography> */}
-          {props.children}
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+
+      <React.Fragment>
+        {/* <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography> */}
+        {props.children}
+        {/* <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Button
               color="inherit"
               disabled={activeStep === 0}
@@ -80,12 +99,6 @@ export default function OrderStepper(props) {
               Back
             </Button>
             <Box sx={{ flex: "1 1 auto" }} />
-            {/* {isStepOptional(activeStep) && (
-              <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                Skip
-              </Button>
-            )} */}
-
             <Button
               onClick={
                 activeStep === steps.length - 1 ? handleFinish : handleNext
@@ -93,9 +106,8 @@ export default function OrderStepper(props) {
             >
               {activeStep === steps.length - 1 ? "Finish" : "Next"}
             </Button>
-          </Box>
-        </React.Fragment>
-      )}
+          </Box> */}
+      </React.Fragment>
     </Box>
   );
 }

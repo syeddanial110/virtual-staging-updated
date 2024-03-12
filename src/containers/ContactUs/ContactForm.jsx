@@ -5,11 +5,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { contactSchema } from "./schema";
 import { Grid } from "@mui/material";
 import UIButton from "@/components/UIButton/UIButton";
+import { toast } from "react-toastify";
 
 const ContactForm = () => {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(contactSchema),
@@ -22,8 +24,12 @@ const ContactForm = () => {
     },
   });
   const handleContact = (data) => {
-    router.push("/home");
-    toast.success("Successfully Login");
+    // router.push("/home");
+    reset();
+    toast.success("Your email has been sent successfully");
+    // setInterval(() => {
+    //   location.reload();
+    // }, 2000);
   };
   return (
     <form onSubmit={handleSubmit(handleContact)}>

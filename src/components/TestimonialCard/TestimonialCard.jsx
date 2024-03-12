@@ -4,8 +4,8 @@ import { TestimonialWrapper } from "./ui";
 import UITypography from "../UITypography/UITypography";
 import UIRating from "../UIRating/UIRating";
 
-const TestimonialCard = ({ heading, authorName, description }) => {
-  const [rating, setRating] = useState(3);
+const TestimonialCard = ({ heading, authorName, description, ratingVal }) => {
+  // const [rating, setRating] = useState(3);
   return (
     <TestimonialWrapper>
       <Stack>
@@ -35,7 +35,7 @@ const TestimonialCard = ({ heading, authorName, description }) => {
         />
       </Stack>
       <Box mt={4}>
-        <UIRating value={rating} setValue={setRating} />
+        <UIRating value={ratingVal} />
       </Box>
     </TestimonialWrapper>
   );

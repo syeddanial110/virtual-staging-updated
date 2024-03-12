@@ -40,6 +40,7 @@ const QuestionAnswer = ({ question, answer }) => {
               margin: "10px 0px !important",
             },
             fontWeight: 600,
+            fontSize: 20,
           }}
         >
           {question}
@@ -47,6 +48,7 @@ const QuestionAnswer = ({ question, answer }) => {
         <AccordionDetails
           sx={{
             padding: "22px 30px",
+            fontSize: 16,
           }}
         >
           {answer}

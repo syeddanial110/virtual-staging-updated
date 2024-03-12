@@ -26,7 +26,7 @@ export default function Home() {
       {/* <Header /> */}
       <DefaultLayout>
         <HeroSection />
-       
+
         {/* <VirtualSection /> */}
         <TabSection />
         {/* <ChooseUsSection /> */}

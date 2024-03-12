@@ -1,3 +1,5 @@
+"use client"
+
 import { BannerWrapper } from "@/containers/AboutUs/ui";
 import DefaultLayout from "@/layout/default-layout";
 import React from "react";
@@ -5,8 +7,23 @@ import virtualRenovationImg from "../../../assets/images/virtualRenovationBanner
 import UITypography from "@/components/UITypography/UITypography";
 import { Grid } from "@mui/material";
 import UIButton from "@/components/UIButton/UIButton";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
+import { addOrderData } from "@/store/orderPlaceSlice";
+import { pathLocations } from "@/utlils/pathLocations";
 
 const VirtualRenovation = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleServiceRedirect = () => {
+    const dataObj = {
+      serviceName: "Virtual Renovation",
+      servicePrice: "69",
+    };
+    dispatch(addOrderData(dataObj));
+    router.push(pathLocations.placeOrder);
+  };
   return (
     <DefaultLayout>
       <Grid container justifyContent="center" gap={3} my={3}>
@@ -44,7 +61,11 @@ const VirtualRenovation = () => {
           />
         </Grid>
         <Grid item xs={11}>
-          <UIButton variant="contained" label="Order now" />
+          <UIButton
+            variant="contained"
+            label="Order now"
+            onClick={handleServiceRedirect}
+          />
         </Grid>
       </Grid>
     </DefaultLayout>

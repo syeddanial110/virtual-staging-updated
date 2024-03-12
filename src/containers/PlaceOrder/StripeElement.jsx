@@ -41,7 +41,6 @@ const StripeElement = () => {
     apprearance,
   };
 
-  console.log("clientSecret", clientSecret);
 
   return (
     <div className="App">

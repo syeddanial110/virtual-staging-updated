@@ -58,7 +58,13 @@ const FurnitureCategory = () => {
           />
         </Grid>
       </Grid>
-      {isLoading && <UILoader />}
+      {isLoading && (
+        <Grid container display="flex" justifyContent="center">
+          <Grid item xs={3}>
+            <UILoader />
+          </Grid>
+        </Grid>
+      )}
       <Grid container justifyContent="center" mt={{ xs: 3, md: 8 }}>
         <Grid item xs={9} md={10}>
           <Grid

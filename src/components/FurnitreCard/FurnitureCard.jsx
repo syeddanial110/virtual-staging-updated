@@ -10,7 +10,7 @@ const FurnitureCard = ({
   imgStyle,
   imgObjectFit,
   style,
-  imgAlt
+  imgAlt,
 }) => {
   return (
     <Box
@@ -34,6 +34,12 @@ const FurnitureCard = ({
           width: "250px",
           height: "250px",
           overflow: "hidden",
+          border: (theme) => `4px solid ${theme.palette.primary.main}`,
+          "&:hover": {
+            "& > img": {
+              transform: "scale(1.2) rotate(-5deg)",
+            },
+          },
         }}
       >
         <img
@@ -49,6 +55,7 @@ const FurnitureCard = ({
             objectFit: imgObjectFit ? imgObjectFit : "contain",
             aspectRatio: 1 / 2,
             // borderRadius: "16px",
+            transition: "all 0.3s linear",
           }}
         />
       </Box>

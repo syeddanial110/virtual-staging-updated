@@ -5,16 +5,18 @@ import { ApiEndpoints } from "@/auth/apiEndpoints";
 import { toast } from "react-toastify";
 import { pathLocations } from "@/utlils/pathLocations";
 import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getToken, getUserId, setToken, setUserId } from "@/auth/Auth";
 import { Box, Grid, Modal } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import UITypography from "../../components/UITypography/UITypography";
+import { addStepperValue } from "@/store/stepperValueSlice";
 
 const PaymentForm = ({ clientSecret }) => {
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
+  const dispatch = useDispatch();
 
   const [isOrderCreated, setIsOrderCreated] = useState(false);
 
@@ -78,60 +80,93 @@ const PaymentForm = ({ clientSecret }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const token = getToken();
-    setLoading(true);
+    // setLoading(true);
 
-    apiPost(
-      `/payment-intent`,
-      { amount: orderPlaceReducer.total * 100 },
-      async (res) => {
-        console.log("res", res);
-
-        if (!stripe || !elements) {
-          return;
-        }
-
-        const cardElement = elements.getElement(CardElement);
-
-        const x = await stripe.createPaymentMethod({
-          type: "card",
-          card: cardElement,
-        });
-
-        console.log("x", x);
-
-        if (x.error) {
-          console.error(error);
-          setLoading(false);
+    if (
+      orderPlaceReducer.serviceName == "Virtual Twilights" ||
+      orderPlaceReducer.serviceName == "Commercial Virtual Staging" ||
+      orderPlaceReducer.serviceName == "Commercial Virtual Renovation"
+    ) {
+      orderPlaceReducer.uploadImageDetails.filter((elm) => {
+        if (elm.otherBasicItems != "") {
+          alert("Working");
         } else {
-          const response = await fetch(`${apiBaseUrl}/confirm-payment`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              paymentIntentId: res.paymentIntentId,
-              payment_method_id: x.paymentMethod.id,
-            }), // Change amount as needed
-          });
-
-          const data = await response.json();
-
-          if (data.success) {
-            console.log("Payment successful");
-            toast.success("Payment successful");
-            handleMakePayment();
-            if (!token) {
-              setIsOrderCreated(true);
-            }
-          } else {
-            console.error("Payment failed:", data.message);
-          }
-
-          setLoading(false);
+          alert("not fill");
         }
-      },
-      (err) => {
-        console.log("err", err);
+      });
+    } else {
+      // orderPlaceReducer.uploadImageDetails.some((elm) => {
+      //   if (elm.roomArea == "") {
+      //     alert("not fillllllll");
+      //   } else {
+      //     alert("Workingggggggggggg");
+      //   }
+      // });
+      console.log('orderPlaceReducer.uploadImageDetails///////', orderPlaceReducer.uploadImageDetails)
+      const x = orderPlaceReducer.uploadImageDetails.some(
+        (item) => item.roomArea === ""
+      );
+      console.log("x///////////", x);
+      if (!x) {
+        alert("Working");
       }
-    );
+    }
+    // const x = orderPlaceReducer.uploadImageDetails.filter((elm) =>
+    //   Object.keys(elm).forEach((key) => {
+    //     console.log("key", key);
+    //   })
+    // );
+
+    // apiPost(
+    //   `/payment-intent`,
+    //   { amount: orderPlaceReducer.total * 100 },
+    //   async (res) => {
+    //     // dispatch(addStepperValue(3));
+    //     console.log("res", res);
+
+    //     if (!stripe || !elements) {
+    //       return;
+    //     }
+
+    //     const cardElement = elements.getElement(CardElement);
+
+    //     const x = await stripe.createPaymentMethod({
+    //       type: "card",
+    //       card: cardElement,
+    //     });
+
+    //     if (x.error) {
+    //       console.error(error);
+    //       setLoading(false);
+    //     } else {
+    //       const response = await fetch(`${apiBaseUrl}/confirm-payment`, {
+    //         method: "POST",
+    //         headers: { "Content-Type": "application/json" },
+    //         body: JSON.stringify({
+    //           paymentIntentId: res.paymentIntentId,
+    //           payment_method_id: x.paymentMethod.id,
+    //         }), // Change amount as needed
+    //       });
+
+    //       const data = await response.json();
+
+    //       if (data.success) {
+    //         toast.success("Payment successful");
+    //         handleMakePayment();
+    //         if (!token) {
+    //           setIsOrderCreated(true);
+    //         }
+    //       } else {
+    //         console.error("Payment failed:", data.message);
+    //       }
+
+    //       setLoading(false);
+    //     }
+    //   },
+    //   (err) => {
+    //     console.log("err", err);
+    //   }
+    // );
   };
 
   const style = {

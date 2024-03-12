@@ -26,6 +26,9 @@ const BlogById = (props) => {
 
   const filteredBlog = blogData.filter((item) => item.id == id);
   const [blog, setBlog] = useState({});
+
+  const [recentBlogs, setRecentBlogs] = useState([]);
+
   useEffect(() => {
     setBlog(filteredBlog[0]);
     setInterval(() => {
@@ -33,6 +36,17 @@ const BlogById = (props) => {
     }, 2000);
   }, []);
 
+  useEffect(() => {
+    const filteredBlogs = blogData.filter(
+      (blog) => blog.id !== filteredBlog[0].id
+    );
+
+    // Get the first 3 filtered blogs
+    const threeFilteredBlogs = filteredBlogs.slice(0, 3);
+    console.log("threeFilteredBlogs", threeFilteredBlogs);
+
+    setRecentBlogs(threeFilteredBlogs);
+  }, []);
 
   return (
     <DefaultLayout>
@@ -133,7 +147,7 @@ const BlogById = (props) => {
                   sx={{ fontSize: "25px" }}
                 />
               </Grid>
-              {["", "", ""].map((item, i) => {
+              {recentBlogs.map((item, i) => {
                 return (
                   <Grid
                     item
@@ -144,17 +158,29 @@ const BlogById = (props) => {
                       borderLeftColor: (theme) => theme.palette.primary.main,
                       borderLeftStyle: "solid",
                       paddingLeft: "10px",
+                      display: "flex",
                     }}
                   >
-                    <UITypography
-                      title={blog.date}
-                      sx={{ fontSize: "11px !important" }}
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      height={60}
+                      width={80}
+                      style={{
+                        objectFit: "cover",
+                      }}
                     />
-                    <UITypography
-                      type="heading"
-                      title="Recent blog 1"
-                      sx={{ fontSize: "25px" }}
-                    />
+                    <Box ml={3}>
+                      <UITypography
+                        type="heading"
+                        title={`${item.title.slice(0, 20)}...`}
+                        sx={{ fontSize: "25px" }}
+                      />
+                      <UITypography
+                        title={`${item.description.slice(0, 40)}...`}
+                        sx={{ fontSize: "11px !important" }}
+                      />
+                    </Box>
                   </Grid>
                 );
               })}

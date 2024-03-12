@@ -9,6 +9,7 @@ const UIRating = ({ value, setValue, ...props }) => {
       onChange={(event, newValue) => {
         setValue(newValue);
       }}
+      readOnly
       sx={{ color: (theme) => theme.palette.primary.main }}
       {...props}
     />

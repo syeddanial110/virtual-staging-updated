@@ -42,7 +42,6 @@
 //       const { token, error } = await stripe.createToken(cardElement);
 
 //       if (error) {
-//         console.log("error", error);
 //         // Handle error (e.g., display error message to user)
 //       } else {
 //         // Send token to your server for further processing
@@ -56,7 +55,6 @@
 
 //         // Submit the form
 //         // form.submit();
-//         console.log("token", token);
 //       }
 //     });
 //   };

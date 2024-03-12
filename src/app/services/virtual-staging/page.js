@@ -6,8 +6,23 @@ import { Grid } from "@mui/material";
 import React from "react";
 import virtualStagingImg from "../../../assets/images/virtualStagingBanner.jpg";
 import UIButton from "@/components/UIButton/UIButton";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
+import { pathLocations } from "@/utlils/pathLocations";
+import { addOrderData } from "@/store/orderPlaceSlice";
 
 const Index = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleServiceRedirect = () => {
+    const dataObj = {
+      serviceName: "Virtual Staging",
+      servicePrice: "24",
+    };
+    dispatch(addOrderData(dataObj));
+    router.push(pathLocations.placeOrder);
+  };
   return (
     <DefaultLayout>
       <Grid container justifyContent="center" gap={3} my={3}>
@@ -53,7 +68,11 @@ const Index = () => {
           />
         </Grid>
         <Grid item xs={11}>
-          <UIButton variant="contained" label="Order now" />
+          <UIButton
+            variant="contained"
+            label="Order now"
+            onClick={handleServiceRedirect}
+          />
         </Grid>
       </Grid>
     </DefaultLayout>

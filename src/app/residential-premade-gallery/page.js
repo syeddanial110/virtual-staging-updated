@@ -1,41 +1,40 @@
-'use client'
+"use client";
 
-import { ImageBASEURL, apiGet } from '@/auth/ApiRequest'
-import { ApiEndpoints } from '@/auth/apiEndpoints'
-import FurnitureCard from '@/components/FurnitreCard/FurnitureCard'
-import UILoader from '@/components/UILoader/UILoader'
-import UITypography from '@/components/UITypography/UITypography'
-import DefaultLayout from '@/layout/default-layout'
-import { pathLocations } from '@/utlils/pathLocations'
-import { Grid } from '@mui/material'
-import { useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import { ImageBASEURL, apiGet } from "@/auth/ApiRequest";
+import { ApiEndpoints } from "@/auth/apiEndpoints";
+import FurnitureCard from "@/components/FurnitreCard/FurnitureCard";
+import UILoader from "@/components/UILoader/UILoader";
+import UITypography from "@/components/UITypography/UITypography";
+import DefaultLayout from "@/layout/default-layout";
+import { pathLocations } from "@/utlils/pathLocations";
+import { Grid } from "@mui/material";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 const ResidentialGallery = () => {
-  const router = useRouter()
+  const router = useRouter();
 
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
 
-  const [premadeCategory, setPremadeCategory] = useState([])
+  const [premadeCategory, setPremadeCategory] = useState([]);
 
   const getPremadeCategory = () => {
     apiGet(
       `${ApiEndpoints.getPremadeCategory}`,
       (res) => {
-        console.log('res', res)
-        setIsLoading(false)
-        setPremadeCategory(res)
+        console.log("res", res);
+        setIsLoading(false);
+        setPremadeCategory(res);
       },
       (err) => {
-        console.log('err', err)
-      },
-    )
-  }
+        console.log("err", err);
+      }
+    );
+  };
 
   useEffect(() => {
-    getPremadeCategory()
-  }, [])
-
+    getPremadeCategory();
+  }, []);
 
   return (
     <DefaultLayout>
@@ -68,7 +67,13 @@ const ResidentialGallery = () => {
       </Grid>
       <Grid container justifyContent="center" mt={8} gap={5}>
         <Grid item xs={10}>
-          {isLoading && <UILoader />}
+          {isLoading && (
+            <Grid container display="flex" justifyContent="center">
+              <Grid item xs={3}>
+                <UILoader />
+              </Grid>
+            </Grid>
+          )}
           <Grid container gap={3}>
             {!isLoading && (
               <>
@@ -89,14 +94,14 @@ const ResidentialGallery = () => {
                             title={item.title}
                             onClick={() => {
                               router.push(
-                                `${pathLocations.premadeGallery}/${item.id}`,
-                              )
+                                `${pathLocations.premadeGallery}/${item.id}`
+                              );
                             }}
                             imgObjectFit="cover"
                           />
                         </Grid>
                       </>
-                    )
+                    );
                   })
                 ) : (
                   <Grid item xs={12}>
@@ -109,7 +114,7 @@ const ResidentialGallery = () => {
         </Grid>
       </Grid>
     </DefaultLayout>
-  )
-}
+  );
+};
 
-export default ResidentialGallery
+export default ResidentialGallery;
