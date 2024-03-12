@@ -124,14 +124,14 @@ const Blogs = () => {
             })}
           </Grid>
         </Grid>
-        <Grid item mt={5}>
+        {/* <Grid item mt={5}>
           <Pagination
             // page={page}
             // onChange={handlePagination}
             count={blogData.length}
             variant="outlined"
           />
-        </Grid>
+        </Grid> */}
       </Grid>
     </DefaultLayout>
   );
