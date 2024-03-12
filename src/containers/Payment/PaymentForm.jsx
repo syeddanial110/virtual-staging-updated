@@ -80,93 +80,93 @@ const PaymentForm = ({ clientSecret }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const token = getToken();
-    // setLoading(true);
+    setLoading(true);
 
-    if (
-      orderPlaceReducer.serviceName == "Virtual Twilights" ||
-      orderPlaceReducer.serviceName == "Commercial Virtual Staging" ||
-      orderPlaceReducer.serviceName == "Commercial Virtual Renovation"
-    ) {
-      orderPlaceReducer.uploadImageDetails.filter((elm) => {
-        if (elm.otherBasicItems != "") {
-          alert("Working");
-        } else {
-          alert("not fill");
-        }
-      });
-    } else {
-      // orderPlaceReducer.uploadImageDetails.some((elm) => {
-      //   if (elm.roomArea == "") {
-      //     alert("not fillllllll");
-      //   } else {
-      //     alert("Workingggggggggggg");
-      //   }
-      // });
-      console.log('orderPlaceReducer.uploadImageDetails///////', orderPlaceReducer.uploadImageDetails)
-      const x = orderPlaceReducer.uploadImageDetails.some(
-        (item) => item.roomArea === ""
-      );
-      console.log("x///////////", x);
-      if (!x) {
-        alert("Working");
-      }
-    }
+    // if (
+    //   orderPlaceReducer.serviceName == "Virtual Twilights" ||
+    //   orderPlaceReducer.serviceName == "Commercial Virtual Staging" ||
+    //   orderPlaceReducer.serviceName == "Commercial Virtual Renovation"
+    // ) {
+    //   orderPlaceReducer.uploadImageDetails.filter((elm) => {
+    //     if (elm.otherBasicItems != "") {
+    //       alert("Working");
+    //     } else {
+    //       alert("not fill");
+    //     }
+    //   });
+    // } else {
+    // orderPlaceReducer.uploadImageDetails.some((elm) => {
+    //   if (elm.roomArea == "") {
+    //     alert("not fillllllll");
+    //   } else {
+    //     alert("Workingggggggggggg");
+    //   }
+    // });
+    // console.log('orderPlaceReducer.uploadImageDetails///////', orderPlaceReducer.uploadImageDetails)
+    // const x = orderPlaceReducer.uploadImageDetails.some(
+    //   (item) => item.roomArea === ""
+    // );
+    // console.log("x///////////", x);
+    // if (!x) {
+    //   alert("Working");
+    // }
+    // }
     // const x = orderPlaceReducer.uploadImageDetails.filter((elm) =>
     //   Object.keys(elm).forEach((key) => {
     //     console.log("key", key);
     //   })
     // );
 
-    // apiPost(
-    //   `/payment-intent`,
-    //   { amount: orderPlaceReducer.total * 100 },
-    //   async (res) => {
-    //     // dispatch(addStepperValue(3));
-    //     console.log("res", res);
+    apiPost(
+      `/payment-intent`,
+      { amount: orderPlaceReducer.total * 100 },
+      async (res) => {
+        // dispatch(addStepperValue(3));
+        console.log("res", res);
 
-    //     if (!stripe || !elements) {
-    //       return;
-    //     }
+        if (!stripe || !elements) {
+          return;
+        }
 
-    //     const cardElement = elements.getElement(CardElement);
+        const cardElement = elements.getElement(CardElement);
 
-    //     const x = await stripe.createPaymentMethod({
-    //       type: "card",
-    //       card: cardElement,
-    //     });
+        const x = await stripe.createPaymentMethod({
+          type: "card",
+          card: cardElement,
+        });
 
-    //     if (x.error) {
-    //       console.error(error);
-    //       setLoading(false);
-    //     } else {
-    //       const response = await fetch(`${apiBaseUrl}/confirm-payment`, {
-    //         method: "POST",
-    //         headers: { "Content-Type": "application/json" },
-    //         body: JSON.stringify({
-    //           paymentIntentId: res.paymentIntentId,
-    //           payment_method_id: x.paymentMethod.id,
-    //         }), // Change amount as needed
-    //       });
+        if (x.error) {
+          console.error(error);
+          setLoading(false);
+        } else {
+          const response = await fetch(`${apiBaseUrl}/confirm-payment`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              paymentIntentId: res.paymentIntentId,
+              payment_method_id: x.paymentMethod.id,
+            }), // Change amount as needed
+          });
 
-    //       const data = await response.json();
+          const data = await response.json();
 
-    //       if (data.success) {
-    //         toast.success("Payment successful");
-    //         handleMakePayment();
-    //         if (!token) {
-    //           setIsOrderCreated(true);
-    //         }
-    //       } else {
-    //         console.error("Payment failed:", data.message);
-    //       }
+          if (data.success) {
+            toast.success("Payment successful");
+            handleMakePayment();
+            if (!token) {
+              setIsOrderCreated(true);
+            }
+          } else {
+            console.error("Payment failed:", data.message);
+          }
 
-    //       setLoading(false);
-    //     }
-    //   },
-    //   (err) => {
-    //     console.log("err", err);
-    //   }
-    // );
+          setLoading(false);
+        }
+      },
+      (err) => {
+        console.log("err", err);
+      }
+    );
   };
 
   const style = {
