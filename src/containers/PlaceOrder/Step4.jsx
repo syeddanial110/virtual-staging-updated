@@ -126,8 +126,7 @@ const Step4 = () => {
       (res) => {
         setCuratedCollection(res);
       },
-      (err) => {
-      }
+      (err) => {}
     );
   };
 
@@ -267,7 +266,6 @@ const Step4 = () => {
 
   // end room area select
 
-
   return (
     <Grid container gap={3} mt={5}>
       <Grid item xs={12}>
@@ -342,10 +340,13 @@ const Step4 = () => {
                         color: (theme) => theme.palette.primary.greyShade5,
                       }}
                     />
-                    <Grid container>
+                    <Grid
+                      container
+                      sx={{ height: "200px", overflowY: "scroll" }}
+                    >
                       {basicItems.map((elm) => {
                         return (
-                          <Grid item xs={6}>
+                          <Grid item xs={6} >
                             <UICheckbox
                               onChange={(e) => handleChange(e, i, elm)}
                               value={elm.title}

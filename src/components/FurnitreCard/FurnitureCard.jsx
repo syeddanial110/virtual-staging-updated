@@ -47,6 +47,7 @@ const FurnitureCard = ({
           alt={imgAlt}
           height={260}
           width={150}
+          loading="eager"
           style={{
             ...imgStyle,
             // width: "100%",

@@ -35,6 +35,9 @@ p {
 .faqAnswer {
   font-family: "custFont";
 }
+.faqQuestion {
+  font-family: "custFontTitle";
+}
 
 /* hero slider css */
 

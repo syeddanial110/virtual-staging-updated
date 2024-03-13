@@ -9,6 +9,8 @@ export const ApiEndpoints = {
   getPremadeProduct: "/premade/category/products/", // /category/products/premadeCategoryId
   getSinglePremadeProduct: "/premade/product/", // /productId
   curatedCollection: "/curated-collections",
+  curatedCollectionById: "/curated-collections/choices/",
+  choiceById: "/choice/",
   promoCode: "/promocode/check",
   userById: "/user/",
   createOrder: "/create-order",

@@ -42,6 +42,7 @@ const QuestionAnswer = ({ question, answer }) => {
             fontWeight: 600,
             fontSize: 20,
           }}
+          className="faqQuestion"
         >
           {question}
         </AccordionSummary>
