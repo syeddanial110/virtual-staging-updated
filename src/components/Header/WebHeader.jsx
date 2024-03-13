@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Avatar,
   Box,
@@ -29,10 +29,12 @@ import { useRouter } from "next/navigation";
 import { getToken, removeToken, removeUserId } from "@/auth/Auth";
 import UIButton from "../UIButton/UIButton";
 import { pathLocations } from "@/utlils/pathLocations";
+import { apiGet } from "@/auth/ApiRequest";
+import { ApiEndpoints } from "@/auth/apiEndpoints";
 
 const WebHeader = () => {
   const router = useRouter();
-  const [open, setOpen] = useState(false);
+  const [curatedCollection, setCuratedCollection] = useState([]);
 
   const token = getToken();
 
@@ -46,6 +48,23 @@ const WebHeader = () => {
   const handleMenuClose = () => {
     setMenuAnchorEl(null);
   };
+
+  const getCuratedCollection = () => {
+    apiGet(
+      `${ApiEndpoints.curatedCollection}`,
+      (res) => {
+        console.log("res getCuratedCollection", res);
+        setCuratedCollection(res);
+      },
+      (err) => {
+        console.log("err", err);
+      }
+    );
+  };
+
+  useEffect(() => {
+    getCuratedCollection();
+  }, []);
 
   return (
     <Grid container alignItems="center" pt={3} pb={1}>
@@ -181,14 +200,19 @@ const WebHeader = () => {
                             <Grid item xs={12}>
                               <UIDivider />
                             </Grid>
-                            {item?.subName[0].subLinks.map((subLink, i) => {
+                            {curatedCollection.map((subLink, i) => {
                               return (
                                 <Grid item xs={12} key={i}>
                                   <UITypography
-                                    title={`- ${subLink.name}`}
+                                    title={`- ${subLink.title}`}
                                     isWhite={true}
                                     className="subLinkTitle"
                                     sx={{ padding: "8px 1px" }}
+                                    onClick={() =>
+                                      router.push(
+                                        `${pathLocations.curatedCollection}/${subLink.id}`
+                                      )
+                                    }
                                   />
                                 </Grid>
                               );

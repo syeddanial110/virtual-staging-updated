@@ -14,7 +14,6 @@ import { useSelector } from "react-redux";
 const placeOrder = () => {
   const stepper = useSelector((state) => state?.stepperValueReducer);
   const orderPlaceReducer = useSelector((state) => state?.orderPlaceReducer);
-  console.log("orderPlaceReducer", orderPlaceReducer);
 
   const [isTotal, setIsTotal] = useState(0);
 
@@ -28,6 +27,7 @@ const placeOrder = () => {
         <Grid item xs={10}>
           <OrderStepper>
             <Step1 />
+            <Step2 />
             <Step3 />
             <Step4 />
             <Step5 />

@@ -205,6 +205,10 @@ export const menu = [
     link: "/profile",
   },
   {
+    title: "Change Password",
+    link: "/change-password",
+  },
+  {
     title: "Orders",
     link: "/order",
   },

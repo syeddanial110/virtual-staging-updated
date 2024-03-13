@@ -18,4 +18,5 @@ export const pathLocations = {
   premadeGallery: "/residential-premade-gallery",
   profile: "/profile",
   order: "/order",
+  curatedCollection: "/curated-collection",
 };

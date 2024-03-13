@@ -9,8 +9,17 @@ import { Box, Grid, InputAdornment } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import EmailIcon from "@mui/icons-material/Email";
 import ProfileForm from "@/containers/Profile/ProfileForm";
+import { getUserId } from "@/auth/Auth";
+import { apiGet } from "@/auth/ApiRequest";
+import { ApiEndpoints } from "@/auth/apiEndpoints";
+import { useDispatch, useSelector } from "react-redux";
+import { addProfileData } from "@/store/profileDataSlice";
+import UILoader from "@/components/UILoader/UILoader";
 
 const Profile = () => {
+  const dispatch = useDispatch();
+  const profileDataReducer = useSelector((state) => state?.profileDataReducer);
+
   const [file, setFile] = useState(null);
   const [fileDataURL, setFileDataURL] = useState("");
   const [isImageUploading, setIsImageUploading] = useState(false);
@@ -44,27 +53,58 @@ const Profile = () => {
     };
   }, [file]);
 
+  const userId = getUserId();
+
+  const getUserProfile = () => {
+    apiGet(
+      `${ApiEndpoints.userById}${userId}`,
+      (res) => {
+        console.log("res", res);
+        const dataObj = {
+          name: res?.user?.name,
+          email: res?.user?.email,
+          phoneNumber: res?.user?.phone,
+        };
+        dispatch(addProfileData(dataObj));
+      },
+      (err) => {
+        console.log("err", err);
+      }
+    );
+  };
+
+  useEffect(() => {
+    getUserProfile();
+  }, []);
+
 
   return (
     <DefaultLayout>
       <Grid container justifyContent="center" gap={3}>
-        <Grid item xs={10} display="flex" alignItems="center">
-          <UIProfileFile
-            _handleChangeImage={_handleChangeImage}
-            data={fileDataURL}
-            isImageUploading={isImageUploading}
+        <Grid item xs={10}>
+          <UITypography
+            type="heading"
+            title="Edit Profile"
+            textAlign="center"
           />
-          <Box ml={2}>
-            <UITypography title="Peter parker" />
-            <UITypography title="example@gmail.com" />
-            <UITypography title="+1 334 555 666" />
-          </Box>
         </Grid>
-        <Grid item xs={10}>
-          <UIDivider />
-        </Grid>
-        <Grid item xs={10}>
-          <ProfileForm />
+        <Grid
+          item
+          xs={6}
+          sx={{
+            border: `1px solid #b5b5b5`,
+            borderRadius: "15px",
+            padding: "10px",
+            minHeight: "40vh",
+          }}
+        >
+          {profileDataReducer.email != "" ? (
+            <ProfileForm />
+          ) : (
+            <>
+              <UILoader />
+            </>
+          )}
         </Grid>
       </Grid>
     </DefaultLayout>

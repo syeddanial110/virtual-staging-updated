@@ -67,7 +67,6 @@ const Step5 = () => {
       `${ApiEndpoints.promoCode}`,
       dataObj,
       (res) => {
-        console.log("res", res);
         if (!res.valid) {
           toast.error("Promo code is not valid");
         } else {
@@ -86,53 +85,53 @@ const Step5 = () => {
     );
   };
 
-  const handleMakePayment = () => {
-    const orderItem = orderPlaceReducer?.uploadImageDetails.map((item) => {
-      return {
-        image: item.image,
-        curated_collection_id: `${item.curatedId}`,
-        choice_ids: item.basicItems,
-        additional_services: item.additionalServices.map((elm) => {
-          return {
-            service_name: elm.title,
-            service_price: elm.price,
-          };
-        }),
-        additional_notes: item.otherBasicItems,
-      };
-    });
-    const id = getUserId();
-    const token = getToken();
+  // const handleMakePayment = () => {
+  //   const orderItem = orderPlaceReducer?.uploadImageDetails.map((item) => {
+  //     return {
+  //       image: item.image,
+  //       curated_collection_id: `${item.curatedId}`,
+  //       choice_ids: item.basicItems,
+  //       additional_services: item.additionalServices.map((elm) => {
+  //         return {
+  //           service_name: elm.title,
+  //           service_price: elm.price,
+  //         };
+  //       }),
+  //       additional_notes: item.otherBasicItems,
+  //     };
+  //   });
+  //   const id = getUserId();
+  //   const token = getToken();
 
-    const dataObj = {
-      name: orderPlaceReducer.name,
-      email: orderPlaceReducer.email,
-      user_id: id === undefined ? null : id,
-      phone: orderPlaceReducer.phoneNumber,
-      service_name: orderPlaceReducer.serviceName,
-      service_price: parseInt(orderPlaceReducer.servicePrice),
-      total_price: parseFloat(orderPlaceReducer.total),
-      order_items: orderItem,
-    };
+  //   const dataObj = {
+  //     name: orderPlaceReducer.name,
+  //     email: orderPlaceReducer.email,
+  //     user_id: id === undefined ? null : id,
+  //     phone: orderPlaceReducer.phoneNumber,
+  //     service_name: orderPlaceReducer.serviceName,
+  //     service_price: parseInt(orderPlaceReducer.servicePrice),
+  //     total_price: parseFloat(orderPlaceReducer.total),
+  //     order_items: orderItem,
+  //   };
 
-    apiPost(
-      `${ApiEndpoints.createOrder}`,
-      dataObj,
-      (res) => {
-        console.log("res", res);
-        toast.success(res.message);
-        router.push(pathLocations.order);
-        if (id == undefined) {
-          setToken(res.token);
-          setUserId(res.user.id);
-        }
-      },
-      (err) => {
-        console.log("err", err);
-        toast.error("All fields are required");
-      }
-    );
-  };
+  //   apiPost(
+  //     `${ApiEndpoints.createOrder}`,
+  //     dataObj,
+  //     (res) => {
+  //       console.log("res", res);
+  //       toast.success(res.message);
+  //       router.push(pathLocations.order);
+  //       if (id == undefined) {
+  //         setToken(res.token);
+  //         setUserId(res.user.id);
+  //       }
+  //     },
+  //     (err) => {
+  //       console.log("err", err);
+  //       toast.error("All fields are required");
+  //     }
+  //   );
+  // };
 
   return (
     <Grid container justifyContent="space-between" gap={1} mt={5}>

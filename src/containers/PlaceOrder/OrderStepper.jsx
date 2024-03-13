@@ -70,8 +70,6 @@ export default function OrderStepper(props) {
     orderPlaceReducer?.uploadImageDetails.length,
   ]);
 
-  console.log("stepper", stepper);
-  console.log("orderPlaceReducer", orderPlaceReducer);
   return (
     <Box sx={{ width: "100%" }}>
       <Stepper activeStep={activeStep}>

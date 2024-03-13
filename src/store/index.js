@@ -8,6 +8,7 @@ import { configureStore } from "@reduxjs/toolkit";
 // import filterReducer from "./filterSlice";
 import stepperValueReducer from "./stepperValueSlice";
 import orderPlaceReducer from "./orderPlaceSlice";
+import profileDataReducer from "./profileDataSlice";
 
 const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
     // filterReducer: filterReducer,
     stepperValueReducer: stepperValueReducer,
     orderPlaceReducer: orderPlaceReducer,
+    profileDataReducer: profileDataReducer,
   },
 });
 

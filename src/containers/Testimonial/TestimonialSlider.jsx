@@ -72,6 +72,7 @@ const TestimonialSlider = ({ arr }) => {
               <Grid container justifyContent="space-around">
                 <Grid item xs={11}>
                   <TestimonialCard
+                    imageUrl={item.image}
                     heading={item.name}
                     authorName={item.date}
                     description={item.description}

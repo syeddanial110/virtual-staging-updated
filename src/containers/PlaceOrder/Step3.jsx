@@ -31,7 +31,6 @@ const Step3 = () => {
     if (e.target.files[0]) {
       fileUpload(`${ApiEndpoints.uploadImage}`, e.target.files[0])
         .then((res) => {
-          console.log("res", res);
           setIsImageUploading(false);
           setFileDataURL([...fileDataURL, res.url]);
           toast.success(res.message);
@@ -108,7 +107,6 @@ const Step3 = () => {
     }
   }, [fileDataURL.length]);
 
-  console.log("fileDataURL", fileDataURL);
 
   return (
     <>

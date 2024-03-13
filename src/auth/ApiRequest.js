@@ -136,7 +136,9 @@ export async function fileUpload(endpoint, file) {
   };
 
   return fetch(apiBaseUrl + endpoint, requestOptions)
-    .then((response) => response.json())
+    .then((response) => {
+      return response?.json();
+    })
     .then((result) => {
       return result;
     })

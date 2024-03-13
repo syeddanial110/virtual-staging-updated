@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import EmailIcon from "@mui/icons-material/Email";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { profileSchema } from "@/schema/schema";
+import { changePasswordSchema, profileSchema } from "@/schema/schema";
 import UIPhoneTextField from "@/components/UIPhoneTextField/UIPhoneTextField";
 import UIButton from "@/components/UIButton/UIButton";
 import { useSelector } from "react-redux";
@@ -14,110 +14,96 @@ import { ApiEndpoints } from "@/auth/apiEndpoints";
 import { getUserId } from "@/auth/Auth";
 import { toast } from "react-toastify";
 
-const ProfileForm = () => {
-  const profileDataReducer = useSelector((state) => state?.profileDataReducer);
+const ChangePasswordForm = () => {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(profileSchema),
+    resolver: yupResolver(changePasswordSchema),
     defaultValues: {
-      name: profileDataReducer.name != "" ? profileDataReducer.name : "",
-      email: profileDataReducer.email != "" ? profileDataReducer.email : "",
+      oldPassword: "",
+      newPassword: "",
+      confirmPassword: "",
     },
   });
 
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const handleChangePassword = (data) => {
 
-  const handleEditProfile = (data) => {
     const id = getUserId();
-
-    const dataObj = {
-      email: data.email,
-      name: data.name,
-      phone: phoneNumber,
+    const dataobj = {
+      password: data.newPassword,
     };
-
     apiPost(
-      `${ApiEndpoints.editProfile}${id}`,
-      dataObj,
+      `${ApiEndpoints.updatePassword}${id}`,
+      dataobj,
       (res) => {
         toast.success(res.message);
+        reset();
       },
       (err) => {
-        toast.error(err.response?.data?.email && err.response?.data?.email[0]);
-        toast.error(err.response?.data?.name && err.response?.data?.name[0]);
       }
     );
   };
 
-  const handleChangePhone = (val) => {
-    setPhoneNumber(val);
-  };
-
-  useEffect(() => {
-    if (profileDataReducer.phoneNumber != "")
-      setPhoneNumber(profileDataReducer.phoneNumber);
-  }, [profileDataReducer.phoneNumber]);
-
-
   return (
     <Grid container justifyContent="center">
       <Grid item xs={8}>
-        <form onSubmit={handleSubmit(handleEditProfile)}>
+        <form onSubmit={handleSubmit(handleChangePassword)}>
           <Grid container gap={2}>
             <Grid item xs={10}>
               <UITypography
-                title="Your Name:"
+                title="Old Password:"
                 sx={{
                   color: (theme) => theme.palette.primary.greyShade4,
                   my: 1,
                 }}
               />
               <UITextField
-                variant="contained"
-                placeholder="Type your name"
+                type="password"
+                placeholder="Type your old password"
                 control={control}
-                name="name"
+                name="oldPassword"
                 fullWidth
-                errorMessage={errors?.name?.message}
+                errorMessage={errors?.oldPassword?.message}
                 autoFocus={false}
               />
             </Grid>
             <Grid item xs={10}>
               <UITypography
-                title="Enter email:"
+                title="New Password:"
                 sx={{
                   color: (theme) => theme.palette.primary.greyShade4,
                   my: 1,
                 }}
               />
               <UITextField
-                variant="contained"
-                placeholder="Type your email"
+                type="password"
+                placeholder="Type your new password"
                 control={control}
-                name="email"
+                name="newPassword"
                 fullWidth
-                errorMessage={errors?.email?.message}
+                errorMessage={errors?.newPassword?.message}
                 autoFocus={false}
               />
             </Grid>
             <Grid item xs={10}>
               <UITypography
-                title="Enter Phone number:"
+                title="Confirm Password:"
                 sx={{
                   color: (theme) => theme.palette.primary.greyShade4,
                   my: 1,
                 }}
               />
-              <UIPhoneTextField
-                variant="outlined"
-                placeholder="Type your Number"
-                name="phoneNumber"
-                value={phoneNumber}
+              <UITextField
+                type="password"
+                placeholder="Type your new password"
+                control={control}
+                name="confirmPassword"
                 fullWidth
-                onChange={handleChangePhone}
+                errorMessage={errors?.confirmPassword?.message}
+                autoFocus={false}
               />
             </Grid>
             <Grid item xs={10} mt={2}>
@@ -130,4 +116,4 @@ const ProfileForm = () => {
   );
 };
 
-export default ProfileForm;
+export default ChangePasswordForm;

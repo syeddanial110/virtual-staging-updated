@@ -36,7 +36,6 @@ const FurnitureId = () => {
           });
         },
         (err) => {
-          console.log("err", err);
         }
       );
   };

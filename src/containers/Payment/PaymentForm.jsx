@@ -55,7 +55,6 @@ const PaymentForm = ({ clientSecret }) => {
       `${ApiEndpoints.createOrder}`,
       dataObj,
       (res) => {
-        console.log("res", res);
         toast.success(res.message);
 
         setInterval(
@@ -71,72 +70,30 @@ const PaymentForm = ({ clientSecret }) => {
         }
       },
       (err) => {
-        console.log("err", err);
         toast.error("All fields are required");
       }
     );
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const token = getToken();
+  const handlePlaceOrder = () => {
     setLoading(true);
-
-    // if (
-    //   orderPlaceReducer.serviceName == "Virtual Twilights" ||
-    //   orderPlaceReducer.serviceName == "Commercial Virtual Staging" ||
-    //   orderPlaceReducer.serviceName == "Commercial Virtual Renovation"
-    // ) {
-    //   orderPlaceReducer.uploadImageDetails.filter((elm) => {
-    //     if (elm.otherBasicItems != "") {
-    //       alert("Working");
-    //     } else {
-    //       alert("not fill");
-    //     }
-    //   });
-    // } else {
-    // orderPlaceReducer.uploadImageDetails.some((elm) => {
-    //   if (elm.roomArea == "") {
-    //     alert("not fillllllll");
-    //   } else {
-    //     alert("Workingggggggggggg");
-    //   }
-    // });
-    // console.log('orderPlaceReducer.uploadImageDetails///////', orderPlaceReducer.uploadImageDetails)
-    // const x = orderPlaceReducer.uploadImageDetails.some(
-    //   (item) => item.roomArea === ""
-    // );
-    // console.log("x///////////", x);
-    // if (!x) {
-    //   alert("Working");
-    // }
-    // }
-    // const x = orderPlaceReducer.uploadImageDetails.filter((elm) =>
-    //   Object.keys(elm).forEach((key) => {
-    //     console.log("key", key);
-    //   })
-    // );
-
+    const token = getToken();
     apiPost(
       `/payment-intent`,
       { amount: orderPlaceReducer.total * 100 },
       async (res) => {
         // dispatch(addStepperValue(3));
-        console.log("res", res);
-
         if (!stripe || !elements) {
           return;
         }
-
         const cardElement = elements.getElement(CardElement);
-
         const x = await stripe.createPaymentMethod({
           type: "card",
           card: cardElement,
         });
-
         if (x.error) {
-          console.error(error);
+          console.error(x.error);
+          toast.error(x.error.message);
           setLoading(false);
         } else {
           const response = await fetch(`${apiBaseUrl}/confirm-payment`, {
@@ -147,9 +104,7 @@ const PaymentForm = ({ clientSecret }) => {
               payment_method_id: x.paymentMethod.id,
             }), // Change amount as needed
           });
-
           const data = await response.json();
-
           if (data.success) {
             toast.success("Payment successful");
             handleMakePayment();
@@ -159,14 +114,50 @@ const PaymentForm = ({ clientSecret }) => {
           } else {
             console.error("Payment failed:", data.message);
           }
-
           setLoading(false);
         }
       },
       (err) => {
-        console.log("err", err);
       }
     );
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (
+      orderPlaceReducer.name == "" ||
+      orderPlaceReducer.email == "" ||
+      orderPlaceReducer.phoneNumber == "" ||
+      orderPlaceReducer.uploadImageDetails.length == 0
+    ) {
+      toast.error("All fields are required");
+    } else {
+      if (
+        orderPlaceReducer.serviceName == "Virtual Twilights" ||
+        orderPlaceReducer.serviceName == "Commercial Virtual Staging" ||
+        orderPlaceReducer.serviceName == "Commercial Virtual Renovation"
+      ) {
+        const x = orderPlaceReducer.uploadImageDetails.some(
+          (item) => item.otherBasicItems === ""
+        );
+        if (!x) {
+          handlePlaceOrder();
+        } else {
+          toast.error("Not box is required");
+        }
+      } else {
+        const x = orderPlaceReducer.uploadImageDetails.some(
+          (item) => item.roomArea === ""
+        );
+
+        if (!x) {
+          handlePlaceOrder();
+        } else {
+          toast.error("Curated collection is required");
+        }
+      }
+    }
   };
 
   const style = {

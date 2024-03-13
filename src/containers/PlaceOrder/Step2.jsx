@@ -41,6 +41,9 @@ const Step2 = () => {
     },
   ];
   const [isSelected, setIsSelected] = useState("");
+  const [styleData, setStyleData] = useState([]);
+
+
   return (
     <>
       <Grid container gap={4}>

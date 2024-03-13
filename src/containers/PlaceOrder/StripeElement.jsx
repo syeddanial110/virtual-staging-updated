@@ -23,7 +23,6 @@ const StripeElement = () => {
     //   },
     //   body: JSON.stringify({ items: [{ id: "12343" }] }),
     // });
-    console.log("response", response);
     setClientSecret(response.data.clientSecret);
     // return response;
   };

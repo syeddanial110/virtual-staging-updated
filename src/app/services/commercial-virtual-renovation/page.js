@@ -9,6 +9,7 @@ import commercialStagingImg from "../../../assets/images/commercialRenovationBan
 import { useDispatch } from "react-redux";
 import { pathLocations } from "@/utlils/pathLocations";
 import { useRouter } from "next/navigation";
+import { addOrderData } from "@/store/orderPlaceSlice";
 
 const CommercialVirtualRenovation = () => {
   const dispatch = useDispatch();

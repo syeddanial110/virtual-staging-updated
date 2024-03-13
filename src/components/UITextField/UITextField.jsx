@@ -116,11 +116,11 @@ const UITextField = ({
         control={control == null ? fallbackControl : control}
         render={({ field }) => (
           <>
-            <UIStyledOutlinedField
+            <UIStyledContainedField
               type={showPassword ? "text" : "password"}
               variant={variant}
               error={errorMessage && true}
-              helperText={errorMessage}
+              // helperText={errorMessage}
               label={label}
               value={value}
               className=" bg-transparent "

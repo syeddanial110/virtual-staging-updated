@@ -7,6 +7,8 @@ import StepProcess from "@/containers/StepProcess/StepProcess";
 import Testimonial from "@/containers/Testimonial/Testimonial";
 import DefaultLayout from "@/layout/default-layout";
 import BeforeAfterImg from "@/containers/BeforeAfterImg/BeforeAfterImg";
+import ReviewsSlider from "@/containers/Reviews/ReviewsSlider";
+import { Grid } from "@mui/material";
 
 export default function Home() {
   // useEffect(() => {
@@ -33,6 +35,11 @@ export default function Home() {
         <LatestCollection />
         <StepProcess />
         <Testimonial />
+        {/* <Grid container justifyContent="center">
+          <Grid item xs={11}>
+            <ReviewsSlider />
+          </Grid>
+        </Grid> */}
       </DefaultLayout>
       {/* <Footer /> */}
       {/* <RandomizedImage /> */}

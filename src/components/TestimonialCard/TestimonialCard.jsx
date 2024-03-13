@@ -3,12 +3,26 @@ import React, { useState } from "react";
 import { TestimonialWrapper } from "./ui";
 import UITypography from "../UITypography/UITypography";
 import UIRating from "../UIRating/UIRating";
+import Image from "next/image";
 
-const TestimonialCard = ({ heading, authorName, description, ratingVal }) => {
+const TestimonialCard = ({
+  heading,
+  authorName,
+  description,
+  ratingVal,
+  imageUrl,
+}) => {
   // const [rating, setRating] = useState(3);
   return (
     <TestimonialWrapper>
-      <Stack>
+      <Stack alignItems="center">
+        <Image
+          src={imageUrl}
+          alt={heading}
+          height={50}
+          width={50}
+          style={{ objectFit: "cover" }}
+        />
         <UITypography
           type="mainDescription"
           title={heading}

@@ -124,11 +124,9 @@ const Step4 = () => {
     apiGet(
       `${ApiEndpoints.curatedCollection}`,
       (res) => {
-        console.log("res", res);
         setCuratedCollection(res);
       },
       (err) => {
-        console.log("err", err);
       }
     );
   };
@@ -246,7 +244,6 @@ const Step4 = () => {
       };
       return newState;
     });
-    console.log("newState", newState);
 
     setBasicItems(filteredRoomArea[0].choices);
   };
@@ -270,8 +267,6 @@ const Step4 = () => {
 
   // end room area select
 
-  console.log("uploadImageDetails", uploadImageDetails);
-  console.log("orderPlaceReducer------------", orderPlaceReducer);
 
   return (
     <Grid container gap={3} mt={5}>

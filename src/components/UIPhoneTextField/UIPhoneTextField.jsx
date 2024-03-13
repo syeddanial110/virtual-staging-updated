@@ -7,11 +7,11 @@ const UIPhoneTextField = ({ value, onChange, ...props }) => {
   return (
     <CountryListWrapper>
       <PhoneInput
-        // country={"us"}
+        country={"us"}
         value={value}
         onChange={onChange}
         enableSearch={false}
-        // onlyCountries={["us"]}
+        onlyCountries={["us"]}
         specialLabel=""
         {...props}
         inputStyle={{ borderRadius: "16px", width: "100%" }}

@@ -35,7 +35,6 @@ const FurnitureCategory = () => {
         setIsLoading(false);
       },
       (err) => {
-        console.log("err", err);
         setIsLoading(false);
       }
     );

@@ -43,7 +43,6 @@ const Signup = () => {
         router.push(pathLocations.login)
       },
       (err) => {
-        console.log('err', err)
         toast.error('Email already exist')
       },
     )

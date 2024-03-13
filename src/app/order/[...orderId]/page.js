@@ -33,15 +33,12 @@ const ViewOrderDetail = () => {
 
   const getSpecificOrder = () => {
     const id = pathname.split('/')[2]
-    console.log('pathname', id)
     apiGetWithoutToken(
       `${ApiEndpoints.getSingleOrder}${id}`,
       (res) => {
-        console.log('res', res)
         setSpecticOrderData(res.order)
       },
       (err) => {
-        console.log('err', err)
       },
     )
   }
@@ -50,7 +47,6 @@ const ViewOrderDetail = () => {
     getSpecificOrder()
   }, [])
 
-  console.log('specticOrderData', specticOrderData)
 
   return (
     <DefaultLayout>

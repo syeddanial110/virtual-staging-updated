@@ -69,7 +69,7 @@ const ContactUs = () => {
                     textDecoration: "none",
                   }}
                 >
-                  +1 240-220-1010
+                  240-220-1010
                 </Link>
               </Box>
             </Grid>

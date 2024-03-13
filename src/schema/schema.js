@@ -28,8 +28,11 @@ export const signupSchema = yup.object({
 });
 
 export const profileSchema = yup.object({
-  name: yup.string(),
-  phoneNumber: yup.string(),
+  name: yup.string().required("Name is required"),
+  email: yup
+    .string()
+    .email("Invalid email format")
+    .required("Email is required"),
   // password: yup
   //   .string()
   //   .required("Password is required")
@@ -38,4 +41,15 @@ export const profileSchema = yup.object({
   //   .string()
   //   .oneOf([yup.ref("password"), null], "Passwords must match")
   //   .required("Confirm Password is required"),
+});
+export const changePasswordSchema = yup.object({
+  oldPassword: yup.string().required("Old Password is required"),
+  newPassword: yup
+    .string()
+    .required("Password is required")
+    .min(8, "Password must Contain 8 characters long"),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("newPassword"), null], "Passwords must match")
+    .required("Confirm Password is required"),
 });

@@ -17,12 +17,14 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import SearchIcon from "@mui/icons-material/Search";
+import { pathLocations } from "@/utlils/pathLocations";
 
 const BlogById = (props) => {
   const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(true);
 
   const id = pathname.split("/")[2];
+  const router = useRouter();
 
   const filteredBlog = blogData.filter((item) => item.id == id);
   const [blog, setBlog] = useState({});
@@ -43,7 +45,6 @@ const BlogById = (props) => {
 
     // Get the first 3 filtered blogs
     const threeFilteredBlogs = filteredBlogs.slice(0, 3);
-    console.log("threeFilteredBlogs", threeFilteredBlogs);
 
     setRecentBlogs(threeFilteredBlogs);
   }, []);
@@ -85,7 +86,7 @@ const BlogById = (props) => {
                         title="Author Name: Picture Perfect Virtual Staging"
                         sx={{ fontWeight: "bold" }}
                       />
-                      <UITypography title="Designation" />
+                      {/* <UITypography title="Designation" /> */}
                     </Box>
                   </Grid>
                   <Grid
@@ -159,7 +160,13 @@ const BlogById = (props) => {
                       borderLeftStyle: "solid",
                       paddingLeft: "10px",
                       display: "flex",
+                      "&:hover": {
+                        cursor: "pointer",
+                      },
                     }}
+                    onClick={() =>
+                      router.push(`${pathLocations.blogs}/${item.id}`)
+                    }
                   >
                     <Image
                       src={item.image}

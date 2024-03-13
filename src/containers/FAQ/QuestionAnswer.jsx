@@ -49,7 +49,9 @@ const QuestionAnswer = ({ question, answer }) => {
           sx={{
             padding: "22px 30px",
             fontSize: 16,
+            lineHeight: 1.5
           }}
+          className="faqAnswer"
         >
           {answer}
         </AccordionDetails>

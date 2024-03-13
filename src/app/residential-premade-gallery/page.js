@@ -22,12 +22,10 @@ const ResidentialGallery = () => {
     apiGet(
       `${ApiEndpoints.getPremadeCategory}`,
       (res) => {
-        console.log("res", res);
         setIsLoading(false);
         setPremadeCategory(res);
       },
       (err) => {
-        console.log("err", err);
       }
     );
   };

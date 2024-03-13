@@ -39,14 +39,12 @@ const Login = () => {
       `${ApiEndpoints.login}`,
       dataObj,
       (res) => {
-        console.log('res', res)
         setToken(res.token)
         setUserId(res?.user?.id)
         toast.success('Successfully login')
         router.push(pathLocations.home)
       },
       (err) => {
-        console.log('err', err)
         toast.error(err?.response?.data?.error)
       },
     )
