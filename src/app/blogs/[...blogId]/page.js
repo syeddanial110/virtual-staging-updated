@@ -2,7 +2,6 @@
 
 import UITypography from "@/components/UITypography/UITypography";
 import DefaultLayout from "@/layout/default-layout";
-import { blogData } from "@/utlils/data";
 import {
   Avatar,
   Box,

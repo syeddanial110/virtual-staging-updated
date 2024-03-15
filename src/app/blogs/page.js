@@ -8,7 +8,6 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import aboutusLine from "../../assets/images/aboutusLine.png";
 import BlogsCard from "@/containers/Blogs/BlogsCard";
-import { blogData } from "@/utlils/data";
 import { pathLocations } from "@/utlils/pathLocations";
 import { useRouter } from "next/navigation";
 import { ImageBASEURL, apiGet } from "@/auth/ApiRequest";
@@ -153,7 +152,6 @@ const Blogs = () => {
           <Pagination
             // page={page}
             // onChange={handlePagination}
-            count={blogData.length}
             variant="outlined"
           />
         </Grid> */}
