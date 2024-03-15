@@ -6,6 +6,8 @@ import { contactSchema } from "./schema";
 import { Grid } from "@mui/material";
 import UIButton from "@/components/UIButton/UIButton";
 import { toast } from "react-toastify";
+import { apiPost } from "@/auth/ApiRequest";
+import { ApiEndpoints } from "@/auth/apiEndpoints";
 
 const ContactForm = () => {
   const {
@@ -20,13 +22,31 @@ const ContactForm = () => {
       firstName: "",
       lastName: "",
       message: "",
-      company: "",
+      subject: "",
     },
   });
   const handleContact = (data) => {
     // router.push("/home");
-    reset();
-    toast.success("Your email has been sent successfully");
+    const dataObj = {
+      first_name: data.firstName,
+      last_name: data.lastName,
+      email: data.email,
+      subject: data.subject,
+      message: data.message,
+    };
+    apiPost(
+      `${ApiEndpoints.contactForm}`,
+      dataObj,
+      (res) => {
+        reset();
+        toast.success("Your email has been sent successfully");
+        console.log("res", res);
+      },
+      (err) => {
+        console.log("err", err);
+      }
+    );
+
     // setInterval(() => {
     //   location.reload();
     // }, 2000);
@@ -68,10 +88,10 @@ const ContactForm = () => {
           <UITextField
             variant="outlined"
             control={control}
-            name="company"
+            name="subject"
             fullWidth
-            placeholder="Company"
-            errorMessage={errors?.company?.message}
+            placeholder="Subject"
+            errorMessage={errors?.subject?.message}
           />
         </Grid>
         <Grid item xs={10}>

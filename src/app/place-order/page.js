@@ -21,32 +21,37 @@ const placeOrder = () => {
     setIsTotal(orderPlaceReducer.total);
   }, [orderPlaceReducer.total, orderPlaceReducer.servicePrice]);
 
+  
+
   return (
     <DefaultLayout>
-      <Grid container justifyContent="center">
-        <Grid item xs={10}>
-          <OrderStepper>
-            <Step1 />
-            <Step2 />
-            <Step3 />
-            <Step4 />
-            <Step5 />
-            {/* {stepper.step == 0 ? (
+      <OrderStepper>
+        <Grid container justifyContent="center">
+          <Grid item xs={10}>
+            {stepper.step == 0 ? (
               <Box sx={{ minHeight: "50vh" }} mt={4}>
+                <Step1 />
               </Box>
             ) : stepper.step == 1 ? (
               <Box sx={{ minHeight: "50vh" }} mt={4}>
+                <Step2 />
               </Box>
             ) : stepper.step == 2 ? (
               <Box sx={{ minHeight: "50vh" }} mt={4}>
+                <Step3 />
+              </Box>
+            ) : stepper.step == 3 ? (
+              <Box sx={{ minHeight: "50vh" }} mt={4}>
+                <Step4 />
               </Box>
             ) : (
               <Box sx={{ minHeight: "50vh" }} mt={4}>
+                <Step5 />
               </Box>
-            )} */}
-          </OrderStepper>
+            )}
+          </Grid>
         </Grid>
-      </Grid>
+      </OrderStepper>
     </DefaultLayout>
   );
 };

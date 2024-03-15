@@ -1,4 +1,5 @@
 "use client";
+
 import { ImageBASEURL, apiGet } from "@/auth/ApiRequest";
 import { ApiEndpoints } from "@/auth/apiEndpoints";
 import FurnitureCard from "@/components/FurnitreCard/FurnitureCard";
@@ -7,34 +8,30 @@ import UITypography from "@/components/UITypography/UITypography";
 import DefaultLayout from "@/layout/default-layout";
 import { pathLocations } from "@/utlils/pathLocations";
 import { Grid } from "@mui/material";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-const CuratedCollectionProducts = () => {
-  const id = usePathname();
+const CuratedCollection = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
-  const cur_id = id.split("/")[2];
+  const [curatedCollectionData, setCuratedCollectionData] = useState([]);
 
-  const [curatedChoices, setCuratedChoices] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
-
-  const getCuratedCollectionProducts = () => {
+  const getCuratedCollection = () => {
     apiGet(
-      `${ApiEndpoints.curatedCollectionById}${cur_id}`,
+      `${ApiEndpoints.curatedCollection}`,
       (res) => {
-        setCuratedChoices(res);
+        setCuratedCollectionData(res);
         setIsLoading(false);
       },
       (err) => {
         console.log("err", err);
-        setIsLoading(false);
       }
     );
   };
 
   useEffect(() => {
-    getCuratedCollectionProducts();
+    getCuratedCollection();
   }, []);
 
   return (
@@ -43,8 +40,35 @@ const CuratedCollectionProducts = () => {
         <Grid item xs={12}>
           <UITypography
             type="heading"
-            title={curatedChoices?.title}
+            title="Curated Collections"
             textAlign="center"
+          />
+        </Grid>
+      </Grid>
+      <Grid container justifyContent="center" gap={3} my={6}>
+        <Grid item xs={10}>
+          <UITypography
+            type="mainHeading"
+            title="Welcome to our curated collection of pre-designed virtually staged rooms!"
+          />
+        </Grid>
+        <Grid item xs={10}>
+          <UITypography
+            type="description"
+            title="Transform your living space with our stunning selection of multi-functional and stylishly designed rooms, ready to inspire and captivate you.
+            Browse through our web pages and explore a wide range of meticulously curated interiors, carefully crafted to suit various aesthetics and preferences. Whether you're looking to revamp your living room, bedroom, kitchen, or even a home office, we have the perfect virtual designs to bring your vision to life."
+          />
+        </Grid>
+        <Grid item xs={10}>
+          <UITypography
+            type="description"
+            title="Each room in our collection is meticulously staged, combining the best in interior design with the latest in virtual technology. Visualize your dream space, experiment with different layouts, and get inspired by our creative combinations of furniture, colors, and textures."
+          />
+        </Grid>
+        <Grid item xs={10}>
+          <UITypography
+            type="description"
+            title="With our pre-designed virtually staged rooms, you can explore different styles, experiment with various color schemes, and imagine the possibilities for your own home. Start your journey towards a transformed living space today and let our curated collection ignite your creativity and help you design the home of your dreams."
           />
         </Grid>
       </Grid>
@@ -61,8 +85,8 @@ const CuratedCollectionProducts = () => {
           <Grid container gap={3} justifyContent="center">
             {!isLoading && (
               <>
-                {curatedChoices?.choices.length > 0 ? (
-                  curatedChoices?.choices.map((item, i) => {
+                {curatedCollectionData.length > 0 ? (
+                  curatedCollectionData.map((item, i) => {
                     return (
                       <>
                         <Grid
@@ -80,11 +104,11 @@ const CuratedCollectionProducts = () => {
                           flexWrap="wrap"
                         >
                           <FurnitureCard
-                            img={`${ImageBASEURL}${item.image}`}
+                            img={`${ImageBASEURL}${item.choices[0].image}`}
                             title={item.title}
                             onClick={() => {
                               router.push(
-                                `${pathLocations.curatedCollection}/${cur_id}/${item.id}`
+                                `${pathLocations.curatedCollection}/${item.id}`
                               );
                             }}
                             imgObjectFit="cover"
@@ -111,4 +135,4 @@ const CuratedCollectionProducts = () => {
   );
 };
 
-export default CuratedCollectionProducts;
+export default CuratedCollection;

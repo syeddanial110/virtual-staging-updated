@@ -125,6 +125,14 @@ const Step4 = () => {
       `${ApiEndpoints.curatedCollection}`,
       (res) => {
         setCuratedCollection(res);
+        setUploadImageDetails((prevState) => {
+          return prevState.map((item, i) => {
+            return {
+              ...item,
+              filteredBasicItem: res[0].choices,
+            };
+          });
+        });
       },
       (err) => {}
     );
@@ -191,7 +199,8 @@ const Step4 = () => {
       basicItemVal.length > 0 ||
       otherBasicItemsValue.length > 0 ||
       additionalServicesVal.length > 0 ||
-      curatedCollectionVal.length > 0
+      curatedCollectionVal.length > 0 ||
+      curatedCollection.length > 0
     ) {
       const dataObj = {
         uploadImageDetails: uploadImageDetails,
@@ -203,6 +212,7 @@ const Step4 = () => {
     otherBasicItemsValue.length,
     additionalServicesVal.length,
     curatedCollectionVal,
+    curatedCollection.length,
   ]);
 
   //#endregion handle basic items end
@@ -240,6 +250,7 @@ const Step4 = () => {
         ...newState[i],
         roomArea: e.target.value,
         curatedId: filteredRoomArea[0].id,
+        filteredBasicItem: filteredRoomArea[0].choices,
       };
       return newState;
     });
@@ -322,7 +333,7 @@ const Step4 = () => {
                     />
                     <UISelect
                       onChange={(e) => handleRoomAreaSelect(e, i)}
-                      // value={roomArea[0].name}
+                      value={item.roomArea}
                       // value={curatedCollectionVal}
                       placeholder="Select One"
                       fullWidth
@@ -344,17 +355,24 @@ const Step4 = () => {
                       container
                       sx={{ height: "200px", overflowY: "scroll" }}
                     >
-                      {basicItems.map((elm) => {
-                        return (
-                          <Grid item xs={6} >
-                            <UICheckbox
-                              onChange={(e) => handleChange(e, i, elm)}
-                              value={elm.title}
-                              label={elm.title}
-                            />
-                          </Grid>
-                        );
-                      })}
+                      {item?.filteredBasicItem?.length > 0 &&
+                        item?.filteredBasicItem?.map((elm) => {
+                          return (
+                            <Grid item xs={6}>
+                              <UICheckbox
+                                onChange={(e) => handleChange(e, i, elm)}
+                                value={elm.title}
+                                label={elm.title}
+                                // defaultChecked={
+                                //   item?.basicItem?.length > 0 &&
+                                //   item.basicItem.some((element) =>
+                                //     elm.id.includes(element)
+                                //   )
+                                // }
+                              />
+                            </Grid>
+                          );
+                        })}
                     </Grid>
                   </Stack>
                 ) : (

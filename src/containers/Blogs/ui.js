@@ -22,7 +22,7 @@ export const BlogBanner = styled(Box)(({ theme }) => ({
 export const BlogWrapper = styled(Box)(({ theme }) => ({
   backgroundColor: "white",
   borderRadius: "35px",
-  minHeight: "560px",
+  minHeight: "460px",
   [theme.breakpoints.down("md")]: {
     minHeight: "500px",
   },

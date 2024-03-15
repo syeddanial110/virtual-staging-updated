@@ -65,10 +65,7 @@ export const pages = [
         name: "Furniture Gallery",
         link: "/furniture-gallery",
       },
-      {
-        name: "Residential Premade Gallery",
-        link: "/residential-premade-gallery",
-      },
+      
     ],
   },
   {

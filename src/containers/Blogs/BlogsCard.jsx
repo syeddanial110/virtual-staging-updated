@@ -9,7 +9,14 @@ import UIDivider from "@/components/UIDivider";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import { useEffect } from "react";
 
-const BlogsCard = ({ imgSrc, title, description, date, tag, handleCardClick }) => {
+const BlogsCard = ({
+  imgSrc,
+  title,
+  description,
+  date,
+  tag,
+  handleCardClick,
+}) => {
   const [shortTitle, setShortTitle] = useState("");
   const [shortDescription, setShortDescription] = useState(description);
 
@@ -46,43 +53,46 @@ const BlogsCard = ({ imgSrc, title, description, date, tag, handleCardClick }) =
             },
           }}
         >
-          <Image
+          <img
             src={imgSrc}
             alt="img-blog"
             style={{
               objectFit: "cover",
               width: "100%",
-              height: 220,
+              height: "220px",
               borderRadius: "35px",
               //   transform: "scale(1)",
               transition: "all 0.3s linear",
             }}
           />
         </Grid>
-      </Grid>
-      <Grid container gap={2} px={3} py={3}>
         <Grid item xs={12}>
-          <UITypography
-            type="heading"
-            title={`${shortTitle}`}
-            sx={{
-              color: (theme) => theme.palette.primary.main,
-              fontSize: "28px",
-            }}
-          />
-        </Grid>
+          <Grid container gap={2} px={3} py={3}>
+            <Grid item xs={12}>
+              <UITypography
+                type="heading"
+                title={`${shortTitle}`}
+                sx={{
+                  color: (theme) => theme.palette.primary.main,
+                  fontSize: "28px",
+                }}
+              />
+            </Grid>
 
-        <Grid item xs={12}>
-          <UITypography
-            title={shortDescription}
-            sx={{
-              color: (theme) => theme.palette.primary.blackShade1,
-              // fontSize: {}
-            }}
-          />
+            <Grid item xs={12}>
+              <UITypography
+                title={shortDescription}
+                sx={{
+                  color: (theme) => theme.palette.primary.blackShade1,
+                  // fontSize: {}
+                }}
+              />
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
-      <Grid container spacing={1} px={3} pb={3} alignItems='center'>
+
+      <Grid container spacing={1} px={3} pb={3} alignItems="center">
         <Grid item xs={12} pb={1}>
           <UIDivider />
         </Grid>
@@ -98,7 +108,7 @@ const BlogsCard = ({ imgSrc, title, description, date, tag, handleCardClick }) =
         </Grid>
         <Grid item xs={6} sm={7} md={7}>
           <Chip
-            label={tag}
+            label={"Picture Perfect Virtual Staging"}
             variant="outlined"
             sx={{
               color: (theme) => theme.palette.primary.main,
@@ -106,7 +116,14 @@ const BlogsCard = ({ imgSrc, title, description, date, tag, handleCardClick }) =
             }}
           />
         </Grid>
-        <Grid item xs={2} sm={3} md={1.2} display="flex" justifyContent="flex-end">
+        <Grid
+          item
+          xs={2}
+          sm={3}
+          md={1.2}
+          display="flex"
+          justifyContent="flex-end"
+        >
           <ArrowCircleRightIcon
             sx={{ color: (theme) => theme.palette.primary.main }}
           />

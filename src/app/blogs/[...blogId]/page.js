@@ -18,6 +18,9 @@ import { useEffect } from "react";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import SearchIcon from "@mui/icons-material/Search";
 import { pathLocations } from "@/utlils/pathLocations";
+import { ImageBASEURL, apiGet } from "@/auth/ApiRequest";
+import { ApiEndpoints } from "@/auth/apiEndpoints";
+import authorImg from "../../../assets/images/headerlogo.png";
 
 const BlogById = (props) => {
   const pathname = usePathname();
@@ -26,27 +29,44 @@ const BlogById = (props) => {
   const id = pathname.split("/")[2];
   const router = useRouter();
 
-  const filteredBlog = blogData.filter((item) => item.id == id);
   const [blog, setBlog] = useState({});
 
   const [recentBlogs, setRecentBlogs] = useState([]);
 
-  useEffect(() => {
-    setBlog(filteredBlog[0]);
-    setInterval(() => {
-      setIsLoading(false);
-    }, 2000);
-  }, []);
-
-  useEffect(() => {
-    const filteredBlogs = blogData.filter(
-      (blog) => blog.id !== filteredBlog[0].id
+  const getBlogById = () => {
+    apiGet(
+      `${ApiEndpoints.getSingleBlog}${id}`,
+      (res) => {
+        console.log("res getBlogById", res);
+        setIsLoading(false);
+        setBlog(res.blog);
+      },
+      (err) => {
+        console.log("err", err);
+      }
     );
+  };
 
-    // Get the first 3 filtered blogs
-    const threeFilteredBlogs = filteredBlogs.slice(0, 3);
+  const getRecentBlogs = () => {
+    apiGet(
+      `${ApiEndpoints.recentBlogs}`,
+      (res) => {
+        console.log("res getRecentBlogs", res);
+        setRecentBlogs(res.recentBlogs);
+      },
+      (err) => {
+        console.log("err", err);
+      }
+    );
+  };
 
-    setRecentBlogs(threeFilteredBlogs);
+  useEffect(() => {
+    // setBlog(filteredBlog[0]);
+    // setInterval(() => {
+    //   setIsLoading(false);
+    // }, 2000);
+    getRecentBlogs();
+    getBlogById();
   }, []);
 
   return (
@@ -60,14 +80,18 @@ const BlogById = (props) => {
               </Grid>
               <Grid item xs={12}>
                 <UITypography
-                  title={blog?.description}
+                  title={blog?.short_description}
                   sx={{
                     color: (theme) => theme.palette.primary.blackShade1,
                   }}
                 />
               </Grid>
               <Grid item xs={12} sx={{ overflow: "hidden" }}>
-                <Image src={blog?.image} alt="image" height={410} />
+                <img
+                  src={`${ImageBASEURL}${blog?.image}`}
+                  alt="image"
+                  height={410}
+                />
               </Grid>
               <Grid item xs={12}>
                 <Grid
@@ -80,7 +104,7 @@ const BlogById = (props) => {
                   }}
                 >
                   <Grid item xs={7} display="flex" alignItems="center">
-                    <Avatar />
+                    <Image src={authorImg} width={70} height={70} />
                     <Box pl={2}>
                       <UITypography
                         title="Author Name: Picture Perfect Virtual Staging"
@@ -91,20 +115,22 @@ const BlogById = (props) => {
                   </Grid>
                   <Grid
                     item
-                    xs={5}
+                    xs={4}
                     display="flex"
                     justifyContent="flex-end"
                     alignItems="center"
                   >
                     <AccessTimeIcon />
-                    <UITypography title={blog.date} />
+                    <UITypography title={blog.published_date} />
                   </Grid>
                 </Grid>
               </Grid>
-              {blog?.listsDescription && (
-                <Grid item xs={12}>
-                  <UITypography title={blog?.listsDescription} />
-                </Grid>
+              <Grid item xs={12}>
+                <div
+                  dangerouslySetInnerHTML={{ __html: blog.long_description }}
+                />
+              </Grid>
+              {/* {blog?.listsDescription && (
               )}
               {blog?.lists?.map((item, i) => {
                 return (
@@ -123,12 +149,12 @@ const BlogById = (props) => {
                     <UITypography title={item?.blogDescription} />
                   </Grid>
                 );
-              })}
+              })} */}
             </Grid>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={3} pt={5}>
             <Grid container gap={3}>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <TextField
                   label="Search"
                   //   sx={{ m: 1, width: "25ch" }}
@@ -140,7 +166,7 @@ const BlogById = (props) => {
                     ),
                   }}
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12}>
                 <UITypography
                   type="heading"
@@ -168,8 +194,8 @@ const BlogById = (props) => {
                       router.push(`${pathLocations.blogs}/${item.id}`)
                     }
                   >
-                    <Image
-                      src={item.image}
+                    <img
+                      src={`${ImageBASEURL}${item.image}`}
                       alt={item.title}
                       height={60}
                       width={80}
@@ -180,11 +206,19 @@ const BlogById = (props) => {
                     <Box ml={3}>
                       <UITypography
                         type="heading"
-                        title={`${item.title.slice(0, 20)}...`}
+                        title={
+                          item.title.length > 21
+                            ? `${item.title.slice(0, 20)}...`
+                            : item.title
+                        }
                         sx={{ fontSize: "25px" }}
                       />
                       <UITypography
-                        title={`${item.description.slice(0, 40)}...`}
+                        title={
+                          item.short_description.length > 40
+                            ? `${item.short_description.slice(0, 40)}...`
+                            : item.short_description
+                        }
                         sx={{ fontSize: "11px !important" }}
                       />
                     </Box>

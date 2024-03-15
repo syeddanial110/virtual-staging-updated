@@ -35,6 +35,7 @@ import { ApiEndpoints } from "@/auth/apiEndpoints";
 const WebHeader = () => {
   const router = useRouter();
   const [curatedCollection, setCuratedCollection] = useState([]);
+  const [styles, setStyles] = useState([]);
 
   const token = getToken();
 
@@ -53,8 +54,18 @@ const WebHeader = () => {
     apiGet(
       `${ApiEndpoints.curatedCollection}`,
       (res) => {
-        console.log("res getCuratedCollection", res);
         setCuratedCollection(res);
+      },
+      (err) => {
+        console.log("err", err);
+      }
+    );
+  };
+  const getAllStyles = () => {
+    apiGet(
+      `${ApiEndpoints.stlyes}`,
+      (res) => {
+        setStyles(res.styles);
       },
       (err) => {
         console.log("err", err);
@@ -64,6 +75,7 @@ const WebHeader = () => {
 
   useEffect(() => {
     getCuratedCollection();
+    getAllStyles();
   }, []);
 
   return (
@@ -236,14 +248,19 @@ const WebHeader = () => {
                             <Grid item xs={12} mb={1}>
                               <UIDivider />
                             </Grid>
-                            {item?.subName[1].subLinks.map((subLink, i) => {
+                            {styles.map((subLink, i) => {
                               return (
                                 <Grid item xs={12} key={i}>
                                   <UITypography
-                                    title={`- ${subLink.name}`}
+                                    title={`- ${subLink.title}`}
                                     isWhite={true}
                                     className="subLinkTitle"
                                     sx={{ padding: "8px 1px" }}
+                                    onClick={() =>
+                                      router.push(
+                                        `${pathLocations.styles}/${subLink.id}`
+                                      )
+                                    }
                                   />
                                 </Grid>
                               );

@@ -12,8 +12,13 @@ import { Navigation } from "swiper/modules";
 import LatestCollectionCard from "@/components/LatestCollectionCard/LatestCollectionCard";
 import { Box, Grid } from "@mui/material";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import { ImageBASEURL } from "@/auth/ApiRequest";
+import { useRouter } from "next/navigation";
+import { pathLocations } from "@/utlils/pathLocations";
 
 const LatestCollectionSlider = ({ arr }) => {
+  const router = useRouter();
+
   return (
     <div style={{ position: "relative" }}>
       <Swiper
@@ -43,7 +48,15 @@ const LatestCollectionSlider = ({ arr }) => {
             <SwiperSlide key={i}>
               <Grid container justifyContent="space-around">
                 <Grid item xs={11}>
-                  <LatestCollectionCard heading={item.heading} img={item.img} />
+                  <LatestCollectionCard
+                    heading={item.title}
+                    img={`${ImageBASEURL}${item.choices[0].image}`}
+                    handleClick={() =>
+                      router.push(
+                        `${pathLocations.curatedCollection}/${item.id}`
+                      )
+                    }
+                  />
                 </Grid>
               </Grid>
             </SwiperSlide>

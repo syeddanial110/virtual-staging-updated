@@ -11,11 +11,14 @@ const Invoice = () => {
   const dispatch = useDispatch();
 
   const orderPlaceReducer = useSelector((state) => state?.orderPlaceReducer);
-  const [totalPrice, setTotalPrice] = useState("");
+  const [totalPrice, setTotalPrice] = useState(0);
   const [additionalServicePrice, setAdditionalServicePrice] = useState("");
 
   useEffect(() => {
-    let x = parseInt(orderPlaceReducer?.servicePrice);
+    let x = parseInt(
+      orderPlaceReducer?.servicePrice *
+        orderPlaceReducer.uploadImageDetails.length
+    );
 
     setTotalPrice(x);
   }, [orderPlaceReducer?.servicePrice]);
@@ -30,12 +33,15 @@ const Invoice = () => {
       return y;
     });
     setAdditionalServicePrice(z);
+    setTotalPrice((prev) => prev + z);
   }, [orderPlaceReducer.uploadImageDetails]);
 
   useEffect(() => {
-    let x = totalPrice / parseInt(orderPlaceReducer.promoCodeDiscount);
+    if (orderPlaceReducer.promoCodeDiscount) {
+      let x = totalPrice / parseInt(orderPlaceReducer.promoCodeDiscount);
 
-    setTotalPrice(totalPrice - x);
+      setTotalPrice(totalPrice - x);
+    }
   }, [orderPlaceReducer?.promoCodeDiscount]);
 
   useEffect(() => {

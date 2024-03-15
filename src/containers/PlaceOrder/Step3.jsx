@@ -75,6 +75,15 @@ const Step3 = () => {
   // }, [file]);
 
   useEffect(() => {
+    if (orderPlaceReducer.uploadImageDetails.length > 0) {
+      const x = orderPlaceReducer.uploadImageDetails.map((item) => {
+        return item.image;
+      });
+      setFileDataURL(x);
+    }
+  }, [orderPlaceReducer.uploadImageDetails]);
+
+  useEffect(() => {
     let y;
     if (fileDataURL.length > 0) {
       y = fileDataURL.map((item, i) => {
@@ -106,7 +115,6 @@ const Step3 = () => {
       disptach(addOrderData(dataObj));
     }
   }, [fileDataURL.length]);
-
 
   return (
     <>

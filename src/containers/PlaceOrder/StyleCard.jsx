@@ -2,12 +2,29 @@
 import UITypography from "@/components/UITypography/UITypography";
 import { Box, Grid } from "@mui/material";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DoneIcon from "@mui/icons-material/Done";
 import { useSelector } from "react-redux";
+import LightBox from "@/components/LightBox/LightBox";
+import { ImageBASEURL } from "@/auth/ApiRequest";
 
-const StyleCard = ({ onClick, img, title, id, isSelected }) => {
+const StyleCard = ({ onClick, img, title, id, isSelected, imgArr = [] }) => {
   const orderPlaceReducer = useSelector((state) => state?.orderPlaceReducer);
+
+  const [open, setOpen] = useState(false);
+
+  const [lightboxImgArr, setLightboxImgArr] = useState([]);
+
+  useEffect(() => {
+    const x =
+      imgArr.length > 0 &&
+      imgArr.map((elm) => {
+        return {
+          src: `${ImageBASEURL}${elm.image}`,
+        };
+      });
+    setLightboxImgArr(x);
+  }, [imgArr?.length]);
 
   return (
     <Box
@@ -19,11 +36,10 @@ const StyleCard = ({ onClick, img, title, id, isSelected }) => {
           cursor: "pointer",
         },
       }}
-      onClick={onClick}
     >
-      <Grid container gap={2}>
+      <Grid container gap={2} onClick={onClick}>
         <Grid item xs={12} sx={{ position: "relative" }}>
-          <Image
+          <img
             src={img}
             alt="img"
             height={180}
@@ -59,6 +75,13 @@ const StyleCard = ({ onClick, img, title, id, isSelected }) => {
           <UITypography type="subheading" title={title} textAlign="center" />
         </Grid>
       </Grid>
+      <UITypography
+        title={"View Example"}
+        textAlign="center"
+        sx={{ color: (theme) => theme.palette.primary.main }}
+        onClick={() => setOpen(true)}
+      />
+      <LightBox open={open} setOpen={setOpen} imgArr={lightboxImgArr} />
     </Box>
   );
 };

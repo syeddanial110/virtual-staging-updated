@@ -1,51 +1,50 @@
-'use client'
-import UITypography from '@/components/UITypography/UITypography'
-import StyleCard from '@/containers/PlaceOrder/StyleCard'
-import DefaultLayout from '@/layout/default-layout'
-import { Box, Chip, Grid, Stack } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import styleImg from '../../../assets/images/bedroomCollection.jpg'
-import uploadedImg from '../../../assets/images/Blogpost7.jpg'
-import Image from 'next/image'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import ListItemText from '@mui/material/ListItemText'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import UIButton from '@/components/UIButton/UIButton'
-import { pathLocations } from '@/utlils/pathLocations'
-import { usePathname, useRouter } from 'next/navigation'
-import { useSelector } from 'react-redux'
-import { apiGet, apiGetWithoutToken } from '@/auth/ApiRequest'
-import { ApiEndpoints } from '@/auth/apiEndpoints'
-import UICheckbox from '@/components/UICheckbox/UICheckbox'
-import UISimpleTextField from '@/components/UITextField/UISimpleTextField'
-import UIDivider from '@/components/UIDivider'
+"use client";
+import UITypography from "@/components/UITypography/UITypography";
+import StyleCard from "@/containers/PlaceOrder/StyleCard";
+import DefaultLayout from "@/layout/default-layout";
+import { Box, Chip, Grid, Stack } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import styleImg from "../../../assets/images/bedroomCollection.jpg";
+import uploadedImg from "../../../assets/images/Blogpost7.jpg";
+import Image from "next/image";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import UIButton from "@/components/UIButton/UIButton";
+import { pathLocations } from "@/utlils/pathLocations";
+import { usePathname, useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import { ImageBASEURL, apiGet, apiGetWithoutToken } from "@/auth/ApiRequest";
+import { ApiEndpoints } from "@/auth/apiEndpoints";
+import UICheckbox from "@/components/UICheckbox/UICheckbox";
+import UISimpleTextField from "@/components/UITextField/UISimpleTextField";
+import UIDivider from "@/components/UIDivider";
 
 const ViewOrderDetail = () => {
-  const router = useRouter()
+  const router = useRouter();
 
-  const [specticOrderData, setSpecticOrderData] = useState({})
+  const [specticOrderData, setSpecticOrderData] = useState({});
 
-  const orderPlaceReducer = useSelector((state) => state?.orderPlaceReducer)
+  const orderPlaceReducer = useSelector((state) => state?.orderPlaceReducer);
 
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   const getSpecificOrder = () => {
-    const id = pathname.split('/')[2]
+    const id = pathname.split("/")[2];
     apiGetWithoutToken(
       `${ApiEndpoints.getSingleOrder}${id}`,
       (res) => {
-        setSpecticOrderData(res.order)
+        setSpecticOrderData(res.order);
       },
-      (err) => {
-      },
-    )
-  }
+      (err) => {}
+    );
+  };
 
   useEffect(() => {
-    getSpecificOrder()
-  }, [])
+    getSpecificOrder();
+  }, []);
 
 
   return (
@@ -72,6 +71,30 @@ const ViewOrderDetail = () => {
             <Grid item xs={12}>
               <UITypography
                 type="mainDescription"
+                title="Your selected style"
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <StyleCard
+                title={specticOrderData?.style?.title}
+                img={`${ImageBASEURL}${specticOrderData?.style?.images[0]?.image}`}
+                // onClick={() => {
+                //   setIsSelected(item.id);
+                //   disptach(
+                //     addOrderData({
+                //       styleId: item.id,
+                //       styleName: item.title,
+                //       styleImage: item.image,
+                //     })
+                //   );
+                // }}
+                imgArr={specticOrderData?.style?.images}
+                // isSelected={isSelected}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <UITypography
+                type="mainDescription"
                 title="Your uploaded images"
               />
             </Grid>
@@ -82,7 +105,7 @@ const ViewOrderDetail = () => {
                     <Grid
                       container
                       sx={{
-                        boxShadow: '0 4px 16px 4px #d1d1d1',
+                        boxShadow: "0 4px 16px 4px #d1d1d1",
                       }}
                       gap={3}
                       mt={5}
@@ -100,19 +123,19 @@ const ViewOrderDetail = () => {
                           href={item.image}
                           download={true}
                           target="_blank"
-                          style={{ width: '100%', height: '100%' }}
+                          style={{ width: "100%", height: "100%" }}
                         >
                           <Box
                             sx={{
                               backgroundImage: `url('${item.image}')`,
-                              backgroundSize: 'contain',
-                              backgroundPosition: 'center',
-                              backgroundRepeat: 'no-repeat',
-                              width: '100%',
+                              backgroundSize: "contain",
+                              backgroundPosition: "center",
+                              backgroundRepeat: "no-repeat",
+                              width: "100%",
                               minHeight:
                                 item.completed_image != null
-                                  ? '200px'
-                                  : '400px',
+                                  ? "200px"
+                                  : "400px",
                               backgroundColor: (theme) =>
                                 theme.palette.primary.greyShade7,
                             }}
@@ -128,16 +151,16 @@ const ViewOrderDetail = () => {
                               href={item.image}
                               download
                               target="_blank"
-                              style={{ width: '100%', height: '100%' }}
+                              style={{ width: "100%", height: "100%" }}
                             >
                               <Box
                                 sx={{
                                   backgroundImage: `url('${item.image}')`,
-                                  backgroundSize: 'contain',
-                                  backgroundPosition: 'center',
-                                  backgroundRepeat: 'no-repeat',
-                                  width: '100%',
-                                  minHeight: '200px',
+                                  backgroundSize: "contain",
+                                  backgroundPosition: "center",
+                                  backgroundRepeat: "no-repeat",
+                                  width: "100%",
+                                  minHeight: "200px",
                                   backgroundColor: (theme) =>
                                     theme.palette.primary.greyShade7,
                                 }}
@@ -150,18 +173,18 @@ const ViewOrderDetail = () => {
                         item
                         xs={4}
                         sx={{
-                          borderRightWidth: '1px',
+                          borderRightWidth: "1px",
                           borderRightColor: (theme) =>
                             theme.palette.primary.greyShade3,
-                          borderRightStyle: 'solid',
-                          paddingRight: '12px',
+                          borderRightStyle: "solid",
+                          paddingRight: "12px",
                           py: 2,
                         }}
                       >
                         <Stack gap={2} py={2}>
                           <UITypography
                             title="Curated Collection"
-                            sx={{ fontSize: '18px !important' }}
+                            sx={{ fontSize: "18px !important" }}
                           />
                           <UITypography
                             title={item?.curated_collection?.title}
@@ -176,10 +199,10 @@ const ViewOrderDetail = () => {
                           />
                           <Grid container>
                             <List>
-                              {item?.curated_collection?.choices.map((elm) => {
+                              {item?.choices.map((elm) => {
                                 return (
                                   <ListItem>
-                                    <ListItemIcon sx={{ minWidth: '40px' }}>
+                                    <ListItemIcon sx={{ minWidth: "40px" }}>
                                       <CheckCircleIcon
                                         sx={{
                                           color: (theme) =>
@@ -189,7 +212,7 @@ const ViewOrderDetail = () => {
                                     </ListItemIcon>
                                     <ListItemText primary={`${elm.title}`} />
                                   </ListItem>
-                                )
+                                );
                               })}
                             </List>
                           </Grid>
@@ -200,7 +223,7 @@ const ViewOrderDetail = () => {
                           title={`${
                             item.additional_notes != null
                               ? item.additional_notes
-                              : 'No Other notes'
+                              : "No Other notes"
                           }`}
                           sx={{ pt: 2 }}
                         />
@@ -210,13 +233,13 @@ const ViewOrderDetail = () => {
                           <Stack gap={1} py={2}>
                             <UITypography
                               title="Additional services"
-                              sx={{ fontSize: '18px !important' }}
+                              sx={{ fontSize: "18px !important" }}
                             />
                             <List>
                               {item.additional_services.map((elm) => {
                                 return (
                                   <ListItem>
-                                    <ListItemIcon sx={{ minWidth: '40px' }}>
+                                    <ListItemIcon sx={{ minWidth: "40px" }}>
                                       <CheckCircleIcon
                                         sx={{
                                           color: (theme) =>
@@ -228,7 +251,7 @@ const ViewOrderDetail = () => {
                                       primary={`${elm.service_name} - ${elm.service_price}`}
                                     />
                                   </ListItem>
-                                )
+                                );
                               })}
                             </List>
                           </Stack>
@@ -239,8 +262,14 @@ const ViewOrderDetail = () => {
                         </Box>
                       )}
                     </Grid>
-                  )
+                  );
                 })}
+            </Grid>
+            <Grid item xs={12}>
+              <UITypography type="mainDescription" title="Total Price" />
+            </Grid>
+            <Grid item xs={12}>
+              <UITypography title={`$${specticOrderData.total_price}`} />
             </Grid>
             <Grid item xs={4}>
               <UIButton
@@ -253,7 +282,7 @@ const ViewOrderDetail = () => {
         </Grid>
       </Grid>
     </DefaultLayout>
-  )
-}
+  );
+};
 
-export default ViewOrderDetail
+export default ViewOrderDetail;

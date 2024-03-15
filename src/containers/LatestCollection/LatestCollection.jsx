@@ -1,6 +1,6 @@
 import UITypography from "@/components/UITypography/UITypography";
 import { Grid } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import bathroomCollection from "../../assets/images/bathroomCollection.jpg";
 import bedroomCollection from "../../assets/images/bedroomCollection.jpg";
 import bonusRoomCollection from "../../assets/images/bonusRoomCollection.jpg";
@@ -15,6 +15,10 @@ import officeCollection from "../../assets/images/officeCollection.jpg";
 import outdoorCollection from "../../assets/images/outdoorCollection.jpg";
 import UIButton from "@/components/UIButton/UIButton";
 import LatestCollectionSlider from "./LatestCollectionSlider";
+import { apiGet } from "@/auth/ApiRequest";
+import { ApiEndpoints } from "@/auth/apiEndpoints";
+import { pathLocations } from "@/utlils/pathLocations";
+import { useRouter } from "next/navigation";
 
 const LatestCollection = () => {
   const arr = [
@@ -67,6 +71,29 @@ const LatestCollection = () => {
       img: childrensClosetCollection,
     },
   ];
+
+  const router = useRouter();
+
+  const [curatedCollection, setCuratedCollection] = useState([]);
+
+  const getCuratedCollection = () => {
+    apiGet(
+      `${ApiEndpoints.curatedCollection}`,
+      (res) => {
+        setCuratedCollection(res);
+      },
+      (err) => {
+        console.log("err", err);
+      }
+    );
+  };
+
+  useEffect(() => {
+    getCuratedCollection();
+  }, []);
+
+  console.log("curatedCollection", curatedCollection);
+
   return (
     <Grid container my={10} gap={6} justifyContent="center">
       <Grid item xs={11}>
@@ -74,10 +101,14 @@ const LatestCollection = () => {
         <UITypography type="mainHeading" title="Collections" />
       </Grid>
       <Grid item xs={11}>
-        <LatestCollectionSlider arr={arr} />
+        <LatestCollectionSlider arr={curatedCollection} />
       </Grid>
       <Grid item xs={6} sm={4} md={3}>
-        <UIButton isDark={false} label="View all Collections" />
+        <UIButton
+          isDark={false}
+          label="View all Collections"
+          onClick={() => router.push(pathLocations.curatedCollection)}
+        />
       </Grid>
     </Grid>
   );

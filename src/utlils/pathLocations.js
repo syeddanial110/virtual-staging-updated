@@ -19,4 +19,5 @@ export const pathLocations = {
   profile: "/profile",
   order: "/order",
   curatedCollection: "/curated-collection",
+  styles: "/styles",
 };

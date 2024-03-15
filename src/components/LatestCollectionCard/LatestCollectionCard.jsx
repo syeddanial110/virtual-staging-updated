@@ -3,9 +3,9 @@ import React from "react";
 import UITypography from "../UITypography/UITypography";
 import { CardWrapper } from "./ui";
 
-const LatestCollectionCard = ({ img, heading }) => {
+const LatestCollectionCard = ({ img, heading, handleClick }) => {
   return (
-    <CardWrapper img={img}>
+    <CardWrapper img={img} onClick={handleClick}>
       <Box
         sx={{
           background: "rgb(59,64,65)",
@@ -15,7 +15,7 @@ const LatestCollectionCard = ({ img, heading }) => {
           borderRadius: "20px",
           width: "100%",
           height: "100%",
-          position: "absolute"
+          position: "absolute",
         }}
       >
         <UITypography

@@ -672,3 +672,13 @@ select:-webkit-autofill:focus {
 .CardField-input-wrapper {
   left: 0 !important;
 }
+
+.MuiStepLabel-root {
+  flex-direction: column;
+}
+
+.MuiStepConnector-line {
+  border-color: #3c828e !important;
+  border-top-width: 2px !important;
+  margin-top: -10px;
+}

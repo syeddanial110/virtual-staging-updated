@@ -18,4 +18,10 @@ export const ApiEndpoints = {
   getSingleOrder: "/order/",
   editProfile: "/user/update-profile/",
   updatePassword: "/user/update-password/",
+  stlyes: "/style/all",
+  styleById: "/style/",
+  getAllBlogs: "/blogs",
+  getSingleBlog: "/blog/",
+  recentBlogs: "/recent-blogs",
+  contactForm: "/contact-form",
 };

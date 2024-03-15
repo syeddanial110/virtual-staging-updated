@@ -5,19 +5,37 @@ import { BlogBanner } from "@/containers/Blogs/ui";
 import DefaultLayout from "@/layout/default-layout";
 import { Box, Grid, Pagination } from "@mui/material";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import aboutusLine from "../../assets/images/aboutusLine.png";
 import BlogsCard from "@/containers/Blogs/BlogsCard";
 import { blogData } from "@/utlils/data";
 import { pathLocations } from "@/utlils/pathLocations";
 import { useRouter } from "next/navigation";
+import { ImageBASEURL, apiGet } from "@/auth/ApiRequest";
+import { ApiEndpoints } from "@/auth/apiEndpoints";
+import UILoader from "@/components/UILoader/UILoader";
 
 const Blogs = () => {
   const router = useRouter();
-  const [page, setPage] = useState(1);
 
-  const handlePagination = (e, val) => {
+  const [blogs, setBlogs] = useState([]);
+
+  const getAllBlogs = () => {
+    apiGet(
+      `${ApiEndpoints.getAllBlogs}`,
+      (res) => {
+        console.log("res", res);
+        setBlogs(res.blogs);
+      },
+      (err) => {
+        console.log("err", err);
+      }
+    );
   };
+
+  useEffect(() => {
+    getAllBlogs();
+  }, []);
 
   return (
     <DefaultLayout>
@@ -106,22 +124,29 @@ const Blogs = () => {
       <Grid container justifyContent="center" mt={10}>
         <Grid item xs={11}>
           <Grid container spacing={3}>
-            {blogData.map((item) => {
-              return (
-                <Grid item xs={12} md={4} key={`${item.title}-${item.id}`}>
-                  <BlogsCard
-                    imgSrc={item.image}
-                    title={item.title}
-                    description={item.description}
-                    date={item.date}
-                    tag={item.tag}
-                    handleCardClick={() =>
-                      router.push(`${pathLocations.blogs}/${item.id}`)
-                    }
-                  />
-                </Grid>
-              );
-            })}
+            {blogs.length == 0 && (
+              <Grid item xs={3}>
+                <UILoader />
+              </Grid>
+            )}
+
+            {blogs.length > 0 &&
+              blogs.map((item) => {
+                return (
+                  <Grid item xs={12} md={4} key={`${item.title}-${item.id}`}>
+                    <BlogsCard
+                      imgSrc={`${ImageBASEURL}${item.image}`}
+                      title={item.title}
+                      description={item.short_description}
+                      date={item.published_date}
+                      tag={item.tag}
+                      handleCardClick={() =>
+                        router.push(`${pathLocations.blogs}/${item.id}`)
+                      }
+                    />
+                  </Grid>
+                );
+              })}
           </Grid>
         </Grid>
         {/* <Grid item mt={5}>

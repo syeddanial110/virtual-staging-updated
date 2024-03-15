@@ -91,7 +91,6 @@ const Step1 = () => {
     }
   }, []);
 
-
   return (
     <>
       <Grid container gap={3} mt={5}>
@@ -138,6 +137,7 @@ const Step1 = () => {
                 value={orderPlaceReducer.serviceName}
                 onChange={handleServiceChange}
                 fullWidth
+                sx={{ "& > div": { padding: "10px 14px" } }}
               >
                 {servicesArr.map((item) => {
                   return <MenuItem value={item.title}>{item.title}</MenuItem>;

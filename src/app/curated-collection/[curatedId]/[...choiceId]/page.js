@@ -26,7 +26,6 @@ const ChoiceDetail = () => {
     apiGet(
       `${ApiEndpoints.choiceById}${choiceId}`,
       (res) => {
-        console.log("res getCollectionById", res);
         setChoiceData({
           title: res.title,
           image: res.image,
@@ -44,7 +43,6 @@ const ChoiceDetail = () => {
     getCollectionById();
   }, []);
 
-  console.log("choiceData", choiceData);
 
   return (
     <DefaultLayout>

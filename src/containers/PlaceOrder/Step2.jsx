@@ -1,7 +1,7 @@
 import UIDivider from "@/components/UIDivider";
 import UITypography from "@/components/UITypography/UITypography";
 import { Grid } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import StyleCard from "./StyleCard";
 import img1 from "../../assets/images/services/staging/virtual staging 1 after.jpg";
 import img2 from "../../assets/images/services/staging/virtual staging 2 after.jpg";
@@ -10,6 +10,8 @@ import img4 from "../../assets/images/services/staging/virtual staging 4 after.j
 import img5 from "../../assets/images/services/staging/virtual staging 5 after.jpg";
 import { useDispatch } from "react-redux";
 import { addOrderData } from "@/store/orderPlaceSlice";
+import { ImageBASEURL, apiGet } from "@/auth/ApiRequest";
+import { ApiEndpoints } from "@/auth/apiEndpoints";
 
 const Step2 = () => {
   const disptach = useDispatch();
@@ -41,8 +43,23 @@ const Step2 = () => {
     },
   ];
   const [isSelected, setIsSelected] = useState("");
-  const [styleData, setStyleData] = useState([]);
+  const [styles, setStyles] = useState([]);
 
+  const getStyles = () => {
+    apiGet(
+      `${ApiEndpoints.stlyes}`,
+      (res) => {
+        setStyles(res.styles);
+      },
+      (err) => {
+        console.log("err", err);
+      }
+    );
+  };
+
+  useEffect(() => {
+    getStyles();
+  }, []);
 
   return (
     <>
@@ -53,13 +70,13 @@ const Step2 = () => {
             title="Pick a furnishing style for your property*"
           />
         </Grid>
-        {arr.map((item) => {
+        {styles.map((item) => {
           return (
             <Grid item xs={3}>
               <StyleCard
                 id={item.id}
                 title={item.title}
-                img={item.image}
+                img={`${ImageBASEURL}${item?.images[0]?.image}`}
                 onClick={() => {
                   setIsSelected(item.id);
                   disptach(
@@ -70,6 +87,7 @@ const Step2 = () => {
                     })
                   );
                 }}
+                imgArr={item.images}
                 isSelected={isSelected}
               />
             </Grid>

@@ -46,6 +46,7 @@ const PaymentForm = ({ clientSecret }) => {
       user_id: id === undefined ? null : id,
       phone: orderPlaceReducer.phoneNumber,
       service_name: orderPlaceReducer.serviceName,
+      style_id: orderPlaceReducer.styleId,
       service_price: parseInt(orderPlaceReducer.servicePrice),
       total_price: parseFloat(orderPlaceReducer.total),
       order_items: orderItem,
@@ -117,8 +118,7 @@ const PaymentForm = ({ clientSecret }) => {
           setLoading(false);
         }
       },
-      (err) => {
-      }
+      (err) => {}
     );
   };
 
@@ -183,7 +183,7 @@ const PaymentForm = ({ clientSecret }) => {
           disabled={!stripe || loading}
           className="paymentButton"
         >
-          {loading ? "Processing..." : "Make Payment"}
+          {loading ? "Processing..." : "Place Order"}
         </button>
       </form>
       <Modal open={isOrderCreated} onClose={handleClose}>
