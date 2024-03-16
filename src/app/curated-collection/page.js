@@ -1,38 +1,39 @@
-"use client";
+'use client'
 
-import { ImageBASEURL, apiGet } from "@/auth/ApiRequest";
-import { ApiEndpoints } from "@/auth/apiEndpoints";
-import FurnitureCard from "@/components/FurnitreCard/FurnitureCard";
-import UILoader from "@/components/UILoader/UILoader";
-import UITypography from "@/components/UITypography/UITypography";
-import DefaultLayout from "@/layout/default-layout";
-import { pathLocations } from "@/utlils/pathLocations";
-import { Grid } from "@mui/material";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { ImageBASEURL, apiGet } from '@/auth/ApiRequest'
+import { ApiEndpoints } from '@/auth/apiEndpoints'
+import FurnitureCard from '@/components/FurnitreCard/FurnitureCard'
+import UILoader from '@/components/UILoader/UILoader'
+import UITypography from '@/components/UITypography/UITypography'
+import CuratedCollectionCard from '@/containers/CuratedCollection/CuratedCollectionCard'
+import DefaultLayout from '@/layout/default-layout'
+import { pathLocations } from '@/utlils/pathLocations'
+import { Grid } from '@mui/material'
+import { useRouter } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
 
 const CuratedCollection = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true)
+  const router = useRouter()
 
-  const [curatedCollectionData, setCuratedCollectionData] = useState([]);
+  const [curatedCollectionData, setCuratedCollectionData] = useState([])
 
   const getCuratedCollection = () => {
     apiGet(
       `${ApiEndpoints.curatedCollection}`,
       (res) => {
-        setCuratedCollectionData(res);
-        setIsLoading(false);
+        setCuratedCollectionData(res)
+        setIsLoading(false)
       },
       (err) => {
-        console.log("err", err);
-      }
-    );
-  };
+        console.log('err', err)
+      },
+    )
+  }
 
   useEffect(() => {
-    getCuratedCollection();
-  }, []);
+    getCuratedCollection()
+  }, [])
 
   return (
     <DefaultLayout>
@@ -103,20 +104,20 @@ const CuratedCollection = () => {
                           // justifyContent="center"
                           flexWrap="wrap"
                         >
-                          <FurnitureCard
+                          <CuratedCollectionCard
                             img={`${ImageBASEURL}${item.choices[0].image}`}
                             title={item.title}
                             onClick={() => {
                               router.push(
-                                `${pathLocations.curatedCollection}/${item.id}`
-                              );
+                                `${pathLocations.curatedCollection}/${item.id}`,
+                              )
                             }}
                             imgObjectFit="cover"
                             imgAlt={item.title}
                           />
                         </Grid>
                       </>
-                    );
+                    )
                   })
                 ) : (
                   <Grid item xs={12}>
@@ -132,7 +133,7 @@ const CuratedCollection = () => {
         </Grid> */}
       </Grid>
     </DefaultLayout>
-  );
-};
+  )
+}
 
-export default CuratedCollection;
+export default CuratedCollection
