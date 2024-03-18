@@ -10,7 +10,7 @@ import {
   Popover,
 } from "@mui/material";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/images/headerlogo.png";
 
 import avatar from "../../assets/icons/avatar.svg";
@@ -24,15 +24,25 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import { menu, pages } from "@/utlils/data";
 import CloseIcon from "@mui/icons-material/Close";
 import { useRouter } from "next/navigation";
+import { getToken, removeToken, removeUserId } from "@/auth/Auth";
+import { apiGet } from "@/auth/ApiRequest";
+import { ApiEndpoints } from "@/auth/apiEndpoints";
+import { pathLocations } from "@/utlils/pathLocations";
+import UIButton from "../UIButton/UIButton";
 
 const MobileHeader = () => {
   const router = useRouter();
+  const [curatedCollection, setCuratedCollection] = useState([]);
+  const [styles, setStyles] = useState([]);
+
   const [state, setState] = React.useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
+
+  const token = getToken();
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -74,6 +84,34 @@ const MobileHeader = () => {
   const handleMenuClose = () => {
     setMenuAnchorEl(null);
   };
+
+  const getCuratedCollection = () => {
+    apiGet(
+      `${ApiEndpoints.curatedCollection}`,
+      (res) => {
+        setCuratedCollection(res);
+      },
+      (err) => {
+        console.log("err", err);
+      }
+    );
+  };
+  const getAllStyles = () => {
+    apiGet(
+      `${ApiEndpoints.stlyes}`,
+      (res) => {
+        setStyles(res.styles);
+      },
+      (err) => {
+        console.log("err", err);
+      }
+    );
+  };
+
+  useEffect(() => {
+    getCuratedCollection();
+    getAllStyles();
+  }, []);
 
   const list = (anchor) => (
     <Box
@@ -185,30 +223,21 @@ const MobileHeader = () => {
                   unmountOnExit
                 >
                   <List component="div" disablePadding>
-                    {item.subName.map((subName, i) => {
+                    {curatedCollection.map((subLink, i) => {
                       return (
-                        <>
-                          <ListItemButton key={i} sx={{ pl: 4 }}>
-                            <ListItemText primary={subName.name} />
-                          </ListItemButton>
-                          <Collapse
-                            in={curatedCollectionOpen}
-                            timeout="auto"
-                            unmountOnExit
-                          >
-                            <List component="div" disablePadding>
-                              {subName.subLinks.map((subLink, i) => {
-                                return (
-                                  <ListItemButton key={i} sx={{ pl: 4 }}>
-                                    <ListItemText
-                                      primary={`  - ${subLink.name}`}
-                                    />
-                                  </ListItemButton>
-                                );
-                              })}
-                            </List>
-                          </Collapse>
-                        </>
+                        <Grid item xs={12} key={i}>
+                          <UITypography
+                            title={`- ${subLink.title}`}
+                            isWhite={true}
+                            className="subLinkTitle"
+                            sx={{ padding: "8px 30px", color: "black" }}
+                            onClick={() =>
+                              router.push(
+                                `${pathLocations.curatedCollection}/${subLink.id}`
+                              )
+                            }
+                          />
+                        </Grid>
                       );
                     })}
                   </List>
@@ -223,7 +252,7 @@ const MobileHeader = () => {
 
   return (
     <Grid container alignItems="center" py={1}>
-      <Grid item xs={6} sm={4} md={3}>
+      <Grid item xs={9} sm={4} md={3}>
         <Image
           src={logo}
           alt="logo"
@@ -240,21 +269,41 @@ const MobileHeader = () => {
       </Grid>
       <Grid
         item
-        xs={6}
+        xs={3}
         sm={7}
         md={8}
         display="flex"
         justifyContent="flex-end"
         px={1}
       >
-        <Image
-          src={avatar}
-          alt="avatar"
-          height={20}
-          style={{ marginRight: 8 }}
-          onClick={handleMenuClick}
-        />
-        <Image src={cart} alt="avatar" height={20} />
+        {token ? (
+          <Box
+            sx={{
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+            onClick={handleMenuClick}
+          >
+            <Image
+              src={avatar}
+              alt="avatar"
+              height={20}
+              style={{
+                marginRight: 14,
+              }}
+            />
+          </Box>
+        ) : (
+          <Box sx={{ marginRight: 14 }}>
+            {/* <UIButton
+              label="Register"
+              onClick={() => router.push(pathLocations.login)}
+            /> */}
+          </Box>
+        )}
+
+        {/* <Image src={cart} alt="avatar" height={20} /> */}
         {["right"].map((anchor) => (
           <React.Fragment key={anchor}>
             <IconButton
@@ -300,7 +349,17 @@ const MobileHeader = () => {
               }}
               key={`${item.title}-${i}`}
             >
-              <UITypography title={item.title} sx={{ color: "#4b4b4b" }} />
+              <UITypography
+                title={item.title}
+                sx={{ color: "#4b4b4b" }}
+                onClick={() => {
+                  if (item.title == "Logout") {
+                    removeToken();
+                    removeUserId();
+                  }
+                  router.push(item.link);
+                }}
+              />
             </Box>
           );
         })}

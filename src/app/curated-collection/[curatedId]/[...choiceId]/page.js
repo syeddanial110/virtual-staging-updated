@@ -43,7 +43,6 @@ const ChoiceDetail = () => {
     getCollectionById();
   }, []);
 
-
   return (
     <DefaultLayout>
       <Grid
@@ -77,9 +76,12 @@ const ChoiceDetail = () => {
           <img
             src={`${ImageBASEURL}${choiceData?.image}`}
             alt="furniture-img"
-            height={500}
-            width={500}
-            style={{ width: "100%", objectFit: "cover" }}
+            style={{
+              width: "600px",
+              objectFit: "contain",
+              maxWidth: "800px !important",
+              height: "auto",
+            }}
           />
         </Grid>
         <Grid item xs={11} md={5}>
