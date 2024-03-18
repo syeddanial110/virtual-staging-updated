@@ -51,10 +51,10 @@ const StyleById = () => {
             />
           </Grid>
           <Grid item xs={10}>
-            <Grid container mt={3}>
+            <Grid container mt={3} gap={2}>
               {styleData?.images?.map((item) => {
                 return (
-                  <Grid item xs={3}>
+                  <Grid item xs={2.8}>
                     <Box
                       sx={{
                         "&:hover": {

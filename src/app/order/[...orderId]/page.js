@@ -5,7 +5,6 @@ import DefaultLayout from "@/layout/default-layout";
 import { Box, Chip, Grid, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import styleImg from "../../../assets/images/bedroomCollection.jpg";
-import uploadedImg from "../../../assets/images/Blogpost7.jpg";
 import Image from "next/image";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
