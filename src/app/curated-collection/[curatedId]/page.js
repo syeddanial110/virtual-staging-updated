@@ -1,51 +1,78 @@
-'use client'
-import { ImageBASEURL, apiGet } from '@/auth/ApiRequest'
-import { ApiEndpoints } from '@/auth/apiEndpoints'
-import FurnitureCard from '@/components/FurnitreCard/FurnitureCard'
-import UILoader from '@/components/UILoader/UILoader'
-import UITypography from '@/components/UITypography/UITypography'
+"use client";
+import { ImageBASEURL, apiGet } from "@/auth/ApiRequest";
+import { ApiEndpoints } from "@/auth/apiEndpoints";
+import FurnitureCard from "@/components/FurnitreCard/FurnitureCard";
+import UILoader from "@/components/UILoader/UILoader";
+import UITypography from "@/components/UITypography/UITypography";
 import CuratedCollectionCard from "@/containers/CuratedCollection/CuratedCollectionCard";
-import DefaultLayout from '@/layout/default-layout'
-import { pathLocations } from '@/utlils/pathLocations'
-import { Grid } from '@mui/material'
-import { usePathname, useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import DefaultLayout from "@/layout/default-layout";
+import { pathLocations } from "@/utlils/pathLocations";
+import { Breadcrumbs, Grid, IconButton } from "@mui/material";
+import { usePathname, useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import UIButton from "@/components/UIButton/UIButton";
+import Link from "next/link";
 
 const CuratedCollectionProducts = () => {
-  const id = usePathname()
-  const router = useRouter()
+  const id = usePathname();
+  const router = useRouter();
 
-  const cur_id = id.split('/')[2]
+  const cur_id = id.split("/")[2];
 
-  const [curatedChoices, setCuratedChoices] = useState({})
-  const [isLoading, setIsLoading] = useState(true)
+  const [curatedChoices, setCuratedChoices] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   const getCuratedCollectionProducts = () => {
     apiGet(
       `${ApiEndpoints.curatedCollectionById}${cur_id}`,
       (res) => {
-        setCuratedChoices(res)
-        setIsLoading(false)
+        setCuratedChoices(res);
+        setIsLoading(false);
       },
       (err) => {
-        console.log('err', err)
-        setIsLoading(false)
-      },
-    )
-  }
+        console.log("err", err);
+        setIsLoading(false);
+      }
+    );
+  };
 
   useEffect(() => {
-    getCuratedCollectionProducts()
-  }, [])
+    getCuratedCollectionProducts();
+  }, []);
 
   return (
     <DefaultLayout>
-      <Grid container>
-        <Grid item xs={12}>
+      <Grid container justifyContent="space-around" alignItems="center">
+        <Grid item xs={4}>
+          <Breadcrumbs aria-label="breadcrumb">
+            <Link
+              underline="hover"
+              color="inherit"
+              href={pathLocations?.curatedCollection}
+              style={{ color: "#3C828E" }}
+            >
+              Curated Collections
+            </Link>
+            <UITypography
+              // onClick={() =>
+              //   router.push(`${pathLocations?.furnitureGallery}/${title}`)
+              // }
+              title={curatedChoices?.title}
+            />
+          </Breadcrumbs>
+          <UIButton
+            onClick={() => router.push(`${pathLocations?.curatedCollection}`)}
+            label="Back"
+            startIcon={<ArrowBackIcon />}
+            sx={{ padding: "10px 14px", fontSize: "12px", mt: 1 }}
+          />
+        </Grid>
+        <Grid item xs={6}>
           <UITypography
             type="heading"
             title={curatedChoices?.title}
-            textAlign="center"
+            // textAlign="center"
           />
         </Grid>
       </Grid>
@@ -58,11 +85,11 @@ const CuratedCollectionProducts = () => {
               </Grid>
             </Grid>
           )}
-
           <Grid container gap={3} justifyContent="center">
             {!isLoading && (
               <>
-                {curatedChoices?.choices.length > 0 ? (
+                {curatedChoices?.choices &&
+                curatedChoices?.choices?.length > 0 ? (
                   curatedChoices?.choices.map((item, i) => {
                     return (
                       <>
@@ -85,15 +112,15 @@ const CuratedCollectionProducts = () => {
                             title={item.title}
                             onClick={() => {
                               router.push(
-                                `${pathLocations.curatedCollection}/${cur_id}/${item.id}`,
-                              )
+                                `${pathLocations.curatedCollection}/${cur_id}/${item.id}`
+                              );
                             }}
                             imgObjectFit="cover"
                             imgAlt={item.title}
                           />
                         </Grid>
                       </>
-                    )
+                    );
                   })
                 ) : (
                   <Grid item xs={12}>
@@ -109,7 +136,7 @@ const CuratedCollectionProducts = () => {
         </Grid> */}
       </Grid>
     </DefaultLayout>
-  )
-}
+  );
+};
 
-export default CuratedCollectionProducts
+export default CuratedCollectionProducts;

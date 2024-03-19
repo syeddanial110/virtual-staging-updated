@@ -8,7 +8,7 @@ import BeforeAfterImg from "../BeforeAfterImg/BeforeAfterImg";
 const SliderBox = ({ beforeImg, afterImg, title, price, height }) => {
   return (
     <Grid container justifyContent="center">
-      <Grid item xs={7} display="flex" justifyContent="center">
+      <Grid item xs={11} md={7} display="flex" justifyContent="center">
         {/* <BeforeAfter
           width={"100%"}
           height={height ? height : 300}

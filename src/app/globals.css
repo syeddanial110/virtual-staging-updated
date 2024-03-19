@@ -464,17 +464,26 @@ p {
   box-shadow: 0 0 0 0px rgba(235, 236, 240, 0.4) !important;
 }
 
+.dropDownMenu {
+  margin-left: auto !important;
+  display: block;
+  background-color: #3c828e !important;
+  padding: 10px 5px !important;
+}
+
 .subnameDropdown {
-  left: -390%;
-  right: -349% !important;
+  left: 0%;
+  right: 0% !important;
   background-color: #575757 !important;
   border-radius: 25px !important;
   width: 93vw !important;
   z-index: 9999999 !important;
+  transform: translate(-50%);
 }
 
 .subLinkTitle:hover {
   background-color: #3c828e;
+  color: white;
 }
 
 .Dropdown_menu__VJLNl.Dropdown_menu-left__Js_a5.subnameDropdown {
@@ -499,23 +508,34 @@ p {
 
 @media screen and (min-width: 1200px) and (max-width: 1450px) {
   .subnameDropdown {
-    left: -290%;
-    right: -349% !important;
+    left: 0%;
+    right: 0% !important;
     width: 80vw !important;
+    transform: translate(-50%);
+  }
+}
+@media screen and (min-width: 1451px) and (max-width: 1699px) {
+  .subnameDropdown {
+    left: 0%;
+    right: 0% !important;
+    width: 80vw !important;
+    transform: translate(-50%);
   }
 }
 @media screen and (min-width: 1700px) and (max-width: 2400px) {
   .subnameDropdown {
-    left: -490%;
-    right: -349% !important;
-    width: 90vw !important;
+    left: 0%;
+    right: 0% !important;
+    width: 60vw !important;
+    transform: translate(-50%);
   }
 }
-@media screen and (min-width: 2400px) and (max-width: 3400px) {
+@media screen and (min-width: 2401px) and (max-width: 3400px) {
   .subnameDropdown {
-    left: -590%;
-    right: -349% !important;
-    width: 90vw !important;
+    left: 0%;
+    right: 0% !important;
+    width: 50vw !important;
+    transform: translate(-50%);
   }
 }
 

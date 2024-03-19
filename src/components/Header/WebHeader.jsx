@@ -17,8 +17,6 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import logo from "../../assets/images/headerlogo.png";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
 import avatar from "../../assets/icons/avatar.svg";
 import cart from "../../assets/icons/cart.svg";
 import { menu, pages } from "@/utlils/data";
@@ -31,6 +29,8 @@ import UIButton from "../UIButton/UIButton";
 import { pathLocations } from "@/utlils/pathLocations";
 import { apiGet } from "@/auth/ApiRequest";
 import { ApiEndpoints } from "@/auth/apiEndpoints";
+import Link from "next/link";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 const WebHeader = () => {
   const router = useRouter();
@@ -122,15 +122,26 @@ const WebHeader = () => {
                 <ListItemButton
                   key={`${item.name}-${i}`}
                   sx={{ p: 0, textAlign: "center" }}
-                  onClick={() => router.push(item.link)}
+                  // onClick={() => router.push(item.link)}
                 >
-                  <ListItemText
-                    sx={{
-                      color: (theme) =>
-                        `${theme.palette.primary.greyShade1} !important`,
+                  <Link
+                    style={{
+                      textDecoration: "none",
+                      width: "100%",
+                      display: "flex",
+                      alignItems: "center",
                     }}
-                    primary={item.name}
-                  />
+                    href={item.link}
+                  >
+                    <ListItemText
+                      sx={{
+                        color: (theme) =>
+                          `${theme.palette.primary.greyShade1} !important`,
+                        textAlign: "center",
+                      }}
+                      primary={item.name}
+                    />
+                  </Link>
                 </ListItemButton>
               );
             } else if (item?.subLinks) {
@@ -147,17 +158,21 @@ const WebHeader = () => {
                   >
                     {item?.subLinks.map((subLink, i) => {
                       return (
-                        <Dropdown.Item
-                          key={i}
-                          // onClick={() => doSomething()}
-                        >
-                          <UITypography
-                            title={`- ${subLink.name}`}
-                            isWhite={true}
-                            // textAlign="center"
-                            onClick={() => router.push(subLink.link)}
-                            sx={{ width: "100%" }}
-                          />
+                        <Dropdown.Item key={i}>
+                          <Link
+                            style={{
+                              textDecoration: "none",
+                              width: "100%",
+                            }}
+                            href={`${subLink.link}`}
+                          >
+                            <UITypography
+                              title={`- ${subLink.name}`}
+                              isWhite={true}
+                              // textAlign="center"
+                              sx={{ width: "100%" }}
+                            />
+                          </Link>
                         </Dropdown.Item>
                       );
                     })}
@@ -181,22 +196,44 @@ const WebHeader = () => {
                 // >
                 <ListItemButton
                   key={i}
-                  sx={{ p: 0, display: "flex", justifyContent: "center" }}
+                  sx={{
+                    padding: '0px 0px 0px 5px',
+                    display: "flex",
+                    justifyContent: "space-between",
+                    maxWidth: "195px !important",
+                    display: "flex",
+                  }}
                 >
+                  <Link
+                    style={{
+                      textDecoration: "none",
+                    }}
+                    href={`${pathLocations.curatedCollection}`}
+                  >
+                    <UITypography
+                      title="Curated Collection"
+                      sx={{ padding: "8px 1px", color: "#7E7E7E" }}
+                    />
+                  </Link>
                   <Dropdown
-                    title={item.name}
+                    title={
+                      <ArrowDropDownIcon
+                        sx={{
+                          // backgroundColor: (theme) =>
+                          //   theme.palette.primary.main,
+                          color: "white",
+                          // borderTopRightRadius: "10px",
+                          // borderBottomRightRadius: "10px",
+                        }}
+                      />
+                    }
                     menuClassName="subnameDropdown"
-                    buttonClassName="dropdownButton"
+                    buttonClassName="dropdownButton dropDownMenu"
                   >
                     <Box sx={{ width: "100%", padding: "10px 20px" }}>
                       <Grid container gap={2}>
                         <Grid item xs={5}>
-                          <Grid
-                            container
-                            gap={2}
-                            // sx={{ height: "80vh", overflowY: "scroll" }}
-                            // className="headerScroll"
-                          >
+                          <Grid container gap={2}>
                             <Grid item xs={12}>
                               <UITypography
                                 type="heading"
@@ -215,17 +252,19 @@ const WebHeader = () => {
                             {curatedCollection.map((subLink, i) => {
                               return (
                                 <Grid item xs={12} key={i}>
-                                  <UITypography
-                                    title={`- ${subLink.title}`}
-                                    isWhite={true}
-                                    className="subLinkTitle"
-                                    sx={{ padding: "8px 1px" }}
-                                    onClick={() =>
-                                      router.push(
-                                        `${pathLocations.curatedCollection}/${subLink.id}`
-                                      )
-                                    }
-                                  />
+                                  <Link
+                                    style={{
+                                      textDecoration: "none",
+                                    }}
+                                    href={`${pathLocations.curatedCollection}/${subLink.id}`}
+                                  >
+                                    <UITypography
+                                      title={`- ${subLink.title}`}
+                                      isWhite={true}
+                                      className="subLinkTitle"
+                                      sx={{ padding: "8px 1px" }}
+                                    />
+                                  </Link>
                                 </Grid>
                               );
                             })}
@@ -251,7 +290,20 @@ const WebHeader = () => {
                             {styles.map((subLink, i) => {
                               return (
                                 <Grid item xs={12} key={i}>
-                                  <UITypography
+                                  <Link
+                                    style={{
+                                      textDecoration: "none",
+                                    }}
+                                    href={`${pathLocations.styles}/${subLink.id}`}
+                                  >
+                                    <UITypography
+                                      title={`- ${subLink.title}`}
+                                      isWhite={true}
+                                      className="subLinkTitle"
+                                      sx={{ padding: "8px 1px" }}
+                                    />
+                                  </Link>
+                                  {/* <UITypography
                                     title={`- ${subLink.title}`}
                                     isWhite={true}
                                     className="subLinkTitle"
@@ -261,7 +313,7 @@ const WebHeader = () => {
                                         `${pathLocations.styles}/${subLink.id}`
                                       )
                                     }
-                                  />
+                                  /> */}
                                 </Grid>
                               );
                             })}

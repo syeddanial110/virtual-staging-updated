@@ -29,6 +29,7 @@ export default function OrderStepper(props) {
   const orderPlaceReducer = useSelector((state) => state?.orderPlaceReducer);
 
   const [activeStep, setActiveStep] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -144,12 +145,31 @@ export default function OrderStepper(props) {
           width: "100%",
         }}
       >
-        <Stepper activeStep={activeStep} sx={{ width: "90%", margin: "auto" }}>
+        <Stepper
+          activeStep={activeStep}
+          sx={{
+            width: "90%",
+            margin: "auto",
+            justifyContent: "center",
+            "& > .MuiStepConnector-horizontal": {
+              display: {
+                xs: "none",
+                md: "block",
+              },
+            },
+          }}
+        >
           {steps.map((label, index) => {
             const stepProps = {};
             const labelProps = {};
             return (
-              <Step key={label} {...stepProps}>
+              <Step
+                key={label}
+                {...stepProps}
+                sx={{
+                  display: { xs: index != activeStep && "none", md: "flex" },
+                }}
+              >
                 <StepLabel {...labelProps}>{label}</StepLabel>
               </Step>
             );

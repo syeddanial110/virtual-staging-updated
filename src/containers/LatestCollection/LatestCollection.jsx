@@ -92,8 +92,6 @@ const LatestCollection = () => {
     getCuratedCollection();
   }, []);
 
-  console.log("curatedCollection", curatedCollection);
-
   return (
     <Grid container my={10} gap={6} justifyContent="center">
       <Grid item xs={11}>
@@ -103,7 +101,7 @@ const LatestCollection = () => {
       <Grid item xs={11}>
         <LatestCollectionSlider arr={curatedCollection} />
       </Grid>
-      <Grid item xs={6} sm={4} md={3}>
+      <Grid item xs={8} sm={4} md={3} display="flex" justifyContent="center">
         <UIButton
           isDark={false}
           label="View all Collections"

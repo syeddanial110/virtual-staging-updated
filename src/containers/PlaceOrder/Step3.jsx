@@ -123,23 +123,36 @@ const Step3 = () => {
           <UITypography
             type="heading"
             title="Upload some photos of your property*"
+            textAlign={{ xs: "center", md: "start" }}
           />
-          <UITypography title="(allowed file types: .jpg, .jpeg, .png )" />
+          <UITypography
+            title="(allowed file types: .jpg, .jpeg, .png )"
+            textAlign={{ xs: "center", md: "start" }}
+          />
         </Grid>
-        <Grid item xs={12}>
+        <Grid
+          item
+          xs={12}
+          display="flex"
+          justifyContent={{ xs: "center", md: "flex-start" }}
+        >
           <UIFileButton
             isWithoutBg
             isFileUpload={false}
             data={{ image: "" }}
             _handleChangeImage={_handleChangeImage}
           />
-          <Grid container mt={3} gap={3}>
+        </Grid>
+        <Grid item xs={12}>
+          <Grid container mt={3} gap={3} justifyContent={{ xs: "center", md: "flex-start" }}>
             {orderPlaceReducer.uploadImageDetails.length > 0 &&
               orderPlaceReducer.uploadImageDetails.map((item, i) => {
                 return (
                   <Grid
                     item
-                    xs={3.5}
+                    xs={12}
+                    sm={5.5}
+                    md={3.5}
                     sx={{
                       position: "relative",
                       backgroundImage: `url('${item.image}')`,

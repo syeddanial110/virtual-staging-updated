@@ -122,7 +122,7 @@ const Blogs = () => {
       </Grid>
       <Grid container justifyContent="center" mt={10}>
         <Grid item xs={11}>
-          <Grid container spacing={3}>
+          <Grid container spacing={3} >
             {blogs.length == 0 && (
               <Grid item xs={3}>
                 <UILoader />

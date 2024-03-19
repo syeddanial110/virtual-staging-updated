@@ -8,9 +8,11 @@ import UILoader from "@/components/UILoader/UILoader";
 import UITypography from "@/components/UITypography/UITypography";
 import DefaultLayout from "@/layout/default-layout";
 import { pathLocations } from "@/utlils/pathLocations";
-import { Grid } from "@mui/material";
+import { Breadcrumbs, Grid } from "@mui/material";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useLayoutEffect, useState } from "react";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const FurnitureCategory = () => {
   const pathname = usePathname();
@@ -47,7 +49,31 @@ const FurnitureCategory = () => {
 
   return (
     <DefaultLayout>
-      <Grid container mt={4}>
+      <Grid container mt={4} justifyContent="center">
+        <Grid item xs={10}>
+          <Breadcrumbs aria-label="breadcrumb">
+            <Link
+              underline="hover"
+              color="inherit"
+              href={pathLocations?.furnitureGallery}
+              style={{ color: "#3C828E" }}
+            >
+              Furniture Gallery
+            </Link>
+            <UITypography
+              // onClick={() =>
+              //   router.push(`${pathLocations?.furnitureGallery}/${title}`)
+              // }
+              title={categoryData.title}
+            />
+          </Breadcrumbs>
+          <UIButton
+            onClick={() => router.push(pathLocations.furnitureGallery)}
+            label="Back"
+            startIcon={<ArrowBackIcon />}
+            sx={{ padding: "10px 14px", fontSize: "12px", mt: 1 }}
+          />
+        </Grid>
         <Grid item xs={12}>
           <UITypography
             type="heading"

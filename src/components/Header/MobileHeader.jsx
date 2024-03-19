@@ -230,7 +230,11 @@ const MobileHeader = () => {
                             title={`- ${subLink.title}`}
                             isWhite={true}
                             className="subLinkTitle"
-                            sx={{ padding: "8px 30px", color: "black" }}
+                            sx={{
+                              padding: "8px 30px",
+                              color: "black",
+                              fontSize: "16px !important",
+                            }}
                             onClick={() =>
                               router.push(
                                 `${pathLocations.curatedCollection}/${subLink.id}`

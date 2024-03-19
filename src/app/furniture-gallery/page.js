@@ -89,6 +89,7 @@ const FutureGallery = () => {
             <Grid
               item
               xs={12}
+              md={6}
               lg={3}
               display="flex"
               justifyContent={{ xs: "center", lg: "flex-end" }}

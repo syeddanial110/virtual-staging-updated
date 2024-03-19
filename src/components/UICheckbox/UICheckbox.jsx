@@ -6,8 +6,9 @@ const UICheckbox = ({ label, onChange, checked, defaultChecked, ...props }) => {
     <FormControlLabel
       onChange={onChange}
       checked={checked}
+      sx={{ alignItems: "flex-start" }}
       defaultChecked={defaultChecked}
-      control={<Checkbox {...props} />}
+      control={<Checkbox sx={{ padding: "0px 12px 14px 12px" }} {...props} />}
       label={label}
     />
   );

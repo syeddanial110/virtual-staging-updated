@@ -72,7 +72,7 @@ const Step2 = () => {
         </Grid>
         {styles.map((item) => {
           return (
-            <Grid item xs={3}>
+            <Grid item xs={12} sm={5} md={3}>
               <StyleCard
                 id={item.id}
                 title={item.title}

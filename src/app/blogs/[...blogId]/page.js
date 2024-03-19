@@ -7,6 +7,7 @@ import {
   Box,
   CircularProgress,
   Grid,
+  IconButton,
   InputAdornment,
   TextField,
 } from "@mui/material";
@@ -20,6 +21,8 @@ import { pathLocations } from "@/utlils/pathLocations";
 import { ImageBASEURL, apiGet } from "@/auth/ApiRequest";
 import { ApiEndpoints } from "@/auth/apiEndpoints";
 import authorImg from "../../../assets/images/headerlogo.png";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import UIButton from "@/components/UIButton/UIButton";
 
 const BlogById = (props) => {
   const pathname = usePathname();
@@ -72,8 +75,15 @@ const BlogById = (props) => {
     <DefaultLayout>
       {blog && !isLoading ? (
         <Grid container px={3} justifyContent="space-around">
-          <Grid item xs={7}>
+          <Grid item xs={11} md={7}>
             <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <UIButton
+                  onClick={() => router.push(pathLocations.blogs)}
+                  label="Back"
+                  startIcon={<ArrowBackIcon />}
+                />
+              </Grid>
               <Grid item xs={12}>
                 <UITypography type="mainHeading" title={blog?.title} />
               </Grid>
@@ -151,7 +161,7 @@ const BlogById = (props) => {
               })} */}
             </Grid>
           </Grid>
-          <Grid item xs={3} pt={5}>
+          <Grid item xs={12} md={3} pt={5}>
             <Grid container gap={3}>
               {/* <Grid item xs={12}>
                 <TextField
@@ -178,6 +188,8 @@ const BlogById = (props) => {
                   <Grid
                     item
                     xs={12}
+                    sm={3.5}
+                    md={12}
                     key={i}
                     sx={{
                       borderLeftWidth: "4px",
@@ -185,6 +197,7 @@ const BlogById = (props) => {
                       borderLeftStyle: "solid",
                       paddingLeft: "10px",
                       display: "flex",
+                      flexDirection: { xs: "row", sm: "column", md: "row" },
                       "&:hover": {
                         cursor: "pointer",
                       },
@@ -202,7 +215,7 @@ const BlogById = (props) => {
                         objectFit: "cover",
                       }}
                     />
-                    <Box ml={3}>
+                    <Box ml={{ xs: 3, sm: 0, md: 3 }}>
                       <UITypography
                         type="heading"
                         title={

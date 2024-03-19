@@ -11,6 +11,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { accesoriesArr } from "@/utlils/data";
 import { ImageBASEURL, apiGet } from "@/auth/ApiRequest";
 import { ApiEndpoints } from "@/auth/apiEndpoints";
+import UIButton from "@/components/UIButton/UIButton";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const FurnitureId = () => {
   const pathname = usePathname();
@@ -20,6 +22,7 @@ const FurnitureId = () => {
     productName: "",
     image: "",
     categoryName: "",
+    categoryId: "",
   });
 
   const getProduct = () => {
@@ -33,17 +36,16 @@ const FurnitureId = () => {
             productName: res.title,
             image: res.image,
             categoryName: res.category.title,
+            categoryId: res.category.id,
           });
         },
-        (err) => {
-        }
+        (err) => {}
       );
   };
 
   useEffect(() => {
     getProduct();
   }, []);
-
 
   return (
     <DefaultLayout>
@@ -64,13 +66,31 @@ const FurnitureId = () => {
             >
               Furniture Gallery
             </Link>
+            <Link
+              underline="hover"
+              color="inherit"
+              href={`${pathLocations?.furnitureGallery}/${productsData.categoryId}`}
+              style={{ color: "#3C828E" }}
+            >
+              {productsData.categoryName}
+            </Link>
             <UITypography
               // onClick={() =>
               //   router.push(`${pathLocations?.furnitureGallery}/${title}`)
               // }
-              title={productsData.categoryName}
+              title={productsData.productName}
             />
           </Breadcrumbs>
+          <UIButton
+            onClick={() =>
+              router.push(
+                `${pathLocations?.furnitureGallery}/${productsData.categoryId}`
+              )
+            }
+            label="Back"
+            startIcon={<ArrowBackIcon />}
+            sx={{ padding: "10px 14px", fontSize: "12px", mt: 1 }}
+          />
         </Grid>
         <Grid item xs={11} md={4}>
           <img

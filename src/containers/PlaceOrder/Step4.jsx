@@ -280,7 +280,11 @@ const Step4 = () => {
   return (
     <Grid container gap={3} mt={5}>
       <Grid item xs={12}>
-        <UITypography type="heading" title="Add details about your photos*" />
+        <UITypography
+          type="heading"
+          title="Add details about your photos*"
+          textAlign={{ xs: "center", md: "start" }}
+        />
       </Grid>
       <Grid item xs={12}>
         {/* <UIFileButton
@@ -295,6 +299,7 @@ const Step4 = () => {
           return (
             <Grid
               container
+              justifyContent="center"
               sx={{
                 boxShadow: "0 4px 16px 4px #d1d1d1",
               }}
@@ -303,7 +308,8 @@ const Step4 = () => {
             >
               <Grid
                 item
-                xs={3.5}
+                xs={12}
+                md={3.5}
                 sx={{
                   backgroundImage: `url('${item.image}')`,
                   backgroundSize: "contain",
@@ -316,9 +322,10 @@ const Step4 = () => {
               ></Grid>
               <Grid
                 item
-                xs={4}
+                xs={11}
+                md={4}
                 sx={{
-                  borderRightWidth: "1px",
+                  borderRightWidth: { xs: "0px", md: "1px" },
                   borderRightColor: (theme) => theme.palette.primary.greyShade3,
                   borderRightStyle: "solid",
                   paddingRight: "12px",
@@ -358,7 +365,7 @@ const Step4 = () => {
                       {item?.filteredBasicItem?.length > 0 &&
                         item?.filteredBasicItem?.map((elm) => {
                           return (
-                            <Grid item xs={6}>
+                            <Grid item xs={12} sm={6}>
                               <UICheckbox
                                 onChange={(e) => handleChange(e, i, elm)}
                                 value={elm.title}
@@ -392,7 +399,7 @@ const Step4 = () => {
                 />
               </Grid>
               {orderPlaceReducer?.serviceName !== "Virtual Twilights" ? (
-                <Grid item xs={3.5}>
+                <Grid item xs={11} md={3.5}>
                   <Stack gap={1} py={2}>
                     <UITypography
                       title="Additional services"

@@ -51,57 +51,47 @@ const StyleById = () => {
             />
           </Grid>
           <Grid item xs={10}>
-            <Grid container mt={3} gap={2}>
+            <Grid
+              container
+              mt={3}
+              gap={2}
+              justifyContent={styleData?.images?.length > 3 && "center"}
+            >
               {styleData?.images?.map((item) => {
                 return (
-                  <Grid item xs={2.8}>
+                  <Grid item xs={12} sm={6} md={3.5}>
                     <Box
                       sx={{
+                        backgroundColor: "white",
+                        // borderRadius: "16px",
+                        width: "100%",
+                        height: "250px",
+                        overflow: "hidden",
+                        border: (theme) =>
+                          `4px solid ${theme.palette.primary.main}`,
                         "&:hover": {
                           cursor: "pointer",
+                          "& > img": {
+                            transform: "scale(1.2) rotate(-5deg)",
+                          },
                         },
-                        // width: "350px",
-                        // height: "350px",
-                        display: "flex",
-                        justifyContent: "center",
-                        flexDirection: "column",
-                        alignItems: "center",
                       }}
                     >
-                      <Box
-                        sx={{
-                          backgroundColor: "white",
-                          // borderRadius: "16px",
-                          width: "250px",
+                      <img
+                        src={`${ImageBASEURL}${item.image}`}
+                        alt={item.style_id}
+                        loading="eager"
+                        style={{
+                          // ...imgStyle,
+                          // width: "100%",
+                          width: "100%",
                           height: "250px",
-                          overflow: "hidden",
-                          border: (theme) =>
-                            `4px solid ${theme.palette.primary.main}`,
-                          "&:hover": {
-                            "& > img": {
-                              transform: "scale(1.2) rotate(-5deg)",
-                            },
-                          },
+                          objectFit: "cover",
+                          aspectRatio: 1 / 2,
+                          // borderRadius: "16px",
+                          transition: "all 0.3s linear",
                         }}
-                      >
-                        <img
-                          src={`${ImageBASEURL}${item.image}`}
-                          alt={item.style_id}
-                          height={260}
-                          width={150}
-                          loading="eager"
-                          style={{
-                            // ...imgStyle,
-                            // width: "100%",
-                            width: "250px",
-                            height: "250px",
-                            objectFit: "cover",
-                            aspectRatio: 1 / 2,
-                            // borderRadius: "16px",
-                            transition: "all 0.3s linear",
-                          }}
-                        />
-                      </Box>
+                      />
                     </Box>
                   </Grid>
                 );

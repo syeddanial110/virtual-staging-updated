@@ -1,6 +1,7 @@
 "use client";
 import { ImageBASEURL, apiGet } from "@/auth/ApiRequest";
 import { ApiEndpoints } from "@/auth/apiEndpoints";
+import UIButton from "@/components/UIButton/UIButton";
 import UITypography from "@/components/UITypography/UITypography";
 import DefaultLayout from "@/layout/default-layout";
 import { pathLocations } from "@/utlils/pathLocations";
@@ -8,6 +9,7 @@ import { Breadcrumbs, Grid } from "@mui/material";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const ChoiceDetail = () => {
   const id = usePathname();
@@ -57,12 +59,20 @@ const ChoiceDetail = () => {
             <Link
               underline="hover"
               color="inherit"
+              href={`${pathLocations?.curatedCollection}`}
+              style={{ color: "#3C828E" }}
+            >
+              Curated Collection
+            </Link>
+            <Link
+              underline="hover"
+              color="inherit"
               href={`${pathLocations?.curatedCollection}/${parseInt(
                 choiceData.curatedCollectionId
               )}`}
               style={{ color: "#3C828E" }}
             >
-              Curated Collection
+              {choiceData.curatedCollectionTitle}
             </Link>
             <UITypography
               // onClick={() =>
@@ -71,13 +81,25 @@ const ChoiceDetail = () => {
               title={choiceData.title}
             />
           </Breadcrumbs>
+          <UIButton
+            onClick={() =>
+              router.push(
+                `${pathLocations?.curatedCollection}/${parseInt(
+                  choiceData.curatedCollectionId
+                )}`
+              )
+            }
+            label="Back"
+            startIcon={<ArrowBackIcon />}
+            sx={{ padding: "10px 14px", fontSize: "12px", mt: 1 }}
+          />
         </Grid>
         <Grid item xs={11} md={4}>
           <img
             src={`${ImageBASEURL}${choiceData?.image}`}
             alt="furniture-img"
             style={{
-              width: "600px",
+              width: "100%",
               objectFit: "contain",
               maxWidth: "800px !important",
               height: "auto",

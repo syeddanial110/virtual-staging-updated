@@ -102,7 +102,7 @@ const Step1 = () => {
         </Grid>
         <Grid item xs={12}>
           <Grid container gap={3}>
-            <Grid item xs={5} columnGap={2}>
+            <Grid item xs={12} md={5} columnGap={2}>
               <UITypography title="Your name" sx={{ pb: 1 }} />
               <UISimpleTextField
                 // variant="simpleContained"
@@ -113,7 +113,7 @@ const Step1 = () => {
                 value={orderPlaceReducer.name}
               />
             </Grid>
-            <Grid item xs={5}>
+            <Grid item xs={12} md={5}>
               <UITypography title="Email" sx={{ pb: 1 }} />
               <UISimpleTextField
                 // variant="simpleContained"
@@ -124,14 +124,14 @@ const Step1 = () => {
                 value={orderPlaceReducer.email}
               />
             </Grid>
-            <Grid item xs={5}>
+            <Grid item xs={12} md={5}>
               <UITypography title="Phone number" sx={{ pb: 1 }} />
               <UIPhoneTextField
                 onChange={handlePhoneNumber}
                 value={orderPlaceReducer.phoneNumber}
               />
             </Grid>
-            <Grid item xs={5}>
+            <Grid item xs={12} md={5}>
               <UITypography title="Services" sx={{ pb: 1 }} />
               <UISelect
                 value={orderPlaceReducer.serviceName}

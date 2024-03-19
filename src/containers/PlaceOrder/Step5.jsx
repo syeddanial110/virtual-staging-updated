@@ -135,21 +135,27 @@ const Step5 = () => {
 
   return (
     <Grid container justifyContent="space-between" gap={1} mt={5}>
-      <Grid item xs={6}>
+      <Grid
+        item
+        xs={12}
+        md={6}
+        mt={{ xs: 2, md: 0 }}
+        sx={{ order: { xs: 3, md: 1 } }}
+      >
         <UITypography type="heading" title="Additional services" />
         <UITypography title="Your property is ready to be staged. Select any additional service to greatly boost your property's value." />
         <Grid container gap={3} mt={3}>
           <Grid item xs={12}>
             <UITypography title="Enter a coupon code" />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} md={4}>
             <UISimpleTextField
               placeholder="H4qw34D"
               value={additionalServices.promoCode}
               onChange={handlePromoCodeInput}
             />
           </Grid>
-          <Grid item xs={5}>
+          <Grid item xs={12} md={5}>
             <UIButton
               variant="contained"
               label="Apply coupon"
@@ -173,10 +179,9 @@ const Step5 = () => {
           </Grid> */}
         </Grid>
       </Grid>
-      <Grid item xs={4}>
+      <Grid item xs={12} md={4} sx={{ order: { xs: 1, md: 2 } }}>
         <Invoice />
       </Grid>
-      <Grid item xs={12}></Grid>
     </Grid>
   );
 };
