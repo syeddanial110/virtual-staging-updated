@@ -21,7 +21,7 @@ const TermsAndPolicy = () => {
           <BannerWrapper bgImg={termsAndCondition} isGradient>
             <UITypography
               type="heading"
-              title="Privacy and Policy"
+              title="Terms & Conditions"
               sx={{
                 color: "white",
                 fontSize: "80px",

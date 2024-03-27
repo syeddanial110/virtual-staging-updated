@@ -188,7 +188,7 @@ const ViewOrderDetail = () => {
                           <UITypography
                             title={item?.curated_collection?.title}
                           />
-                          <UITypography title="your like items in your room?" />
+                          <UITypography title="Selected additional items to be added" />
                           <UITypography
                             title="(Basic items added)"
                             sx={{
@@ -247,7 +247,7 @@ const ViewOrderDetail = () => {
                                       />
                                     </ListItemIcon>
                                     <ListItemText
-                                      primary={`${elm.service_name} - ${elm.service_price}`}
+                                      primary={`${elm.service_name} - $${elm.service_price}`}
                                     />
                                   </ListItem>
                                 );

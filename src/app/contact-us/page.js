@@ -42,11 +42,11 @@ const ContactUs = () => {
                 type="heading"
                 title="Have questions? We would love to hear from you!"
               />
-              <UITypography title="Our team is here to provide answers and assistance in any way we can. Please feel free to reach out to us through the contact form below, and we'll be more than happy to assist you in any way we can. Form to be sent to " />
-              <UITypography
+              <UITypography title="Our team is here to provide answers and assistance in any way we can. Please feel free to reach out to us through the contact form below, and we'll be more than happy to assist you in any way we can." />
+              {/* <UITypography
                 title="info@pictureperfectvirtualstaging.com"
                 sx={{ color: (theme) => theme.palette.primary.main }}
-              />
+              /> */}
               <Box display="flex" gap={1} mt={4}>
                 <EmailIcon
                   sx={{ color: (theme) => theme.palette.primary.main }}

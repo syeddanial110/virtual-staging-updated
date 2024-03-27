@@ -50,7 +50,7 @@ const LatestCollectionSlider = ({ arr }) => {
                 <Grid item xs={11}>
                   <LatestCollectionCard
                     heading={item.title}
-                    img={`${ImageBASEURL}${item.choices[0].image}`}
+                    img={`${ImageBASEURL}${item.choices[0]?.image}`}
                     handleClick={() =>
                       router.push(
                         `${pathLocations.curatedCollection}/${item.id}`

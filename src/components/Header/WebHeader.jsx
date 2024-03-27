@@ -6,6 +6,7 @@ import {
   Box,
   Collapse,
   Grid,
+  IconButton,
   List,
   ListItemButton,
   ListItemIcon,
@@ -13,6 +14,7 @@ import {
   Menu,
   MenuItem,
   Popover,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import Image from "next/image";
@@ -31,6 +33,7 @@ import { apiGet } from "@/auth/ApiRequest";
 import { ApiEndpoints } from "@/auth/apiEndpoints";
 import Link from "next/link";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 const WebHeader = () => {
   const router = useRouter();
@@ -110,7 +113,7 @@ const WebHeader = () => {
           textAlign="center"
         /> */}
       </Grid>
-      <Grid item xs={9} display="flex" justifyContent="center">
+      <Grid item xs={8.5} display="flex" justifyContent="center">
         <List
           sx={{ width: "80%", display: "flex" }}
           component="nav"
@@ -197,7 +200,7 @@ const WebHeader = () => {
                 <ListItemButton
                   key={i}
                   sx={{
-                    padding: '0px 0px 0px 5px',
+                    padding: "0px 0px 0px 5px",
                     display: "flex",
                     justifyContent: "space-between",
                     maxWidth: "195px !important",
@@ -343,7 +346,7 @@ const WebHeader = () => {
           })}
         </List>
       </Grid>
-      <Grid item xs={1} display="flex" justifyContent="center">
+      <Grid item xs={1.3} display="flex" justifyContent="space-around">
         {token ? (
           <Box
             sx={{
@@ -363,11 +366,31 @@ const WebHeader = () => {
             />
           </Box>
         ) : (
-          <Box sx={{ marginRight: 14 }}>
+          <Box
+            sx={{
+              // marginRight: 14,
+              display: "flex",
+              justifyContent: "space-around",
+              width: "100%",
+            }}
+          >
             <UIButton
+              label="Order Now"
+              onClick={() => router.push(pathLocations.placeOrder)}
+              sx={{ padding: "5px 8px", fontSize: "12px", minWidth: "100px" }}
+            />
+            <Tooltip title="Register">
+              <IconButton onClick={() => router.push(pathLocations.login)}>
+                <PersonAddIcon
+                  sx={{ color: (theme) => theme.palette.primary.main }}
+                />
+              </IconButton>
+            </Tooltip>
+            {/* <UIButton
               label="Register"
               onClick={() => router.push(pathLocations.login)}
-            />
+              sx={{ padding: "5px 8px", fontSize: "12px", minWidth: "100px" }}
+            /> */}
           </Box>
         )}
         {/* <Box

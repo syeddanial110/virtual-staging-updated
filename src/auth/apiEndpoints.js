@@ -10,6 +10,7 @@ export const ApiEndpoints = {
   getSinglePremadeProduct: "/premade/product/", // /productId
   curatedCollection: "/curated-collections",
   curatedCollectionById: "/curated-collections/choices/",
+  curatedCollectionPage: "/curated-collections-pages",
   choiceById: "/choice/",
   promoCode: "/promocode/check",
   userById: "/user/",

@@ -286,7 +286,7 @@ const Step4 = () => {
                       return <MenuItem value={item.name}>{item.name}</MenuItem>;
                     })}
                   </UISelect>
-                  <UITypography title="Would you like any of these items in your room?" />
+                  <UITypography title="Selected additional items to be added" />
                   <UITypography
                     title="(Basic items will be added)"
                     sx={{ color: (theme) => theme.palette.primary.greyShade5 }}
@@ -304,7 +304,7 @@ const Step4 = () => {
                       );
                     })}
                   </Grid>
-                  <UITypography title="Not mentioned? Type them in here" />
+                  <UITypography title="Additional Instructions" />
                   <UISimpleTextField
                     placeholder="Stydy, Chair, desswer etc"
                     multiline

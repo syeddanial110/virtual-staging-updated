@@ -20,7 +20,7 @@ const CuratedCollection = () => {
 
   const getCuratedCollection = () => {
     apiGet(
-      `${ApiEndpoints.curatedCollection}`,
+      `${ApiEndpoints.curatedCollectionPage}`,
       (res) => {
         setCuratedCollectionData(res)
         setIsLoading(false)

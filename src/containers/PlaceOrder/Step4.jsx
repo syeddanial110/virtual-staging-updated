@@ -351,7 +351,7 @@ const Step4 = () => {
                         );
                       })}
                     </UISelect>
-                    <UITypography title="Would you like any of these items in your room?" />
+                    <UITypography title="Select additional items to be added" />
                     <UITypography
                       title="(Basic items will be added)"
                       sx={{
