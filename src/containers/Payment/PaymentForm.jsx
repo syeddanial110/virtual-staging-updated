@@ -144,7 +144,7 @@ const PaymentForm = ({ clientSecret }) => {
         if (!x) {
           handlePlaceOrder();
         } else {
-          toast.error("Not box is required");
+          toast.error("Note box is required");
         }
       } else {
         const x = orderPlaceReducer.uploadImageDetails.some(
@@ -154,7 +154,7 @@ const PaymentForm = ({ clientSecret }) => {
         if (!x) {
           handlePlaceOrder();
         } else {
-          toast.error("Curated collection is required");
+          toast.error("Room Name is required");
         }
       }
     }

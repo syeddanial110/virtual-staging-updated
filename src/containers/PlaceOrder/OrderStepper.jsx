@@ -71,7 +71,7 @@ export default function OrderStepper(props) {
           setActiveStep(4);
           dispatch(addStepperValue(3));
         } else {
-          toast.error("Not box is required");
+          toast.error("Note box is required");
         }
       } else {
         const x = orderPlaceReducer.uploadImageDetails.some(
@@ -82,7 +82,7 @@ export default function OrderStepper(props) {
           setActiveStep(4);
           dispatch(addStepperValue(3));
         } else {
-          toast.error("Curated collection is required");
+          toast.error("Room Name is required");
         }
       }
     }

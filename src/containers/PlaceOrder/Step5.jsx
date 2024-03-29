@@ -142,8 +142,8 @@ const Step5 = () => {
         mt={{ xs: 2, md: 0 }}
         sx={{ order: { xs: 3, md: 1 } }}
       >
-        <UITypography type="heading" title="Additional services" />
-        <UITypography title="Your property is ready to be staged. Select any additional service to greatly boost your property's value." />
+        {/* <UITypography type="heading" title="Additional services" />
+        <UITypography title="Your property is ready to be staged. Select any additional service to greatly boost your property's value." /> */}
         <Grid container gap={3} mt={3}>
           <Grid item xs={12}>
             <UITypography title="Enter a coupon code" />

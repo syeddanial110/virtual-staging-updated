@@ -277,6 +277,8 @@ const Step4 = () => {
 
   // end room area select
 
+  console.log("orderPlaceReducer", orderPlaceReducer);
+
   return (
     <Grid container gap={3} mt={5}>
       <Grid item xs={12}>
@@ -385,12 +387,16 @@ const Step4 = () => {
                 ) : (
                   <></>
                 )}
-                <UITypography
-                  title="Not mentioned? Type them in here"
-                  sx={{ pt: 2 }}
-                />
+                <UITypography title="Additional Instructions" sx={{ pt: 2 }} />
                 <UISimpleTextField
-                  placeholder="Stydy, Chair, desswer etc"
+                  // placeholder={
+                  //   orderPlaceReducer?.serviceName == "Virtual Renovation"
+                  //     ? "Please describe the requested renovations. floor color, wall color etc."
+                  //     : orderPlaceReducer?.serviceName ==
+                  //       "Commercial Virtual Renovation"
+                  //     ? "Please describe the requested renovations. floor color, wall color etc."
+                  //     : "Study, Chair, dresswear etc"
+                  // }
                   multiline
                   rows={4}
                   fullWidth

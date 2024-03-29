@@ -78,7 +78,7 @@ const LatestCollection = () => {
 
   const getCuratedCollection = () => {
     apiGet(
-      `${ApiEndpoints.curatedCollection}`,
+      `${ApiEndpoints.curatedCollectionPage}`,
       (res) => {
         setCuratedCollection(res);
       },
