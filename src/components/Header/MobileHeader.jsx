@@ -8,6 +8,7 @@ import {
   ListItemButton,
   ListItemText,
   Popover,
+  Tooltip,
 } from "@mui/material";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -29,6 +30,7 @@ import { apiGet } from "@/auth/ApiRequest";
 import { ApiEndpoints } from "@/auth/apiEndpoints";
 import { pathLocations } from "@/utlils/pathLocations";
 import UIButton from "../UIButton/UIButton";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 const MobileHeader = () => {
   const router = useRouter();
@@ -87,7 +89,7 @@ const MobileHeader = () => {
 
   const getCuratedCollection = () => {
     apiGet(
-      `${ApiEndpoints.curatedCollection}`,
+      `${ApiEndpoints.curatedCollectionPage}`,
       (res) => {
         setCuratedCollection(res);
       },
@@ -299,11 +301,19 @@ const MobileHeader = () => {
             />
           </Box>
         ) : (
-          <Box sx={{ marginRight: 14 }}>
-            {/* <UIButton
-              label="Register"
-              onClick={() => router.push(pathLocations.login)}
-            /> */}
+          <Box display="flex">
+            <UIButton
+              label="Order Now"
+              onClick={() => router.push(pathLocations.placeOrder)}
+              sx={{ padding: "5px 8px", fontSize: "12px", minWidth: "100px" }}
+            />
+            <Tooltip title="Register">
+              <IconButton onClick={() => router.push(pathLocations.login)}>
+                <PersonAddIcon
+                  sx={{ color: (theme) => theme.palette.primary.main }}
+                />
+              </IconButton>
+            </Tooltip>
           </Box>
         )}
 

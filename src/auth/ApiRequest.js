@@ -3,11 +3,11 @@ import { getToken } from "./Auth";
 
 // export const BASEURL = "https://virtual-staging-backend-3w39.onrender.com/api";
 // export const BASEURL = "http://localhost:5000/api";
-export const BASEURL = "https://admin.hartvilleanquitemall.com/api";
+export const BASEURL = "https://admin.pictureperfectvirtualstaging.com/api";
 // export const ImageBASEURL = "https://virtual-staging-backend-3w39.onrender.com";
 // export const ImageBASEURL = "http://localhost:5000";
 // export const ImageBASEURL = "https://res.cloudinary.com";
-export const ImageBASEURL = "https://admin.hartvilleanquitemall.com/public/";
+export const ImageBASEURL = "https://admin.pictureperfectvirtualstaging.com/public/";
 
 export const apiBaseUrl = `${BASEURL}`;
 

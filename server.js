@@ -6,7 +6,7 @@ const dev = process.env.NODE_ENV !== "production";
 const hostname =
   process.env.NODE_ENV != "production"
     ? "localhost"
-    : "hartvilleanquitemall.com";
+    : "pictureperfectvirtualstaging.com";
 const port = 3001;
 // when using middleware `hostname` and `port` must be provided below
 const app = next({ dev, hostname, port });
