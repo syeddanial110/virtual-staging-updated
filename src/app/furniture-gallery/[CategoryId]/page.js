@@ -74,7 +74,7 @@ const FurnitureCategory = () => {
             sx={{ padding: "10px 14px", fontSize: "12px", mt: 1 }}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} mt={3}>
           <UITypography
             type="heading"
             title={`${categoryData.title} Set`}

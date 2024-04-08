@@ -366,6 +366,12 @@ const Step4 = () => {
                     >
                       {item?.filteredBasicItem?.length > 0 &&
                         item?.filteredBasicItem?.map((elm) => {
+                          if (item?.basicItem?.length > 0) {
+                            item?.basicItem?.some((element) => {
+                              console.log("element", element);
+                              return elm.id == element;
+                            });
+                          }
                           return (
                             <Grid item xs={12} sm={6}>
                               <UICheckbox

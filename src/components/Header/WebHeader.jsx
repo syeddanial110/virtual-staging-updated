@@ -85,7 +85,7 @@ const WebHeader = () => {
     <Grid container alignItems="center" pt={3} pb={1}>
       <Grid
         item
-        lg={2}
+        xs={2}
         xl={1.5}
         sx={{
           "&:hover": {
@@ -106,12 +106,6 @@ const WebHeader = () => {
           //   },
           // }}
         />
-        {/* <UITypography
-          type="mainDescription"
-          title="Logo Here"
-          isWhite={false}
-          textAlign="center"
-        /> */}
       </Grid>
       <Grid item xs={8.5} display="flex" justifyContent="center">
         <List
@@ -346,7 +340,7 @@ const WebHeader = () => {
           })}
         </List>
       </Grid>
-      <Grid item xs={1.3} display="flex" justifyContent="space-around">
+      <Grid item xs={1.3} xl={1.9} display="flex" justifyContent="flex-end">
         {token ? (
           <Box
             sx={{
@@ -370,8 +364,9 @@ const WebHeader = () => {
             sx={{
               // marginRight: 14,
               display: "flex",
-              justifyContent: "space-around",
+              justifyContent: "flex-end",
               width: "100%",
+              gap: 2,
             }}
           >
             <UIButton

@@ -43,8 +43,13 @@ const CuratedCollectionProducts = () => {
 
   return (
     <DefaultLayout>
-      <Grid container justifyContent="space-around" alignItems="center">
-        <Grid item xs={4}>
+      <Grid
+        container
+        justifyContent={{ xs: "center", md: "space-around" }}
+        alignItems="center"
+        mt={3}
+      >
+        <Grid item xs={11} md={4}>
           <Breadcrumbs aria-label="breadcrumb">
             <Link
               underline="hover"
@@ -68,11 +73,11 @@ const CuratedCollectionProducts = () => {
             sx={{ padding: "10px 14px", fontSize: "12px", mt: 1 }}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={11} md={6} mt={5}>
           <UITypography
             type="heading"
             title={curatedChoices?.title}
-            // textAlign="center"
+            textAlign={{ xs: "center", md: "start" }}
           />
         </Grid>
       </Grid>

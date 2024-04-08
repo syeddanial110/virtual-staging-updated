@@ -22,7 +22,7 @@ import UIDivider from "../UIDivider";
 
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import { menu, pages } from "@/utlils/data";
+import { menu, mobilePages, pages } from "@/utlils/data";
 import CloseIcon from "@mui/icons-material/Close";
 import { useRouter } from "next/navigation";
 import { getToken, removeToken, removeUserId } from "@/auth/Auth";
@@ -164,7 +164,7 @@ const MobileHeader = () => {
             </ListItemButton>
           </ListItem>
         ))} */}
-        {pages.map((item, i) => {
+        {mobilePages.map((item, i) => {
           if (item?.name && !item?.subLinks && !item?.subName) {
             return (
               <ListItemButton
@@ -258,7 +258,7 @@ const MobileHeader = () => {
 
   return (
     <Grid container alignItems="center" py={1}>
-      <Grid item xs={9} sm={4} md={3}>
+      <Grid item xs={9} sm={3} md={3}>
         <Image
           src={logo}
           alt="logo"
@@ -276,8 +276,8 @@ const MobileHeader = () => {
       <Grid
         item
         xs={3}
-        sm={7}
-        md={8}
+        sm={8.8}
+        md={9}
         display="flex"
         justifyContent="flex-end"
         px={1}

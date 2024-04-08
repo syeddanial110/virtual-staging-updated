@@ -21,7 +21,7 @@ const placeOrder = () => {
     setIsTotal(orderPlaceReducer.total);
   }, [orderPlaceReducer.total, orderPlaceReducer.servicePrice]);
 
-  
+  console.log('orderPlaceReducer', orderPlaceReducer)
 
   return (
     <DefaultLayout>

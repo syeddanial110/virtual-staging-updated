@@ -169,6 +169,153 @@ export const pages = [
     link: "/contact-us",
   },
 ];
+export const mobilePages = [
+  {
+    link: "/",
+    name: "Home",
+  },
+  {
+    name: "About Us",
+    subLinks: [
+      {
+        name: "About Us",
+        link: "/about-us",
+      },
+      {
+        name: "Blog",
+        link: "/blogs",
+      },
+    ],
+  },
+  {
+    name: "Furniture Gallery",
+    link: "/furniture-gallery",
+  },
+  {
+    name: "Curated Collections",
+    subName: [
+      {
+        name: "Rooms – Preview photo grid of each room below",
+        subLinks: [
+          {
+            name: "Living Rooms",
+            link: "/",
+          },
+          {
+            name: "Dining Rooms",
+            link: "/",
+          },
+          {
+            name: "Bedrooms",
+            link: "/",
+          },
+          {
+            name: "Office",
+            link: "/",
+          },
+          {
+            name: "Bathrooms – View All",
+            link: "/",
+          },
+          {
+            name: "Bonus Rooms – View All",
+            link: "/",
+          },
+          {
+            name: "Children’s Baths – View All",
+            link: "/",
+          },
+          {
+            name: "Children’s Bedrooms – View all",
+            link: "/",
+          },
+          {
+            name: "Children’s Closets – View All",
+            link: "/",
+          },
+          {
+            name: "Closets – View All",
+            link: "/",
+          },
+          {
+            name: "Kitchen – View All",
+            link: "/",
+          },
+          {
+            name: "Outside – View All",
+            link: "/",
+          },
+        ],
+      },
+      {
+        name: "Styles",
+        subLinks: [
+          {
+            name: "Coastal",
+            link: "/",
+          },
+          {
+            name: "Farmhouse",
+            link: "/",
+          },
+          {
+            name: "Mid Century Modern",
+            link: "/",
+          },
+          {
+            name: "Scandinavian",
+            link: "/",
+          },
+          {
+            name: "Traditional",
+            link: "/",
+          },
+          {
+            name: "Urban Industrial",
+            link: "/",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "Services",
+    subLinks: [
+      {
+        name: "Virtual Staging",
+        link: "/services/virtual-staging",
+      },
+      {
+        name: "Virtual Renovation",
+        link: "/services/virtual-renovation",
+      },
+      {
+        name: "Virtual Twilights",
+        link: "/services/virtual-twilights",
+      },
+      {
+        name: "Commercial Virtual Staging",
+        link: "/services/commercial-virtual-staging",
+      },
+      {
+        name: "Commercial Virtual Renovation",
+        link: "/services/commercial-virtual-renovation",
+      },
+    ],
+  },
+  {
+    name: "Reviews",
+    link: "/reviews",
+  },
+  {
+    name: "FAQ",
+    link: "/faq",
+  },
+  {
+    name: "Contact",
+    link: "/contact-us",
+  },
+];
 
 const token = getToken();
 

@@ -10,6 +10,9 @@ export const CardWrapper = styled(Box)(({ theme, img }) => ({
   backgroundPosition: "center",
   position: "relative",
   minHeight: "60vh",
+  [theme.breakpoints.down("md")]: {
+    minHeight: "40vh",
+  },
   borderRadius: "20px",
   "&:hover": {
     cursor: "pointer",

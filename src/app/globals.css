@@ -621,6 +621,11 @@ p {
   height: 470px;
 }
 
+.reviewSwiper > .swiper-pagination{
+  left: 50% !important;
+  right: 50% !important;
+}
+
 .reviewSwiper > .swiper-wrapper > .swiper-slide {
   /* text-align: center; */
   font-size: 18px;

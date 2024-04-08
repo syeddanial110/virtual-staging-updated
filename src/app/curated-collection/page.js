@@ -37,7 +37,7 @@ const CuratedCollection = () => {
 
   return (
     <DefaultLayout>
-      <Grid container>
+      <Grid container mt={4}>
         <Grid item xs={12}>
           <UITypography
             type="heading"
