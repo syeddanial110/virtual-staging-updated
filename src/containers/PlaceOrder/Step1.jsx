@@ -72,9 +72,9 @@ const Step1 = () => {
 
   useEffect(() => {
     if (
-      orderPlaceReducer.name != "" ||
-      orderPlaceReducer.email != "" ||
-      orderPlaceReducer.phoneNumber != ""
+      orderPlaceReducer.name !== "" &&
+      orderPlaceReducer.email !== "" &&
+      orderPlaceReducer.phoneNumber !== ""
     ) {
       setInputVal({
         name: orderPlaceReducer.name,
@@ -103,7 +103,7 @@ const Step1 = () => {
         <Grid item xs={12}>
           <Grid container gap={3}>
             <Grid item xs={12} md={5} columnGap={2}>
-              <UITypography title="Your name" sx={{ pb: 1 }} />
+              <UITypography title="Your name *" sx={{ pb: 1 }} />
               <UISimpleTextField
                 // variant="simpleContained"
                 name="name"
@@ -114,7 +114,7 @@ const Step1 = () => {
               />
             </Grid>
             <Grid item xs={12} md={5}>
-              <UITypography title="Email" sx={{ pb: 1 }} />
+              <UITypography title="Email *" sx={{ pb: 1 }} />
               <UISimpleTextField
                 // variant="simpleContained"
                 name="email"
@@ -125,14 +125,14 @@ const Step1 = () => {
               />
             </Grid>
             <Grid item xs={12} md={5}>
-              <UITypography title="Phone number" sx={{ pb: 1 }} />
+              <UITypography title="Phone number *" sx={{ pb: 1 }} />
               <UIPhoneTextField
                 onChange={handlePhoneNumber}
                 value={orderPlaceReducer.phoneNumber}
               />
             </Grid>
             <Grid item xs={12} md={5}>
-              <UITypography title="Services" sx={{ pb: 1 }} />
+              <UITypography title="Services *" sx={{ pb: 1 }} />
               <UISelect
                 value={orderPlaceReducer.serviceName}
                 onChange={handleServiceChange}

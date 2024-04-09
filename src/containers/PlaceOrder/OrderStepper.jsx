@@ -35,10 +35,9 @@ export default function OrderStepper(props) {
 
   const handleNext = () => {
     if (
-      activeStep == 0 &&
-      orderPlaceReducer.name == "" &&
-      orderPlaceReducer?.email == "" &&
-      orderPlaceReducer?.phoneNumber == ""
+      (activeStep == 0 && orderPlaceReducer.name === "") ||
+      orderPlaceReducer?.email === "" ||
+      orderPlaceReducer?.phoneNumber === ""
     ) {
       toast.error("First fill all the fields");
     } else if (activeStep == 0) {
