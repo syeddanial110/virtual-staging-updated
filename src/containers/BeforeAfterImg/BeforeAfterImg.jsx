@@ -22,6 +22,7 @@ const BeforeAfterImg = ({ beforeImg, afterImg }) => {
                 height: "455px",
                 width: "3750px",
               }}
+              className="beforeAfterSlider"
             />
           }
           itemTwo={

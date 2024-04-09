@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -20,6 +20,24 @@ import leftArrow from "../../assets/icons/leftArrow.svg";
 import rightArrow from "../../assets/icons/rightArrow.svg";
 
 const TabSlider = ({ item }) => {
+  const [swiper, setSwiper] = useState(null);
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 700);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 700);
+      if (swiper) {
+        swiper.allowTouchMove = !isMobile;
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [swiper, isMobile]);
+
   return (
     <Box sx={{ position: "relative" }}>
       <Swiper
@@ -30,20 +48,25 @@ const TabSlider = ({ item }) => {
         loop={true}
         pagination={false}
         modules={[Navigation]}
-        navigation={{ nextEl: ".nextBtn", prevEl: ".prevBtn" }}
+        draggable={true}
+        navigation={{ nextEl: ".tabnextBtn", prevEl: ".tabprevBtn" }}
         className="tabSwiper"
+        noSwipingClass="swiper-no-swiping"
         // spaceBetween={10}
-        // breakpoints={{
-        //   200: {
-        //     slidesPerView: 1,
-        //   },
-        //   700: {
-        //     slidesPerView: 1,
-        //   },
-        //   1100: {
-        //     slidesPerView: 3,
-        //   },
-        // }}
+        allowTouchMove={!isMobile}
+        breakpoints={
+          {
+            // 700: {
+            //   allowTouchMove: false,
+            // },
+            // 800: {
+            //   allowTouchMove: true,
+            // },
+            // 1100: {
+            //   slidesPerView: 3,
+            // },
+          }
+        }
       >
         {item.imagesArr.map((elm, i) => {
           return (
@@ -70,15 +93,15 @@ const TabSlider = ({ item }) => {
         sx={{
           // width: "100%",
           position: "absolute",
-          left: { xs: 60, sm: 60, lg: 80 },
-          top: "50%",
-          display: { xs: "none", lg: "flex" },
+          left: { xs: "38%", sm: 60, lg: 80 },
+          top: { xs: "104%", md: "50%" },
+          display: { xs: "flex", lg: "flex" },
         }}
         className="arrowBtn"
       >
         <Box
           // ref={navigationPrevRef}
-          className="prevBtn"
+          className="tabprevBtn"
           sx={{
             // position: "absolute",
             // bottom: { xs: 40, md: 0 },
@@ -101,15 +124,15 @@ const TabSlider = ({ item }) => {
         sx={{
           // width: "100%",
           position: "absolute",
-          right: { xs: 60, sm: 60, lg: 80 },
-          top: "50%",
-          display: { xs: "none", lg: "flex" },
+          right: { xs: "38%", sm: 60, lg: 80 },
+          top: { xs: "104%", md: "50%" },
+          display: { xs: "flex", lg: "flex" },
         }}
         className="arrowBtn"
       >
         <Box
           // ref={navigationNextRef}
-          className="nextBtn"
+          className="tabnextBtn"
           sx={{
             // position: "absolute",
             // bottom: { xs: 40, md: 0 },

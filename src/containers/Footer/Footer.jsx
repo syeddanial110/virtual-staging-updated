@@ -23,12 +23,16 @@ import { pathLocations } from "@/utlils/pathLocations";
 const Footer = () => {
   const router = useRouter();
   return (
-    <FooterWrapper>
+    <FooterWrapper
+      sx={{
+        marginTop: { xs: "40px", md: "80px" },
+      }}
+    >
       <Grid
         container
         justifyContent="space-around"
         gap={3}
-        sx={{ padding: "50px 30px" }}
+        sx={{ padding: { xs: "40px 30px", md: "50px 30px" } }}
       >
         <Grid item xs={12} sm={5.5} lg={2.9}>
           <Grid container spacing={3}>

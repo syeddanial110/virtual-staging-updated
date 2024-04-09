@@ -61,7 +61,7 @@ const FutureGallery = () => {
   return (
     <DefaultLayout>
       <Grid container mt={4} justifyContent={{ xs: "center", md: "flex-end" }}>
-        <Grid item xs={9}>
+        <Grid item xs={11} md={9} sx={{ display: { xs: "none", md: "block" } }}>
           <UITypography
             type="mainHeading"
             title="ELEVATE YOUR SPACE WITH "
@@ -78,12 +78,19 @@ const FutureGallery = () => {
             sx={{ color: (theme) => theme.palette.primary.main }}
           />
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={11} md={9} sx={{ display: { xs: "block", md: "none" } }}>
+          <UITypography
+            type="mainHeading"
+            title="ELEVATE YOUR SPACE WITH DESIGNER FURNITURE FOR EVERY ROOM"
+            sx={{ color: (theme) => theme.palette.primary.main }}
+          />
+        </Grid>
+        <Grid item xs={11} md={9}>
           <Grid
             container
             gap={2}
             // justifyContent="center"
-            mt={{ xs: 10, lg: 12 }}
+            mt={{ xs: 2, lg: 12 }}
             // px={3}
           >
             <Grid
@@ -91,7 +98,7 @@ const FutureGallery = () => {
               xs={12}
               md={6}
               lg={3}
-              display="flex"
+              display={{ xs: "none", md: "flex" }}
               justifyContent={{ xs: "center", lg: "flex-end" }}
             >
               <Image
@@ -112,11 +119,11 @@ const FutureGallery = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={12} mt={7}>
+        <Grid item xs={12} mt={7} sx={{ display: { xs: "none", md: "block" } }}>
           <UIDivider />
         </Grid>
       </Grid>
-      <Grid container justifyContent="center" mt={8}>
+      <Grid container justifyContent="center" mt={{ xs: 5, md: 8 }}>
         <Grid item xs={11} md={6}>
           <SearchTextField
             fullWidth

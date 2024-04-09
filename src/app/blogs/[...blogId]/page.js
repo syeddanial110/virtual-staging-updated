@@ -74,7 +74,7 @@ const BlogById = (props) => {
   return (
     <DefaultLayout>
       {blog && !isLoading ? (
-        <Grid container px={3} justifyContent="space-around">
+        <Grid container justifyContent="space-around">
           <Grid item xs={11} md={7}>
             <Grid container spacing={3}>
               <Grid item xs={12}>
@@ -129,7 +129,7 @@ const BlogById = (props) => {
                     justifyContent="flex-end"
                     alignItems="center"
                   >
-                    <AccessTimeIcon />
+                    <AccessTimeIcon sx={{ marginRight: "5px" }} />
                     <UITypography title={blog.published_date} />
                   </Grid>
                 </Grid>
@@ -161,8 +161,8 @@ const BlogById = (props) => {
               })} */}
             </Grid>
           </Grid>
-          <Grid item xs={12} md={3} pt={5}>
-            <Grid container gap={3}>
+          <Grid item xs={12} md={3} pt={{ xs: 0, md: 5 }}>
+            <Grid container gap={3} justifyContent="center">
               {/* <Grid item xs={12}>
                 <TextField
                   label="Search"
@@ -176,7 +176,7 @@ const BlogById = (props) => {
                   }}
                 />
               </Grid> */}
-              <Grid item xs={12}>
+              <Grid item xs={11}>
                 <UITypography
                   type="heading"
                   title="Recent Blogs"
@@ -187,7 +187,7 @@ const BlogById = (props) => {
                 return (
                   <Grid
                     item
-                    xs={12}
+                    xs={11}
                     sm={3.5}
                     md={12}
                     key={i}

@@ -119,16 +119,21 @@ const HeroSectionSlider = () => {
                   />
                   <Box
                     sx={{
-                      width: "59%",
+                      width: { xs: "90%", md: "59%" },
                       paddingLeft: { xs: "14px", md: "60px" },
                       display: "flex",
                       alignItems: "center",
                       // height: { xs: "80vh", sm: "90vh", md: "90vh" },
                       position: "absolute",
                       top: 50,
+                      height: "80%",
                     }}
                   >
-                    <Stack>
+                    <Stack
+                      sx={{ height: "100%" }}
+                      justifyContent="center"
+                      // alignItems={{ xs: "center", md: "flex-start" }}
+                    >
                       <Box>
                         <UITypography
                           type="mainHeading"
@@ -172,10 +177,12 @@ const HeroSectionSlider = () => {
                         mt={3}
                         display={{ xs: "flex", sm: "block" }}
                         flexDirection={{ xs: "column", sm: "row" }}
+                        sx={{ width: "100%" }}
                       >
                         <UIButton
                           isDark={true}
                           label="Place Order"
+                          // fullWidth={{ xs: true, md: false }}
                           onClick={() => {
                             const dataObj = {
                               serviceName: "",
@@ -187,6 +194,7 @@ const HeroSectionSlider = () => {
                         />
                         <UIButton
                           label="Explore Gallery"
+                          // fullWidth={{ xs: true, md: false }}
                           onClick={() =>
                             router.push(pathLocations.furnitureGallery)
                           }

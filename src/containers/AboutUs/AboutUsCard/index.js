@@ -5,7 +5,7 @@ import UITypography from "@/components/UITypography/UITypography";
 
 const AboutUsCard = ({ title, description }) => {
   return (
-    <AboutUsCardWrapper>
+    <AboutUsCardWrapper sx={{ height: { xs: "auto", md: "300px" } }}>
       <Grid container>
         <Grid item xs={12}>
           <UITypography

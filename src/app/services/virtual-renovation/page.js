@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { BannerWrapper } from "@/containers/AboutUs/ui";
 import DefaultLayout from "@/layout/default-layout";
@@ -61,11 +61,16 @@ const VirtualRenovation = () => {
           />
         </Grid>
         <Grid item xs={11}>
-          <UIButton
-            variant="contained"
-            label="Order now"
-            onClick={handleServiceRedirect}
-          />
+          <Grid container justifyContent={{ xs: "center", md: "flex-start" }}>
+            <Grid item xs={9} md={4} lg={2}>
+              <UIButton
+                variant="contained"
+                label="Order now"
+                fullWidth
+                onClick={handleServiceRedirect}
+              />
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </DefaultLayout>

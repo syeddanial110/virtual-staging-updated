@@ -41,9 +41,9 @@ const AboutUs = () => {
 
   return (
     <DefaultLayout>
-      <Grid container justifyContent="center" spacing={{ xs: 5, md: 10 }}>
-        <Grid item xs={11.5}>
-          <BannerWrapper bgImg={aboutImg}>
+      <Grid container justifyContent="center" spacing={{ xs: 3, md: 10 }}>
+        <Grid item xs={11}>
+          <BannerWrapper bgImg={aboutImg} isGradient={true}>
             <UITypography
               type="mainHeading"
               title="About Us"
@@ -57,12 +57,12 @@ const AboutUs = () => {
             />
           </BannerWrapper>
         </Grid>
-        <Grid item xs={11.5}>
+        <Grid item xs={11}>
           <UITypography
             title="MEET THE OWNER"
             type="mainHeading"
             sx={{
-              fontSize: { xs: "25px !important", lg: "48px !important" },
+              fontSize: { xs: "35px !important", lg: "48px !important" },
               fontWeight: "regular",
             }}
           />
@@ -72,11 +72,11 @@ const AboutUs = () => {
         container
         gap={1}
         justifyContent="center"
-        mt={2}
-        px={{ xs: 2, md: 3 }}
+        mt={{ xs: 0, md: 2 }}
+        // px={{ xs: 2, md: 3 }}
       >
         <Grid item xs={12} md={1} lg={2}></Grid>
-        <Grid item xs={12} md={5} lg={5}>
+        <Grid item xs={11} md={5} lg={5}>
           <UITypography
             type="mainDescription"
             title="Chris Crummitt is the CEO and Owner of "
@@ -88,7 +88,7 @@ const AboutUs = () => {
             sx={{ fontSize: { xs: "18px !important", md: "25px !important" } }}
           />
         </Grid>
-        <Grid item xs={12} md={5} lg={4}>
+        <Grid item xs={11} md={5} lg={4}>
           <UITypography
             type="mainDescription"
             sx={{
@@ -111,14 +111,14 @@ const AboutUs = () => {
         container
         gap={2}
         justifyContent="center"
-        mt={{ xs: 10, lg: 12 }}
-        px={3}
+        mt={{ xs: 3, lg: 12 }}
+        px={{ xs: 0, md: 3 }}
       >
         <Grid
           item
           xs={12}
           lg={2}
-          display="flex"
+          display={{ xs: "none", md: "flex" }}
           justifyContent={{ xs: "center", lg: "flex-end" }}
         >
           <Image
@@ -127,7 +127,7 @@ const AboutUs = () => {
             style={{ height: "6px", width: "150px" }}
           />
         </Grid>
-        <Grid item xs={12} lg={5}>
+        <Grid item xs={11} lg={5}>
           <UITypography
             type="mainDescription"
             title="With a wealth of firsthand experience working alongside top producing real estate agents, Chris understands the significance of presentation in the industry. Taking this understanding to heart, she personally oversees the selection of virtual furniture for our gallery, collaborating closely with talented designers to ensure the highest levels of realism, trendiness, and quality that distinguish us from the competition."
@@ -137,7 +137,7 @@ const AboutUs = () => {
             }}
           />
         </Grid>
-        <Grid item xs={12} lg={4}>
+        <Grid item xs={11} lg={4}>
           <UITypography
             type="mainDescription"
             sx={{
@@ -160,7 +160,7 @@ const AboutUs = () => {
         container
         justifyContent="space-evenly"
         gap={{ xs: 2, lg: 0 }}
-        mt={12}
+        mt={{ xs: 6, md: 12 }}
       >
         {arr.map((item, i) => {
           return (

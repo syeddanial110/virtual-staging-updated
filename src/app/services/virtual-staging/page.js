@@ -25,7 +25,7 @@ const Index = () => {
   };
   return (
     <DefaultLayout>
-      <Grid container justifyContent="center" gap={3} my={3}>
+      <Grid container justifyContent="center" gap={3} my={{ xs: 2, md: 3 }}>
         <Grid item xs={11}>
           <BannerWrapper bgImg={virtualStagingImg}>
             <UITypography
@@ -68,11 +68,16 @@ const Index = () => {
           />
         </Grid>
         <Grid item xs={11}>
-          <UIButton
-            variant="contained"
-            label="Order now"
-            onClick={handleServiceRedirect}
-          />
+          <Grid container justifyContent={{ xs: "center", md: "flex-start" }}>
+            <Grid item xs={9} md={4} lg={2}>
+              <UIButton
+                variant="contained"
+                label="Order now"
+                fullWidth
+                onClick={handleServiceRedirect}
+              />
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </DefaultLayout>

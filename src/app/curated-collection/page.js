@@ -1,39 +1,39 @@
-'use client'
+"use client";
 
-import { ImageBASEURL, apiGet } from '@/auth/ApiRequest'
-import { ApiEndpoints } from '@/auth/apiEndpoints'
-import FurnitureCard from '@/components/FurnitreCard/FurnitureCard'
-import UILoader from '@/components/UILoader/UILoader'
-import UITypography from '@/components/UITypography/UITypography'
-import CuratedCollectionCard from '@/containers/CuratedCollection/CuratedCollectionCard'
-import DefaultLayout from '@/layout/default-layout'
-import { pathLocations } from '@/utlils/pathLocations'
-import { Grid } from '@mui/material'
-import { useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import { ImageBASEURL, apiGet } from "@/auth/ApiRequest";
+import { ApiEndpoints } from "@/auth/apiEndpoints";
+import FurnitureCard from "@/components/FurnitreCard/FurnitureCard";
+import UILoader from "@/components/UILoader/UILoader";
+import UITypography from "@/components/UITypography/UITypography";
+import CuratedCollectionCard from "@/containers/CuratedCollection/CuratedCollectionCard";
+import DefaultLayout from "@/layout/default-layout";
+import { pathLocations } from "@/utlils/pathLocations";
+import { Grid } from "@mui/material";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 const CuratedCollection = () => {
-  const [isLoading, setIsLoading] = useState(true)
-  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
-  const [curatedCollectionData, setCuratedCollectionData] = useState([])
+  const [curatedCollectionData, setCuratedCollectionData] = useState([]);
 
   const getCuratedCollection = () => {
     apiGet(
       `${ApiEndpoints.curatedCollectionPage}`,
       (res) => {
-        setCuratedCollectionData(res)
-        setIsLoading(false)
+        setCuratedCollectionData(res);
+        setIsLoading(false);
       },
       (err) => {
-        console.log('err', err)
-      },
-    )
-  }
+        console.log("err", err);
+      }
+    );
+  };
 
   useEffect(() => {
-    getCuratedCollection()
-  }, [])
+    getCuratedCollection();
+  }, []);
 
   return (
     <DefaultLayout>
@@ -46,27 +46,27 @@ const CuratedCollection = () => {
           />
         </Grid>
       </Grid>
-      <Grid container justifyContent="center" gap={3} my={6}>
-        <Grid item xs={10}>
+      <Grid container justifyContent="center" gap={3} my={{ xs: 2, md: 6 }}>
+        <Grid item xs={11} md={10}>
           <UITypography
             type="mainHeading"
             title="Welcome to our curated collection of pre-designed virtually staged rooms!"
           />
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={11}>
           <UITypography
             type="description"
             title="Transform your living space with our stunning selection of multi-functional and stylishly designed rooms, ready to inspire and captivate you.
             Browse through our web pages and explore a wide range of meticulously curated interiors, carefully crafted to suit various aesthetics and preferences. Whether you're looking to revamp your living room, bedroom, kitchen, or even a home office, we have the perfect virtual designs to bring your vision to life."
           />
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={11}>
           <UITypography
             type="description"
             title="Each room in our collection is meticulously staged, combining the best in interior design with the latest in virtual technology. Visualize your dream space, experiment with different layouts, and get inspired by our creative combinations of furniture, colors, and textures."
           />
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={11}>
           <UITypography
             type="description"
             title="With our pre-designed virtually staged rooms, you can explore different styles, experiment with various color schemes, and imagine the possibilities for your own home. Start your journey towards a transformed living space today and let our curated collection ignite your creativity and help you design the home of your dreams."
@@ -109,15 +109,15 @@ const CuratedCollection = () => {
                             title={item.title}
                             onClick={() => {
                               router.push(
-                                `${pathLocations.curatedCollection}/${item.id}`,
-                              )
+                                `${pathLocations.curatedCollection}/${item.id}`
+                              );
                             }}
                             imgObjectFit="cover"
                             imgAlt={item.title}
                           />
                         </Grid>
                       </>
-                    )
+                    );
                   })
                 ) : (
                   <Grid item xs={12}>
@@ -133,7 +133,7 @@ const CuratedCollection = () => {
         </Grid> */}
       </Grid>
     </DefaultLayout>
-  )
-}
+  );
+};
 
-export default CuratedCollection
+export default CuratedCollection;

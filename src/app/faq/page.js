@@ -71,14 +71,14 @@ const FAQ = () => {
             />
           </BannerWrapper>
         </Grid>
-        <Grid item xs={11} md={8}  mt={4}>
+        <Grid item xs={11} md={8} mt={{ xs: 2, md: 4 }}>
           <UITypography
             type="heading"
             title="FREQUENTLY ASKED QUESTIONS"
             sx={{
               color: "black",
               fontSize: "60px",
-              mb: "13px",
+              mb: { xs: 0, md: "13px" },
               ml: { xs: "30px", md: "60px" },
             }}
           />
@@ -86,7 +86,12 @@ const FAQ = () => {
         <Grid item xs={11} md={6}>
           {arr.map((item, i) => {
             return (
-              <QuestionAnswer question={item.question} answer={item.answer} key={i} />
+              <QuestionAnswer
+                question={item.question}
+                answer={item.answer}
+                key={i}
+                index={i}
+              />
             );
           })}
         </Grid>

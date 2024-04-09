@@ -5,12 +5,16 @@ import { styled } from "@mui/system";
 
 export const BannerWrapper = styled(Box)(({ theme, bgImg, isGradient }) => ({
   backgroundImage: isGradient
-    ? `linear-gradient(to bottom, rgb(245 246 252 / 0%), rgb(0 0 0 / 20%)), url("${bgImg.src}")`
+    ? `linear-gradient(to bottom, rgb(245 246 252 / 0%), rgb(0 0 0 / 0%)), url("${bgImg.src}")`
     : `url("${bgImg.src}")`,
+
   height: "60vh",
   width: "100%",
   [theme.breakpoints.down("md")]: {
     height: "30vh",
+    backgroundImage: isGradient
+      ? `linear-gradient(to bottom, rgb(245 246 252 / 0%), rgb(0 0 0 / 30%)), url("${bgImg.src}")`
+      : `url("${bgImg.src}")`,
   },
   backgroundPosition: "bottom",
   backgroundSize: "cover",
@@ -27,7 +31,6 @@ export const AboutUsCardWrapper = styled(Box)(({ theme, isDark }) => ({
   paddingRight: "35px",
   paddingLeft: "35px",
   padding: "30px",
-  height: "300px",
   // width: "100%",
   borderRadius: "35px",
 }));

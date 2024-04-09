@@ -54,13 +54,17 @@ const VirtualTwilights = () => {
             title={`Not only are they breathtakingly beautiful, but they also possess the power to captivate any viewer. These stunning images make your listing pop and give your sellers a unique advantage. Stand apart from the competition and ensure your property gets noticed with virtual twilights. Don't miss out on the opportunity to make a lasting impression. Upgrade your real estate game today!`}
           />
         </Grid>
-
         <Grid item xs={11}>
-          <UIButton
-            variant="contained"
-            label="Order now"
-            onClick={handleServiceRedirect}
-          />
+          <Grid container justifyContent={{ xs: "center", md: "flex-start" }}>
+            <Grid item xs={9} md={4} lg={2}>
+              <UIButton
+                variant="contained"
+                label="Order now"
+                fullWidth
+                onClick={handleServiceRedirect}
+              />
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </DefaultLayout>

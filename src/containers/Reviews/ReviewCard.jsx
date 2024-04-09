@@ -19,7 +19,11 @@ const ReviewCard = ({ img, name, rating, date, description }) => {
   return (
     <Paper
       elevation={3}
-      sx={{ padding: "20px", borderRadius: "16px", minHeight: "250px" }}
+      sx={{
+        padding: "20px",
+        borderRadius: "16px",
+        minHeight: { xs: "210px", md: "250px" },
+      }}
     >
       <Grid container spacing={2}>
         <Grid item>

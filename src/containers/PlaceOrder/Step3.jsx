@@ -126,7 +126,7 @@ const Step3 = () => {
             textAlign={{ xs: "center", md: "start" }}
           />
           <UITypography
-            title="(allowed file types: .jpg, .jpeg, .png )"
+            title="(allowed file types: .jpg, .jpeg, .png ) and max size 10 mb"
             textAlign={{ xs: "center", md: "start" }}
           />
         </Grid>

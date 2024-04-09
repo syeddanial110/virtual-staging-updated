@@ -26,7 +26,7 @@ import ReviewsSlider from "../Reviews/ReviewsSlider";
 
 const Testimonial = () => {
   return (
-    <Box sx={{ position: "relative", my: 4 }}>
+    <Box sx={{ position: "relative", my: { xs: 0, md: 4 } }}>
       <Image
         src={testimonialBg}
         alt="testimonialBg"
@@ -37,13 +37,14 @@ const Testimonial = () => {
           mixBlendMode: "exclusion",
         }}
         height={290}
+        className="testimonialBgImg"
       />
       <Grid container justifyContent="center">
         <Grid
           item
           xs={11}
           md={12}
-          pt={{ xs: 16, sm: 16, md: 14, lg: 12 }}
+          pt={{ xs: 9, sm: 16, md: 14, lg: 12 }}
           display="flex"
           justifyContent="center"
         >
@@ -95,7 +96,7 @@ const Testimonial = () => {
             />
           </Box>
         </Grid>
-        <Grid item xs={11} mt={10}>
+        <Grid item xs={11} mt={{ xs: 0, md: 10 }}>
           <ReviewsSlider />
         </Grid>
       </Grid>

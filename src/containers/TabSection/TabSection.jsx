@@ -118,7 +118,6 @@ import { pathLocations } from "@/utlils/pathLocations";
 import { useRouter } from "next/navigation";
 
 const TabSection = () => {
-
   const tabArr = [
     {
       label: "Virtual Staging",
@@ -376,7 +375,7 @@ const TabSection = () => {
         aria-labelledby={`simple-tab-${index}`}
         {...other}
       >
-        {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+        {value === index && <Box sx={{ py: 3 }}>{children}</Box>}
       </div>
     );
   }
@@ -396,7 +395,6 @@ const TabSection = () => {
   const router = useRouter();
 
   const handleServiceRedirect = (name, price) => {
-   
     const dataObj = {
       serviceName: name,
       servicePrice: price,
@@ -410,10 +408,10 @@ const TabSection = () => {
       <Grid
         container
         justifyContent="center"
-        mt={{ xs: 0, lg: 8 }}
+        mt={{ xs: 2, lg: 8 }}
         gap={{ xs: 2, md: 9 }}
       >
-        <Grid item xs={9}>
+        <Grid item xs={11} md={9}>
           <UITypography
             type="mainHeading"
             title={`Elevate your spaces with the industry's finest `}
@@ -445,7 +443,7 @@ const TabSection = () => {
           />
         </Grid>
       </Grid>
-      <Grid container justifyContent="center" mt={5}>
+      <Grid container justifyContent="center" mt={{ xs: 3, md: 5 }}>
         <Grid item xs={11} md={12}>
           <UITabs handleChange={handleChange} value={value} tabArr={tabArr}>
             {tabArr.map((item, i) => {
@@ -512,14 +510,19 @@ const TabSection = () => {
                     </Grid>
                   </Grid>
                   <Grid container justifyContent="center">
-                    <Grid item xs={12} sm={6} lg={5} mt={2}>
-                      <UIButton
-                        isDark={false}
-                        label="Place order"
-                        onClick={() =>
-                          handleServiceRedirect(item.label, item.price)
-                        }
-                      />
+                    <Grid item xs={9} sm={6} md={6} lg={5} mt={2}>
+                      <Box sx={{ width: { xs: "100%", md: "40%", lg: "35%" } }}>
+                        <UIButton
+                          isDark={false}
+                          label="Place order"
+                          fullWidth={true}
+                          // fullWidth={{ xs: true, md: false }}
+                          // fullWidth={{ xs: true, sm: false }}
+                          onClick={() =>
+                            handleServiceRedirect(item.label, item.price)
+                          }
+                        />
+                      </Box>
                     </Grid>
                   </Grid>
                 </CustomTabPanel>

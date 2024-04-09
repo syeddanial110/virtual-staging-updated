@@ -93,7 +93,12 @@ const LatestCollection = () => {
   }, []);
 
   return (
-    <Grid container my={10} gap={6} justifyContent="center">
+    <Grid
+      container
+      my={{ xs: 3, md: 10 }}
+      gap={{ xs: 3, md: 6 }}
+      justifyContent="center"
+    >
       <Grid item xs={11}>
         <UITypography type="mainHeading" title="Discover Our Latest" />
         <UITypography type="mainHeading" title="Collections" />
@@ -104,6 +109,7 @@ const LatestCollection = () => {
       <Grid item xs={8} sm={4} md={3} display="flex" justifyContent="center">
         <UIButton
           isDark={false}
+          fullWidth={{ xs: true, md: false }}
           label="View all Collections"
           onClick={() => router.push(pathLocations.curatedCollection)}
         />

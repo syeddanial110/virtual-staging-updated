@@ -73,7 +73,7 @@ const CuratedCollectionProducts = () => {
             sx={{ padding: "10px 14px", fontSize: "12px", mt: 1 }}
           />
         </Grid>
-        <Grid item xs={11} md={6} mt={5}>
+        <Grid item xs={11} md={6} mt={{ xs: 3, md: 5 }}>
           <UITypography
             type="heading"
             title={curatedChoices?.title}
@@ -81,7 +81,7 @@ const CuratedCollectionProducts = () => {
           />
         </Grid>
       </Grid>
-      <Grid container justifyContent="center" mt={8} gap={5}>
+      <Grid container justifyContent="center" mt={{ xs: 3, md: 8 }} gap={5}>
         <Grid item xs={11}>
           {isLoading && (
             <Grid container display="flex" justifyContent="center">

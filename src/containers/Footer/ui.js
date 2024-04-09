@@ -12,5 +12,5 @@ export const FooterWrapper = styled(Box)(({ theme, isDark }) => ({
   minHeight: "50vh",
   borderTopRightRadius: "40px",
   borderTopLeftRadius: "40px",
-  marginTop: "80px",
+  
 }));

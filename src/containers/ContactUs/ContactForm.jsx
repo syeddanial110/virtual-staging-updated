@@ -54,7 +54,7 @@ const ContactForm = () => {
   return (
     <form onSubmit={handleSubmit(handleContact)}>
       <Grid container spacing={3} justifyContent="center">
-        <Grid item xs={5}>
+        <Grid item xs={11} md={5}>
           <UITextField
             variant="outlined"
             control={control}
@@ -64,7 +64,7 @@ const ContactForm = () => {
             errorMessage={errors?.firstName?.message}
           />
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={11} md={5}>
           <UITextField
             variant="outlined"
             control={control}
@@ -74,7 +74,7 @@ const ContactForm = () => {
             errorMessage={errors?.lastName?.message}
           />
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={11} md={5}>
           <UITextField
             variant="outlined"
             control={control}
@@ -84,7 +84,7 @@ const ContactForm = () => {
             errorMessage={errors?.email?.message}
           />
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={11} md={5}>
           <UITextField
             variant="outlined"
             control={control}
@@ -94,7 +94,7 @@ const ContactForm = () => {
             errorMessage={errors?.subject?.message}
           />
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={11} md={10}>
           <UITextField
             variant="outlined"
             control={control}
@@ -106,7 +106,7 @@ const ContactForm = () => {
             rows={4}
           />
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={11} md={10}>
           <UIButton
             variant="contained"
             label="Submit"

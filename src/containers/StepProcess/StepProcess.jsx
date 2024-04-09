@@ -44,7 +44,14 @@ const StepProcess = () => {
     },
   ];
   return (
-    <Box sx={{ backgroundColor: "#242424", py: 10 }}>
+    <Box
+      sx={{
+        backgroundColor: "#242424",
+        paddingTop: { xs: "30px", md: "80px" },
+        paddingBottom: { xs: "45px", md: "80px" },
+        mt: { xs: 5, lg: 3 },
+      }}
+    >
       <Grid container justifyContent="center">
         <Grid item xs={11}>
           <UITypography

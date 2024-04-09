@@ -39,7 +39,7 @@ const Blogs = () => {
   return (
     <DefaultLayout>
       <Grid container justifyContent="center" spacing={{ xs: 5, md: 10 }}>
-        <Grid item xs={11.5}>
+        <Grid item xs={11}>
           <BlogBanner>
             <UITypography
               type="mainHeading"
@@ -54,12 +54,12 @@ const Blogs = () => {
             />
           </BlogBanner>
         </Grid>
-        <Grid item xs={11.5}>
+        <Grid item xs={11}>
           <UITypography
             title="WELCOME TO OUR BLOG"
             type="mainHeading"
             sx={{
-              fontSize: { xs: "25px !important", lg: "48px !important" },
+              fontSize: { xs: "30px !important", lg: "48px !important" },
               fontWeight: "regular",
             }}
           />
@@ -69,14 +69,14 @@ const Blogs = () => {
         container
         gap={2}
         justifyContent="center"
-        mt={{ xs: 10, lg: 12 }}
+        mt={{ xs: 2, lg: 12 }}
         px={3}
       >
         <Grid
           item
           xs={12}
           lg={2}
-          display="flex"
+          display={{ xs: "none", md: "flex" }}
           justifyContent={{ xs: "center", lg: "flex-end" }}
         >
           <Image
@@ -120,9 +120,9 @@ const Blogs = () => {
           />
         </Grid>
       </Grid>
-      <Grid container justifyContent="center" mt={10}>
+      <Grid container justifyContent="center" mt={{ xs: 5, md: 10 }}>
         <Grid item xs={11}>
-          <Grid container spacing={3} >
+          <Grid container spacing={3}>
             {blogs.length == 0 && (
               <Grid item xs={3}>
                 <UILoader />

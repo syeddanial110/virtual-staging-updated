@@ -15,13 +15,13 @@ const ContactUs = () => {
     <DefaultLayout>
       <Grid container justifyContent="center" gap={3}>
         <Grid item xs={11}>
-          <BannerWrapper bgImg={contactUsBanner}>
+          <BannerWrapper bgImg={contactUsBanner} isGradient={true}>
             <UITypography
               type="heading"
               title="Contact Us"
               sx={{
                 color: "white",
-                fontSize: "80px",
+                fontSize: { xs: "40px !important", md: "80px !important" },
                 mb: "13px",
                 ml: { xs: "30px", md: "60px" },
               }}
@@ -31,13 +31,13 @@ const ContactUs = () => {
         <Grid item xs={11} display="flex" justifyContent="center">
           <Grid
             container
-            mt={4}
+            mt={{ xs: 1, md: 4 }}
             justifyContent={{ xs: "center", md: "space-between" }}
             alignItems="center"
             // spacing={3}
             gap={3}
           >
-            <Grid item xs={11} md={5.5}>
+            <Grid item xs={12} md={5.5}>
               <UITypography
                 type="heading"
                 title="Have questions? We would love to hear from you!"
@@ -75,9 +75,9 @@ const ContactUs = () => {
             </Grid>
             <Grid
               item
-              xs={11}
+              xs={12}
               md={5.5}
-              px={3}
+              px={{ xs: 1, md: 3 }}
               py={3}
               sx={{
                 backgroundColor: (theme) => theme.palette.primary.greyShade7,

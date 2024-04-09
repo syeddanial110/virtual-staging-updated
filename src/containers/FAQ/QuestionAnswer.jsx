@@ -6,7 +6,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
 
-const QuestionAnswer = ({ question, answer }) => {
+const QuestionAnswer = ({ question, answer, index }) => {
   return (
     <>
       <Accordion
@@ -50,7 +50,7 @@ const QuestionAnswer = ({ question, answer }) => {
           sx={{
             padding: "22px 30px",
             fontSize: 16,
-            lineHeight: 1.5
+            lineHeight: 1.5,
           }}
           className="faqAnswer"
         >
