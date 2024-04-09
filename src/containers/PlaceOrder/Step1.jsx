@@ -85,7 +85,7 @@ const Step1 = () => {
     if (orderPlaceReducer.serviceName == "") {
       const dataObj = {
         serviceName: "Virtual Staging",
-        servicePrice: "69",
+        servicePrice: "24",
       };
       dispatch(addOrderData(dataObj));
     }

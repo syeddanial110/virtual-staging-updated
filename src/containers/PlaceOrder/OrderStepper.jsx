@@ -77,12 +77,15 @@ export default function OrderStepper(props) {
         const x = orderPlaceReducer.uploadImageDetails.some(
           (item) => item.roomArea === ""
         );
+        const y = orderPlaceReducer.uploadImageDetails.some(
+          (item) => item.basicItems.length === 0
+        );
 
-        if (!x) {
+        if (!x && !y) {
           setActiveStep(4);
           dispatch(addStepperValue(3));
         } else {
-          toast.error("Room Name is required");
+          toast.error("Room Name and items are required");
         }
       }
     }
