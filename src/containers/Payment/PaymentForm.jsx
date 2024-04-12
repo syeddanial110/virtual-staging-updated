@@ -63,7 +63,7 @@ const PaymentForm = ({ clientSecret }) => {
             setIsOrderCreated(false);
             window.location.href = pathLocations.order;
           },
-           10000
+          token ? 5000 : 5000
         );
         if (id == undefined) {
           setToken(res.token);
@@ -109,7 +109,9 @@ const PaymentForm = ({ clientSecret }) => {
           if (data.success) {
             toast.success("Payment successful");
             handleMakePayment();
+            // if (!token) {
               setIsOrderCreated(true);
+            // }
           } else {
             console.error("Payment failed:", data.message);
           }
@@ -196,11 +198,11 @@ const PaymentForm = ({ clientSecret }) => {
               />
             </Grid>
             <Grid item xs={12}>
-        <UITypography type="heading" title="Order Confirmed" textAlign="center" />
-      </Grid>
-      <Grid item xs={12}>
-        <UITypography type="subheading" title="Your order is in progress." textAlign="center" />
-      </Grid>
+              <UITypography type="heading" title="Order Confirmed" textAlign="center" />
+            </Grid>
+            <Grid item xs={12}>
+              <UITypography type="subheading" title="Your order is in progress." textAlign="center" />
+            </Grid>
           </Grid>
         </Box>
       </Modal>
