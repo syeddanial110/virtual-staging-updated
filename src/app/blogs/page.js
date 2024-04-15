@@ -23,7 +23,6 @@ const Blogs = () => {
     apiGet(
       `${ApiEndpoints.getAllBlogs}`,
       (res) => {
-        console.log("res", res);
         setBlogs(res.blogs);
       },
       (err) => {

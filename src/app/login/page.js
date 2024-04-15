@@ -125,6 +125,21 @@ const Login = () => {
                     type="submit"
                   />
                 </Grid>
+                <Grid item xs={6} display="flex" justifyContent="center">
+                  {/* <UITypography
+                    title="Continue as guest?"
+                    sx={{
+                      color: (theme) => theme.palette.primary.greyShade7,
+                      mt: 1,
+                      textDecoration: "underline",
+                      "&:hover": {
+                        cursor: "pointer",
+                      },
+                    }}
+                    textAlign="end"
+                    onClick={() => router.push(pathLocations.home)}
+                  /> */}
+                </Grid>
               </Grid>
             </FormWrapper>
           </form>

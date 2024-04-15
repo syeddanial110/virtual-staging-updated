@@ -8,7 +8,9 @@ import UITypography from "@/components/UITypography/UITypography";
 import CurrentOrders from "@/containers/Order/CurrentOrders";
 import OrderHistory from "@/containers/Order/OrderHistory";
 import DefaultLayout from "@/layout/default-layout";
+import { pathLocations } from "@/utlils/pathLocations";
 import { Box, Grid } from "@mui/material";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const Order = () => {
@@ -39,6 +41,8 @@ const Order = () => {
     );
   }
 
+  const router = useRouter();
+
   const [value, setValue] = useState(0);
   const [ordersData, setOrdersData] = useState([]);
 
@@ -54,6 +58,10 @@ const Order = () => {
         setOrdersData(res.user.orders);
       },
       (err) => {
+        console.log("err", err);
+        if (err?.response?.data?.message == "Unauthenticated.") {
+          router.push(pathLocations.login);
+        }
       }
     );
   };
