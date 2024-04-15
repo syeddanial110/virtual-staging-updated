@@ -16,23 +16,33 @@ import {
 import { Grid } from "@mui/material";
 import { toast } from "react-toastify";
 
-const steps = [
-  "Personal info",
-  "Select Style",
-  "Upload photos",
-  "Image Details",
-  "Payment Details",
-];
-
 export default function OrderStepper(props) {
   const stepper = useSelector((state) => state?.stepperValueReducer);
   const orderPlaceReducer = useSelector((state) => state?.orderPlaceReducer);
+
+  const steps =
+    orderPlaceReducer.serviceName == "Virtual Twilights"
+      ? [
+          "Personal info",
+          // "Select Style",
+          "Upload photos",
+          "Image Details",
+          "Payment Details",
+        ]
+      : [
+          "Personal info",
+          "Select Style",
+          "Upload photos",
+          "Image Details",
+          "Payment Details",
+        ];
 
   const [activeStep, setActiveStep] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const dispatch = useDispatch();
 
+  console.log("activeStep", activeStep);
   const handleNext = () => {
     if (
       (activeStep == 0 && orderPlaceReducer.name === "") ||
@@ -44,47 +54,86 @@ export default function OrderStepper(props) {
       setActiveStep(1);
       dispatch(addStepperValue(0));
     }
-
-    if (activeStep == 1 && orderPlaceReducer.styleName == "") {
-      toast.error("First Select the style");
-    } else if (activeStep == 1) {
-      setActiveStep(2);
-      dispatch(addStepperValue(1));
-    }
-    if (activeStep == 2 && orderPlaceReducer.uploadImageDetails.length == 0) {
-      toast.error("Upload images is required");
-    } else if (activeStep == 2) {
-      setActiveStep(3);
-      dispatch(addStepperValue(2));
-    }
-    if (activeStep == 3) {
-      if (
-        orderPlaceReducer.serviceName == "Virtual Twilights" ||
-        orderPlaceReducer.serviceName == "Commercial Virtual Staging" ||
-        orderPlaceReducer.serviceName == "Commercial Virtual Renovation"
-      ) {
-        const x = orderPlaceReducer.uploadImageDetails.some(
-          (item) => item.otherBasicItems === ""
-        );
-        if (!x) {
-          setActiveStep(4);
-          dispatch(addStepperValue(3));
+    if (orderPlaceReducer.serviceName !== "Virtual Twilights") {
+      if (activeStep == 1 && orderPlaceReducer.styleName == "") {
+        toast.error("First Select the style");
+      } else if (activeStep == 1) {
+        setActiveStep(2);
+        dispatch(addStepperValue(1));
+      }
+      if (activeStep == 2 && orderPlaceReducer.uploadImageDetails.length == 0) {
+        toast.error("Upload images is required");
+      } else if (activeStep == 2) {
+        setActiveStep(3);
+        dispatch(addStepperValue(2));
+      }
+      if (activeStep == 3) {
+        if (
+          orderPlaceReducer.serviceName == "Virtual Twilights" ||
+          orderPlaceReducer.serviceName == "Commercial Virtual Staging" ||
+          orderPlaceReducer.serviceName == "Commercial Virtual Renovation"
+        ) {
+          const x = orderPlaceReducer.uploadImageDetails.some(
+            (item) => item.otherBasicItems === ""
+          );
+          if (!x) {
+            setActiveStep(4);
+            dispatch(addStepperValue(3));
+          } else {
+            toast.error("Note box is required");
+          }
         } else {
-          toast.error("Note box is required");
+          const x = orderPlaceReducer.uploadImageDetails.some(
+            (item) => item.roomArea === ""
+          );
+          const y = orderPlaceReducer.uploadImageDetails.some(
+            (item) => item.basicItems.length === 0
+          );
+
+          if (!x && !y) {
+            setActiveStep(4);
+            dispatch(addStepperValue(3));
+          } else {
+            toast.error("Room Name and items are required");
+          }
         }
-      } else {
-        const x = orderPlaceReducer.uploadImageDetails.some(
-          (item) => item.roomArea === ""
-        );
-        const y = orderPlaceReducer.uploadImageDetails.some(
-          (item) => item.basicItems.length === 0
-        );
-
-        if (!x && !y) {
-          setActiveStep(4);
-          dispatch(addStepperValue(3));
+      }
+    } else {
+      if (activeStep == 1 && orderPlaceReducer.uploadImageDetails.length == 0) {
+        toast.error("Upload images is required");
+      } else if (activeStep == 1) {
+        setActiveStep(2);
+        dispatch(addStepperValue(1));
+      }
+      if (activeStep == 2) {
+        if (
+          orderPlaceReducer.serviceName == "Virtual Twilights" ||
+          orderPlaceReducer.serviceName == "Commercial Virtual Staging" ||
+          orderPlaceReducer.serviceName == "Commercial Virtual Renovation"
+        ) {
+          const x = orderPlaceReducer.uploadImageDetails.some(
+            (item) => item.otherBasicItems === ""
+          );
+          if (!x) {
+            setActiveStep(3);
+            dispatch(addStepperValue(2));
+          } else {
+            toast.error("Note box is required");
+          }
         } else {
-          toast.error("Room Name and items are required");
+          const x = orderPlaceReducer.uploadImageDetails.some(
+            (item) => item.roomArea === ""
+          );
+          const y = orderPlaceReducer.uploadImageDetails.some(
+            (item) => item.basicItems.length === 0
+          );
+
+          if (!x && !y) {
+            setActiveStep(3);
+            dispatch(addStepperValue(2));
+          } else {
+            toast.error("Room Name and items are required");
+          }
         }
       }
     }

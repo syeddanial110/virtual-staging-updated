@@ -21,35 +21,58 @@ const placeOrder = () => {
     setIsTotal(orderPlaceReducer.total);
   }, [orderPlaceReducer.total, orderPlaceReducer.servicePrice]);
 
-  console.log('orderPlaceReducer', orderPlaceReducer)
+  console.log("orderPlaceReducer", orderPlaceReducer);
+  console.log("stepper", stepper);
 
   return (
     <DefaultLayout>
       <OrderStepper>
         <Grid container justifyContent="center">
-          <Grid item xs={10}>
-            {stepper.step == 0 ? (
-              <Box sx={{ minHeight: "50vh" }} mt={4}>
-                <Step1 />
-              </Box>
-            ) : stepper.step == 1 ? (
-              <Box sx={{ minHeight: "50vh" }} mt={4}>
-                <Step2 />
-              </Box>
-            ) : stepper.step == 2 ? (
-              <Box sx={{ minHeight: "50vh" }} mt={4}>
-                <Step3 />
-              </Box>
-            ) : stepper.step == 3 ? (
-              <Box sx={{ minHeight: "50vh" }} mt={4}>
-                <Step4 />
-              </Box>
-            ) : (
-              <Box sx={{ minHeight: "50vh" }} mt={4}>
-                <Step5 />
-              </Box>
-            )}
-          </Grid>
+          {orderPlaceReducer.serviceName !== "Virtual Twilights" ? (
+            <Grid item xs={10}>
+              {stepper.step == 0 ? (
+                <Box sx={{ minHeight: "50vh" }} mt={4}>
+                  <Step1 />
+                </Box>
+              ) : stepper.step == 1 ? (
+                <Box sx={{ minHeight: "50vh" }} mt={4}>
+                  <Step2 />
+                </Box>
+              ) : stepper.step == 2 ? (
+                <Box sx={{ minHeight: "50vh" }} mt={4}>
+                  <Step3 />
+                </Box>
+              ) : stepper.step == 3 ? (
+                <Box sx={{ minHeight: "50vh" }} mt={4}>
+                  <Step4 />
+                </Box>
+              ) : (
+                <Box sx={{ minHeight: "50vh" }} mt={4}>
+                  <Step5 />
+                </Box>
+              )}
+            </Grid>
+          ) : (
+            <Grid item xs={10}>
+              {stepper.step == 0 ? (
+                <Box sx={{ minHeight: "50vh" }} mt={4}>
+                  <Step1 />
+                </Box>
+              ) : stepper.step == 1 ? (
+                <Box sx={{ minHeight: "50vh" }} mt={4}>
+                  <Step3 />
+                </Box>
+              ) : stepper.step == 2 ? (
+                <Box sx={{ minHeight: "50vh" }} mt={4}>
+                  <Step4 />
+                </Box>
+              ) : (
+                <Box sx={{ minHeight: "50vh" }} mt={4}>
+                  <Step5 />
+                </Box>
+              )}
+            </Grid>
+          )}
         </Grid>
       </OrderStepper>
     </DefaultLayout>

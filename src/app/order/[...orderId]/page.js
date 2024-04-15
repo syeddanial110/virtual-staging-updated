@@ -25,7 +25,6 @@ const ViewOrderDetail = () => {
   const router = useRouter();
 
   const [specticOrderData, setSpecticOrderData] = useState({});
-
   const orderPlaceReducer = useSelector((state) => state?.orderPlaceReducer);
 
   const pathname = usePathname();
@@ -45,6 +44,7 @@ const ViewOrderDetail = () => {
     getSpecificOrder();
   }, []);
 
+  console.log("specticOrderData", specticOrderData);
 
   return (
     <DefaultLayout>
@@ -67,30 +67,34 @@ const ViewOrderDetail = () => {
               <UITypography title={`Phone Number: ${specticOrderData.phone}`} />
             </Grid>
 
-            <Grid item xs={12}>
-              <UITypography
-                type="mainDescription"
-                title="Your selected style"
-              />
-            </Grid>
-            <Grid item xs={3}>
-              <StyleCard
-                title={specticOrderData?.style?.title}
-                img={`${ImageBASEURL}${specticOrderData?.style?.images[0]?.image}`}
-                // onClick={() => {
-                //   setIsSelected(item.id);
-                //   disptach(
-                //     addOrderData({
-                //       styleId: item.id,
-                //       styleName: item.title,
-                //       styleImage: item.image,
-                //     })
-                //   );
-                // }}
-                imgArr={specticOrderData?.style?.images}
-                // isSelected={isSelected}
-              />
-            </Grid>
+            {specticOrderData.service_name !== "Virtual Twilights" && (
+              <>
+                <Grid item xs={12}>
+                  <UITypography
+                    type="mainDescription"
+                    title="Your selected style"
+                  />
+                </Grid>
+                <Grid item xs={3}>
+                  <StyleCard
+                    title={specticOrderData?.style?.title}
+                    img={`${ImageBASEURL}${specticOrderData?.style?.images[0]?.image}`}
+                    // onClick={() => {
+                    //   setIsSelected(item.id);
+                    //   disptach(
+                    //     addOrderData({
+                    //       styleId: item.id,
+                    //       styleName: item.title,
+                    //       styleImage: item.image,
+                    //     })
+                    //   );
+                    // }}
+                    imgArr={specticOrderData?.style?.images}
+                    // isSelected={isSelected}
+                  />
+                </Grid>
+              </>
+            )}
             <Grid item xs={12}>
               <UITypography
                 type="mainDescription"

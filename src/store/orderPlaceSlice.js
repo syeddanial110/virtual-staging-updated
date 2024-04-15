@@ -29,7 +29,7 @@ const initalState = {
   ],
   rapidDelivery: "",
   deliveryPrice: "",
-  promoCodeDiscount: "",
+  promoCodeDiscount: 0,
   total: ""
 };
 
