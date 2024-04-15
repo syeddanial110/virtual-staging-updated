@@ -105,15 +105,18 @@ const PaymentForm = ({ clientSecret }) => {
               payment_method_id: x.paymentMethod.id,
             }), // Change amount as needed
           });
+          console.log("response", response);
           const data = await response.json();
+          console.log("data", data);
           if (data.success) {
             toast.success("Payment successful");
             handleMakePayment();
             // if (!token) {
-              setIsOrderCreated(true);
+            setIsOrderCreated(true);
             // }
           } else {
-            console.error("Payment failed:", data.message);
+            toast.error("Your card was declined. Your request was in live mode, but used a known test card.");
+            console.log("Payment failed:", data);
           }
           setLoading(false);
         }
@@ -198,10 +201,18 @@ const PaymentForm = ({ clientSecret }) => {
               />
             </Grid>
             <Grid item xs={12}>
-              <UITypography type="heading" title="Order Confirmed" textAlign="center" />
+              <UITypography
+                type="heading"
+                title="Order Confirmed"
+                textAlign="center"
+              />
             </Grid>
             <Grid item xs={12}>
-              <UITypography type="subheading" title="Your order is in progress." textAlign="center" />
+              <UITypography
+                type="subheading"
+                title="Your order is in progress."
+                textAlign="center"
+              />
             </Grid>
           </Grid>
         </Box>
