@@ -4,6 +4,7 @@ import { Grid, Paper } from "@mui/material";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import paymentImg from "../../assets/images/paymentImg.png";
+import paymentImg2 from "../../assets/images/paymentImg2.png";
 import { useDispatch, useSelector } from "react-redux";
 import { addOrderData } from "@/store/orderPlaceSlice";
 
@@ -114,7 +115,7 @@ const Invoice = () => {
           />
         </Grid>
         <Grid item xs={12} display="flex" justifyContent="center">
-          <Image src={paymentImg} alt="payment-img" height={100} />
+          <Image src={paymentImg2} alt="payment-img" height={100} />
         </Grid>
       </Grid>
     </Paper>
