@@ -59,9 +59,9 @@ const Order = () => {
       },
       (err) => {
         console.log("err", err);
-        if (err?.response?.data?.message == "Unauthenticated.") {
-          router.push(pathLocations.login);
-        }
+        // if (err?.response?.data?.message == "Unauthenticated.") {
+        //   router.push(pathLocations.login);
+        // }
       }
     );
   };
