@@ -59,7 +59,6 @@ const Profile = () => {
     apiGet(
       `${ApiEndpoints.userById}${userId}`,
       (res) => {
-        console.log("res", res);
         const dataObj = {
           name: res?.user?.name,
           email: res?.user?.email,

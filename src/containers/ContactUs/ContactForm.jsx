@@ -40,7 +40,6 @@ const ContactForm = () => {
       (res) => {
         reset();
         toast.success("Your email has been sent successfully");
-        console.log("res", res);
       },
       (err) => {
         console.log("err", err);

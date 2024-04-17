@@ -105,9 +105,7 @@ const PaymentForm = ({ clientSecret }) => {
               payment_method_id: x.paymentMethod.id,
             }), // Change amount as needed
           });
-          console.log("response", response);
           const data = await response.json();
-          console.log("data", data);
           if (data.success) {
             toast.success("Payment successful");
             handleMakePayment();
@@ -116,7 +114,6 @@ const PaymentForm = ({ clientSecret }) => {
             // }
           } else {
             toast.error("Your card was declined. Your request was in live mode, but used a known test card.");
-            console.log("Payment failed:", data);
           }
           setLoading(false);
         }

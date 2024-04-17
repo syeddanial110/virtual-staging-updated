@@ -42,7 +42,6 @@ export default function OrderStepper(props) {
 
   const dispatch = useDispatch();
 
-  console.log("activeStep", activeStep);
   const handleNext = () => {
     if (
       (activeStep == 0 && orderPlaceReducer.name === "") ||
@@ -249,14 +248,25 @@ export default function OrderStepper(props) {
             Back
           </Button>
           <Box sx={{ flex: "1 1 auto" }} />
-          <Button
-            disabled={activeStep == 4}
-            onClick={
-              activeStep === steps.length - 1 ? handleFinish : handleNext
-            }
-          >
-            Next
-          </Button>
+          {orderPlaceReducer.serviceName == "Virtual Twilights" ? (
+            <Button
+              disabled={activeStep == 3}
+              onClick={
+                activeStep === steps.length - 1 ? handleFinish : handleNext
+              }
+            >
+              Next
+            </Button>
+          ) : (
+            <Button
+              disabled={activeStep == 4}
+              onClick={
+                activeStep === steps.length - 1 ? handleFinish : handleNext
+              }
+            >
+              Next
+            </Button>
+          )}
         </Box>
       </React.Fragment>
     </Box>

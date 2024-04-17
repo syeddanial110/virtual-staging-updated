@@ -277,7 +277,6 @@ const Step4 = () => {
 
   // end room area select
 
-  console.log("orderPlaceReducer", orderPlaceReducer);
 
   return (
     <Grid container gap={3} mt={5}>
@@ -368,7 +367,6 @@ const Step4 = () => {
                         item?.filteredBasicItem?.map((elm) => {
                           if (item?.basicItem?.length > 0) {
                             item?.basicItem?.some((element) => {
-                              console.log("element", element);
                               return elm.id == element;
                             });
                           }

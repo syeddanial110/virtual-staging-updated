@@ -16,7 +16,6 @@ const StyleById = () => {
 
   const getStyleById = () => {
     const id = pathname.split("/")[2];
-    console.log("id", id);
     apiGet(
       `${ApiEndpoints.styleById}${id}`,
       (res) => {

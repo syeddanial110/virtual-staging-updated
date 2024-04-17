@@ -39,7 +39,6 @@ const BlogById = (props) => {
     apiGet(
       `${ApiEndpoints.getSingleBlog}${id}`,
       (res) => {
-        console.log("res getBlogById", res);
         setIsLoading(false);
         setBlog(res.blog);
       },
@@ -53,7 +52,6 @@ const BlogById = (props) => {
     apiGet(
       `${ApiEndpoints.recentBlogs}`,
       (res) => {
-        console.log("res getRecentBlogs", res);
         setRecentBlogs(res.recentBlogs);
       },
       (err) => {

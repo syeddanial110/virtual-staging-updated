@@ -1,6 +1,6 @@
 import UIDivider from "@/components/UIDivider";
 import UITypography from "@/components/UITypography/UITypography";
-import { Grid, Paper } from "@mui/material";
+import { Badge, Grid, Paper } from "@mui/material";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import paymentImg from "../../assets/images/paymentImg.png";
@@ -12,46 +12,58 @@ const Invoice = () => {
   const dispatch = useDispatch();
 
   const orderPlaceReducer = useSelector((state) => state?.orderPlaceReducer);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [additionalServicePrice, setAdditionalServicePrice] = useState("");
-
-  useEffect(() => {
-    let x = parseInt(
-      orderPlaceReducer?.servicePrice *
-        orderPlaceReducer.uploadImageDetails.length
-    );
-
-    setTotalPrice(x);
-  }, [orderPlaceReducer?.servicePrice]);
 
   useEffect(() => {
     let z = 0;
-    let x = orderPlaceReducer.uploadImageDetails.map((item) => {
-      let y = item.additionalServices.map((elm) => {
-        z += parseFloat(elm.price);
-        return z;
+    if (orderPlaceReducer?.serviceName == "Virtual Twilights") {
+      const y = orderPlaceReducer?.uploadImageDetails.map((item) => {
+        return {
+          image: item?.image,
+          roomArea: item?.roomArea,
+          curatedId: item?.curatedId,
+          basicItems: item?.basicItems,
+          otherBasicItems: item?.otherBasicItems,
+          additionalServices: [],
+        };
       });
-      return y;
-    });
-    setAdditionalServicePrice(z);
-    setTotalPrice((prev) => prev + z);
-  }, [orderPlaceReducer.uploadImageDetails]);
 
-  useEffect(() => {
-    if (orderPlaceReducer.promoCodeDiscount) {
-      let x = totalPrice / parseInt(orderPlaceReducer.promoCodeDiscount);
+      console.log("y", y);
+      const dataObj = {
+        additionalItemsTotal: 0,
+        uploadImageDetails: y,
+      };
 
-      setTotalPrice(totalPrice - x);
+      dispatch(addOrderData(dataObj));
+    } else {
+      let x = orderPlaceReducer.uploadImageDetails.map((item) => {
+        let y = item.additionalServices.map((elm) => {
+          z += parseFloat(elm.price);
+          console.log("z", z);
+          return z;
+        });
+        console.log("y", y);
+        return y;
+      });
+
+      const dataObj = {
+        additionalItemsTotal: z,
+      };
+
+      dispatch(addOrderData(dataObj));
     }
-  }, [orderPlaceReducer?.promoCodeDiscount]);
+  }, [orderPlaceReducer.uploadImageDetails.length]);
 
-  useEffect(() => {
-    const dataObj = {
-      total: totalPrice,
-    };
+  // useEffect(() => {
+  //   if (orderPlaceReducer.promoCodeDiscount) {
+  //     let x = totalPrice / parseInt(orderPlaceReducer.promoCodeDiscount);
 
-    dispatch(addOrderData(dataObj));
-  }, [totalPrice]);
+  //     setTotalPrice(totalPrice - x);
+  //   }
+  // }, [orderPlaceReducer?.promoCodeDiscount]);
+
+  // useEffect(() => {
+
+  // }, [totalPrice]);
 
   return (
     <Paper elevation={10}>
@@ -71,11 +83,21 @@ const Invoice = () => {
         </Grid>
         <Grid item xs={12} display="flex" justifyContent="space-between">
           <UITypography
+            title={`Quantity`}
+            sx={{ fontSize: "14px !important" }}
+          />
+          <UITypography
+            title={`${orderPlaceReducer?.uploadImageDetails?.length}`}
+            sx={{ fontSize: "14px !important" }}
+          />
+        </Grid>
+        <Grid item xs={12} display="flex" justifyContent="space-between">
+          <UITypography
             title="Additional Services"
             sx={{ fontSize: "14px !important" }}
           />
           <UITypography
-            title={`$${additionalServicePrice}`}
+            title={`$${orderPlaceReducer?.additionalItemsTotal}`}
             sx={{ fontSize: "14px !important" }}
           />
         </Grid>
@@ -85,7 +107,14 @@ const Invoice = () => {
             sx={{ fontSize: "14px !important" }}
           />
           <UITypography
-            title={`${orderPlaceReducer?.promoCodeDiscount}%`}
+            title={
+              orderPlaceReducer?.promoCodeType == "BOGO" ||
+              orderPlaceReducer?.promoCodeType == "Free Item"
+                ? "Free"
+                : orderPlaceReducer?.promoCodeType == "Fixed Price"
+                ? `$${orderPlaceReducer?.promoCodeDiscount}`
+                : `${orderPlaceReducer?.promoCodeDiscount}%`
+            }
             sx={{ fontSize: "14px !important" }}
           />
         </Grid>
@@ -98,7 +127,9 @@ const Invoice = () => {
             sx={{ fontSize: "14px !important", fontWeight: "bold" }}
           />
           <UITypography
-            title={`$${totalPrice}`}
+            title={`$${
+              orderPlaceReducer?.total + orderPlaceReducer?.additionalItemsTotal
+            }`}
             sx={{ fontSize: "14px !important" }}
           />
         </Grid>

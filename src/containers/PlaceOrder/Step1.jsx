@@ -63,9 +63,17 @@ const Step1 = () => {
 
   const handleServiceChange = (e) => {
     const price = servicesArr.filter((elm) => elm.title == e.target.value);
+    console.log("price", price);
     const dataObj = {
       serviceName: e.target.value,
       servicePrice: price[0]?.price,
+      total: parseInt(price[0]?.price),
+      promoCodeDiscount: 0,
+      promoCodeType: "",
+      additionalItemsTotal:
+        price[0]?.title == "Virtual Twilights"
+          ? 0
+          : orderPlaceReducer?.additionalItemsTotal,
     };
     dispatch(addOrderData(dataObj));
   };
@@ -86,6 +94,7 @@ const Step1 = () => {
       const dataObj = {
         serviceName: "Virtual Staging",
         servicePrice: "24",
+        total: 24,
       };
       dispatch(addOrderData(dataObj));
     }

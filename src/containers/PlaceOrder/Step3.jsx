@@ -108,8 +108,10 @@ const Step3 = () => {
             : [],
         };
       });
+
       const dataObj = {
         uploadImageDetails: y,
+        total: parseInt(orderPlaceReducer?.servicePrice) * y.length,
       };
 
       disptach(addOrderData(dataObj));
@@ -144,7 +146,12 @@ const Step3 = () => {
           />
         </Grid>
         <Grid item xs={12}>
-          <Grid container mt={3} gap={3} justifyContent={{ xs: "center", md: "flex-start" }}>
+          <Grid
+            container
+            mt={3}
+            gap={3}
+            justifyContent={{ xs: "center", md: "flex-start" }}
+          >
             {orderPlaceReducer.uploadImageDetails.length > 0 &&
               orderPlaceReducer.uploadImageDetails.map((item, i) => {
                 return (

@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import Invoice from "./Invoice";
-import { apiPost } from "@/auth/ApiRequest";
+import { apiGet, apiPost } from "@/auth/ApiRequest";
 import { ApiEndpoints } from "@/auth/apiEndpoints";
 import { toast } from "react-toastify";
 import {
@@ -38,30 +38,18 @@ const Step5 = () => {
     property: "",
     deliveryType: "",
     promoCode: "",
-    promoDiscount: "",
   });
-
-  const handleRadioChange = (e, price) => {
-    setAdditionalServices({
-      ...additionalServices,
-      deliveryType: e.target.value,
-      deliveryPrice: price,
-    });
-
-    const dataObj = {
-      rapidDelivery: e.target.value,
-      deliveryPrice: price,
-    };
-    dispatch(addOrderData(dataObj));
-  };
+  const [isPromoCode, setIsPromoCode] = useState(false);
 
   const handlePromoCodeInput = (e) => {
     setAdditionalServices({ ...additionalServices, promoCode: e.target.value });
   };
 
+  console.log("orderPlaceReducer", orderPlaceReducer);
   const promoCodeSubmit = () => {
     const dataObj = {
       code: additionalServices.promoCode,
+      service: orderPlaceReducer?.serviceName,
     };
     apiPost(
       `${ApiEndpoints.promoCode}`,
@@ -71,14 +59,91 @@ const Step5 = () => {
           toast.error("Promo code is not valid");
         } else {
           toast.success("Promo code is valid");
-          setAdditionalServices({
-            ...additionalServices,
-            promoDiscount: res.discount,
-          });
-          const dataObj = {
-            promoCodeDiscount: res.discount,
-          };
-          dispatch(addOrderData(dataObj));
+          console.log("res", res);
+          if (res.promocode?.type == "BOGO") {
+            if (orderPlaceReducer.uploadImageDetails.length > 1) {
+              let bogoObj = {
+                promoCodeDiscount: 0,
+                promoCodeType: "BOGO",
+                total:
+                  orderPlaceReducer?.total -
+                  parseInt(orderPlaceReducer.servicePrice).toFixed(2),
+              };
+              dispatch(addOrderData(bogoObj));
+            } else {
+              toast.error("Upload one more photo to use this promocode");
+            }
+          }
+          if (res.promocode?.type == "Percentage") {
+            setIsPromoCode(true);
+            let _percentTotal =
+              (res.promocode?.discount / orderPlaceReducer?.total) * 100;
+
+            const percentObj = {
+              promoCodeDiscount: res.promocode?.discount,
+              promoCodeType: "Percentage",
+              total: parseInt(_percentTotal.toFixed(2)),
+            };
+            dispatch(addOrderData(percentObj));
+          }
+
+          if (res.promocode?.type == "Fixed Price") {
+            setIsPromoCode(true);
+            let fixedPriceTotal =
+              parseInt(orderPlaceReducer.total) -
+              parseInt(res?.promocode?.discount);
+
+            console.log("fixedPriceTotal", fixedPriceTotal);
+            const fixedTotalObj = {
+              promoCodeDiscount: parseInt(res?.promocode?.discount),
+              promoCodeType: "Fixed Price",
+              total: parseInt(fixedPriceTotal.toFixed(2)),
+            };
+            dispatch(addOrderData(fixedTotalObj));
+          }
+
+          if (res.promocode?.type == "Free Item") {
+            setIsPromoCode(true);
+            let freeItemTotal =
+              orderPlaceReducer?.total -
+              parseInt(orderPlaceReducer?.servicePrice) *
+                orderPlaceReducer?.uploadImageDetails.length;
+
+            const fixedTotalObj = {
+              promoCodeDiscount: 0,
+              promoCodeType: "Free Item",
+              total: parseInt(freeItemTotal.toFixed(2)),
+            };
+            dispatch(addOrderData(fixedTotalObj));
+          }
+          if (res?.promocode?.type == "New User") {
+            const id = getUserId();
+            apiGet(
+              `${ApiEndpoints.userById}${id}`,
+              (res) => {
+                console.log("res", res);
+                if (res?.user?.orders.length == 0) {
+                  setIsPromoCode(true);
+                  let newUserTotal =
+                    (res.promocode?.discount / orderPlaceReducer?.total) * 100;
+                  const percentObj = {
+                    promoCodeDiscount: res.promocode?.discount,
+                    promoCodeType: "New User",
+                    total: parseInt(newUserTotal.toFixed(2)),
+                  };
+                  dispatch(addOrderData(percentObj));
+                } else {
+                  toast.error("You're not eligible for this promo code");
+                }
+              },
+              (err) => {
+                console.log("err", err);
+                // if (err?.response?.data?.message == "Unauthenticated.") {
+                //   router.push(pathLocations.login);
+                // }
+              }
+            );
+          }
         }
       },
       (err) => {}
