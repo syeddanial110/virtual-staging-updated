@@ -34,7 +34,6 @@ const Login = () => {
       email: data.email,
       password: data.password,
     };
-
     apiPost(
       `${ApiEndpoints.login}`,
       dataObj,
@@ -42,7 +41,8 @@ const Login = () => {
         setToken(res.token);
         setUserId(res?.user?.id);
         toast.success("Successfully login");
-        router.push(pathLocations.home);
+        window.location.href = pathLocations.home;
+        // router.push(pathLocations.home);
       },
       (err) => {
         toast.error(err?.response?.data?.error);

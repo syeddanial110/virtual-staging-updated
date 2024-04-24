@@ -8,6 +8,9 @@ import UISimpleTextField from "@/components/UITextField/UISimpleTextField";
 import { useDispatch, useSelector } from "react-redux";
 import { addOrderData } from "@/store/orderPlaceSlice";
 import UISelect from "@/components/UISelect/UISelect";
+import { apiGet } from "@/auth/ApiRequest";
+import { getUserId } from "@/auth/Auth";
+import { ApiEndpoints } from "@/auth/apiEndpoints";
 
 const Step1 = () => {
   const dispatch = useDispatch();
@@ -63,13 +66,16 @@ const Step1 = () => {
 
   const handleServiceChange = (e) => {
     const price = servicesArr.filter((elm) => elm.title == e.target.value);
-    console.log("price", price);
     const dataObj = {
       serviceName: e.target.value,
       servicePrice: price[0]?.price,
       total: parseInt(price[0]?.price),
       promoCodeDiscount: 0,
       promoCodeType: "",
+      styleId: "",
+      styleName: "",
+      styleImage: "",
+      uploadImageDetails: [],
       additionalItemsTotal:
         price[0]?.title == "Virtual Twilights"
           ? 0
@@ -99,6 +105,32 @@ const Step1 = () => {
       dispatch(addOrderData(dataObj));
     }
   }, []);
+
+  const userId = getUserId();
+
+  useEffect(() => {
+    if (orderPlaceReducer.name == "" && orderPlaceReducer.email == "") {
+      apiGet(
+        `${ApiEndpoints.userById}${userId}`,
+        (res) => {
+          const dataObj = {
+            name: res?.user?.name,
+            email: res?.user?.email,
+          };
+          dispatch(addOrderData(dataObj));
+          setInputVal({
+            ...inputVal,
+            email: res?.user?.email,
+            name: res?.user?.name,
+          });
+        },
+        (err) => {
+          console.log("err", err);
+        }
+      );
+    }
+  }, []);
+
 
   return (
     <>

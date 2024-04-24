@@ -277,7 +277,6 @@ const Step4 = () => {
 
   // end room area select
 
-
   return (
     <Grid container gap={3} mt={5}>
       <Grid item xs={12}>
@@ -365,23 +364,22 @@ const Step4 = () => {
                     >
                       {item?.filteredBasicItem?.length > 0 &&
                         item?.filteredBasicItem?.map((elm) => {
-                          if (item?.basicItem?.length > 0) {
-                            item?.basicItem?.some((element) => {
-                              return elm.id == element;
-                            });
-                          }
+                          // if (item?.basicItem?.length > 0) {
+                          //    item?.basicItem?.some((element) => {
+                          //     return elm.id == element;
+                          //   });
+                          // }
                           return (
                             <Grid item xs={12} sm={6}>
                               <UICheckbox
                                 onChange={(e) => handleChange(e, i, elm)}
                                 value={elm.title}
                                 label={elm.title}
-                                // defaultChecked={
-                                //   item?.basicItem?.length > 0 &&
-                                //   item.basicItem.some((element) =>
-                                //     elm.id.includes(element)
-                                //   )
-                                // }
+                                // defaultChecked={item?.basicItem?.some(
+                                //   (element) => {
+                                //     return elm.id == element && true;
+                                //   }
+                                // )}
                               />
                             </Grid>
                           );

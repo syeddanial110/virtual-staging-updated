@@ -48,7 +48,9 @@ const PaymentForm = ({ clientSecret }) => {
       service_name: orderPlaceReducer.serviceName,
       style_id: orderPlaceReducer.styleId,
       service_price: parseInt(orderPlaceReducer.servicePrice),
-      total_price: parseFloat(orderPlaceReducer.total),
+      total_price:
+        parseFloat(orderPlaceReducer.total) +
+        parseFloat(orderPlaceReducer.additionalItemsTotal),
       order_items: orderItem,
     };
 
@@ -81,7 +83,12 @@ const PaymentForm = ({ clientSecret }) => {
     const token = getToken();
     apiPost(
       `/payment-intent`,
-      { amount: orderPlaceReducer.total * 100 },
+      {
+        amount:
+          (parseFloat(orderPlaceReducer.total) +
+            parseFloat(orderPlaceReducer.additionalItemsTotal)) *
+          100,
+      },
       async (res) => {
         // dispatch(addStepperValue(3));
         if (!stripe || !elements) {
@@ -113,7 +120,9 @@ const PaymentForm = ({ clientSecret }) => {
             setIsOrderCreated(true);
             // }
           } else {
-            toast.error("Your card was declined. Your request was in live mode, but used a known test card.");
+            toast.error(
+              "Your card was declined. Your request was in live mode, but used a known test card."
+            );
           }
           setLoading(false);
         }

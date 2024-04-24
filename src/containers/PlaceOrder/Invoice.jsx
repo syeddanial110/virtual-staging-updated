@@ -27,7 +27,6 @@ const Invoice = () => {
         };
       });
 
-      console.log("y", y);
       const dataObj = {
         additionalItemsTotal: 0,
         uploadImageDetails: y,
@@ -38,10 +37,8 @@ const Invoice = () => {
       let x = orderPlaceReducer.uploadImageDetails.map((item) => {
         let y = item.additionalServices.map((elm) => {
           z += parseFloat(elm.price);
-          console.log("z", z);
           return z;
         });
-        console.log("y", y);
         return y;
       });
 

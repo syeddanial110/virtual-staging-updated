@@ -26,7 +26,6 @@ const Blogs = () => {
         setBlogs(res.blogs);
       },
       (err) => {
-        console.log("err", err);
       }
     );
   };

@@ -44,7 +44,6 @@ const ViewOrderDetail = () => {
     getSpecificOrder();
   }, []);
 
-  console.log("specticOrderData", specticOrderData);
 
   return (
     <DefaultLayout>
