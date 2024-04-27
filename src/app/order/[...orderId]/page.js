@@ -44,7 +44,6 @@ const ViewOrderDetail = () => {
     getSpecificOrder();
   }, []);
 
-
   return (
     <DefaultLayout>
       <Grid container justifyContent="center">
@@ -150,14 +149,14 @@ const ViewOrderDetail = () => {
                             </Box> */}
                             <UITypography title="After" />
                             <a
-                              href={item.image}
+                              href={item.completed_image}
                               download
                               target="_blank"
                               style={{ width: "100%", height: "100%" }}
                             >
                               <Box
                                 sx={{
-                                  backgroundImage: `url('${item.image}')`,
+                                  backgroundImage: `url('${item.completed_image}')`,
                                   backgroundSize: "contain",
                                   backgroundPosition: "center",
                                   backgroundRepeat: "no-repeat",
