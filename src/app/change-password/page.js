@@ -3,11 +3,17 @@
 import UITypography from "@/components/UITypography/UITypography";
 import DefaultLayout from "@/layout/default-layout";
 import { Box, Grid, InputAdornment } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import ProfileForm from "@/containers/Profile/ProfileForm";
 import ChangePasswordForm from "@/containers/Profile/ChangePasswordForm";
+import { handleCheckToken } from "@/utlils/middlewear";
+import { useRouter } from "next/navigation";
 
 const ChangePassword = () => {
+  useLayoutEffect(() => {
+    handleCheckToken();
+  }, []);
+
   return (
     <DefaultLayout>
       <Grid container justifyContent="center" gap={3}>

@@ -3,7 +3,7 @@ import UITypography from "@/components/UITypography/UITypography";
 import StyleCard from "@/containers/PlaceOrder/StyleCard";
 import DefaultLayout from "@/layout/default-layout";
 import { Box, Chip, Grid, Stack } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import styleImg from "../../../assets/images/bedroomCollection.jpg";
 import Image from "next/image";
 import List from "@mui/material/List";
@@ -20,6 +20,7 @@ import { ApiEndpoints } from "@/auth/apiEndpoints";
 import UICheckbox from "@/components/UICheckbox/UICheckbox";
 import UISimpleTextField from "@/components/UITextField/UISimpleTextField";
 import UIDivider from "@/components/UIDivider";
+import { handleCheckToken } from "@/utlils/middlewear";
 
 const ViewOrderDetail = () => {
   const router = useRouter();
@@ -42,6 +43,10 @@ const ViewOrderDetail = () => {
 
   useEffect(() => {
     getSpecificOrder();
+  }, []);
+
+  useLayoutEffect(() => {
+    handleCheckToken();
   }, []);
 
   return (

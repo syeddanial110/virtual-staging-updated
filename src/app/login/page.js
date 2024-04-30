@@ -75,7 +75,7 @@ const Login = () => {
                     control={control}
                     name="email"
                     fullWidth
-                    sx={{ "& > div > input": { color: "white !important" } }}
+                    sx={{ "& > div > input": { color: "black !important" } }}
                     errorMessage={errors?.email?.message}
                     autoFocus={false}
                     InputProps={{
@@ -97,7 +97,7 @@ const Login = () => {
                     type="password"
                     placeholder="******"
                     control={control}
-                    sx={{ "& > div > input": { color: "white !important" } }}
+                    sx={{ "& > div > input": { color: "black !important" } }}
                     name="password"
                     fullWidth
                     errorMessage={errors?.password?.message}

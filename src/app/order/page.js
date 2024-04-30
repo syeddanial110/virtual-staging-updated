@@ -8,10 +8,11 @@ import UITypography from "@/components/UITypography/UITypography";
 import CurrentOrders from "@/containers/Order/CurrentOrders";
 import OrderHistory from "@/containers/Order/OrderHistory";
 import DefaultLayout from "@/layout/default-layout";
+import { handleCheckToken } from "@/utlils/middlewear";
 import { pathLocations } from "@/utlils/pathLocations";
 import { Box, Grid } from "@mui/material";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 
 const Order = () => {
   const tabArr = [
@@ -68,6 +69,10 @@ const Order = () => {
 
   useEffect(() => {
     getOrdersByUserId();
+  }, []);
+
+  useLayoutEffect(() => {
+    handleCheckToken();
   }, []);
 
   return (

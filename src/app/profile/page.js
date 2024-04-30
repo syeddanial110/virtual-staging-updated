@@ -6,17 +6,21 @@ import UITextField from "@/components/UITextField/UITextField";
 import UITypography from "@/components/UITypography/UITypography";
 import DefaultLayout from "@/layout/default-layout";
 import { Box, Grid, InputAdornment } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import EmailIcon from "@mui/icons-material/Email";
 import ProfileForm from "@/containers/Profile/ProfileForm";
-import { getUserId } from "@/auth/Auth";
+import { getToken, getUserId } from "@/auth/Auth";
 import { apiGet } from "@/auth/ApiRequest";
 import { ApiEndpoints } from "@/auth/apiEndpoints";
 import { useDispatch, useSelector } from "react-redux";
 import { addProfileData } from "@/store/profileDataSlice";
 import UILoader from "@/components/UILoader/UILoader";
+import { useRouter } from "next/navigation";
+import { handleCheckToken } from "@/utlils/middlewear";
 
 const Profile = () => {
+  const router = useRouter();
+
   const dispatch = useDispatch();
   const profileDataReducer = useSelector((state) => state?.profileDataReducer);
 
@@ -76,6 +80,9 @@ const Profile = () => {
     getUserProfile();
   }, []);
 
+  useLayoutEffect(() => {
+    handleCheckToken();
+  }, []);
 
   return (
     <DefaultLayout>
