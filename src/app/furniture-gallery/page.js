@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { ImageBASEURL, apiGet } from "@/auth/ApiRequest";
 import { ApiEndpoints } from "@/auth/apiEndpoints";
 import UILoader from "@/components/UILoader/UILoader";
+import { FurnitureBoxWrapper } from "@/containers/FurnitureGallery/ui";
 
 const FutureGallery = () => {
   const router = useRouter();
@@ -60,69 +61,83 @@ const FutureGallery = () => {
 
   return (
     <DefaultLayout>
-      <Grid container mt={4} justifyContent={{ xs: "center", md: "flex-end" }}>
-        <Grid item xs={11} md={9} sx={{ display: { xs: "none", md: "block" } }}>
-          <UITypography
-            type="mainHeading"
-            title="ELEVATE YOUR SPACE WITH "
-            sx={{ color: (theme) => theme.palette.primary.main }}
-          />
-          <UITypography
-            type="mainHeading"
-            title="DESIGNER FURNITURE FOR "
-            sx={{ color: (theme) => theme.palette.primary.main }}
-          />
-          <UITypography
-            type="mainHeading"
-            title="EVERY ROOM"
-            sx={{ color: (theme) => theme.palette.primary.main }}
-          />
-        </Grid>
-        <Grid item xs={11} md={9} sx={{ display: { xs: "block", md: "none" } }}>
-          <UITypography
-            type="mainHeading"
-            title="ELEVATE YOUR SPACE WITH DESIGNER FURNITURE FOR EVERY ROOM"
-            sx={{ color: (theme) => theme.palette.primary.main }}
-          />
-        </Grid>
-        <Grid item xs={11} md={9}>
+      <FurnitureBoxWrapper className="funitureBanner">
+        <Grid
+          container
+          alignItems="center"
+          justifyContent={{ xs: "center", md: "flex-end" }}
+        >
           <Grid
-            container
-            gap={2}
-            // justifyContent="center"
-            mt={{ xs: 2, lg: 12 }}
-            // px={3}
+            item
+            xs={11}
+            md={9}
+            sx={{ display: { xs: "none", md: "block" } }}
           >
+            <UITypography
+              type="mainHeading"
+              title="ELEVATE YOUR SPACE WITH "
+              sx={{ color: (theme) => theme.palette.primary.white }}
+            />
+            <UITypography
+              type="mainHeading"
+              title="DESIGNER FURNITURE FOR "
+              sx={{ color: (theme) => theme.palette.primary.white }}
+            />
+            <UITypography
+              type="mainHeading"
+              title="EVERY ROOM"
+              sx={{ color: (theme) => theme.palette.primary.white }}
+            />
+          </Grid>
+          <Grid
+            item
+            xs={11}
+            md={9}
+            sx={{ display: { xs: "block", md: "none" } }}
+          >
+            <UITypography
+              type="mainHeading"
+              title="ELEVATE YOUR SPACE WITH DESIGNER FURNITURE FOR EVERY ROOM"
+              sx={{ color: (theme) => theme.palette.primary.main }}
+            />
+          </Grid>
+          <Grid item xs={11} md={9}>
             <Grid
-              item
-              xs={12}
-              md={6}
-              lg={3}
-              display={{ xs: "none", md: "flex" }}
-              justifyContent={{ xs: "center", lg: "flex-end" }}
+              container
+              gap={2}
+              // justifyContent="center"
+              mt={{ xs: 2, lg: 12 }}
+              // px={3}
             >
-              <Image
-                src={aboutusLine}
-                alt="line"
-                style={{ height: "6px", width: "100%" }}
-              />
-            </Grid>
-            <Grid item xs={12} lg={8}>
-              <UITypography
-                type="mainDescription"
-                title="With a wealth of firsthand experience working alongside top producing real estate agents, Chris understands the significance of presentation in the industry. Taking this understanding to heart, she personally oversees the selection of virtual furniture for our gallery, collaborating closely with talented designers to ensure the highest levels of realism, trendiness, and quality that distinguish us from the competition."
-                sx={{
-                  fontSize: "16px !important",
-                  width: { xs: "100%", md: "90%" },
-                }}
-              />
+              <Grid
+                item
+                xs={12}
+                md={6}
+                lg={3}
+                display={{ xs: "none", md: "flex" }}
+                justifyContent={{ xs: "center", lg: "flex-end" }}
+              >
+                <Image
+                  src={aboutusLine}
+                  alt="line"
+                  style={{ height: "6px", width: "100%" }}
+                />
+              </Grid>
+              <Grid item xs={12} lg={8}>
+                <UITypography
+                  type="mainDescription"
+                  title="With a wealth of firsthand experience working alongside top producing real estate agents, Chris understands the significance of presentation in the industry. Taking this understanding to heart, she personally oversees the selection of virtual furniture for our gallery, collaborating closely with talented designers to ensure the highest levels of realism, trendiness, and quality that distinguish us from the competition."
+                  sx={{
+                    fontSize: "16px !important",
+                    width: { xs: "100%", md: "90%" },
+                    color: (theme) => theme.palette.primary.white,
+                  }}
+                />
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={12} mt={7} sx={{ display: { xs: "none", md: "block" } }}>
-          <UIDivider />
-        </Grid>
-      </Grid>
+      </FurnitureBoxWrapper>
       <Grid container justifyContent="center" mt={{ xs: 5, md: 8 }}>
         <Grid item xs={11} md={6}>
           <SearchTextField

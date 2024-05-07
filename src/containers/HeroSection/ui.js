@@ -74,16 +74,16 @@ export const UIBgBox = styled(Box)(({ theme, img }) => ({
     height: "900px !important",
   },
 
-  [theme.breakpoints.up("lg")]: {
-    maskImage: `url(
-      "${bannerBg.src}"
-    )`,
-    "-webkit-mask-repeat": "no-repeat",
-    maskRepeat: "no-repeat",
-    maskSize: "100%",
-    maskPosition: "top",
-    height: "760px",
-  },
+  // [theme.breakpoints.up("lg")]: {
+  //   maskImage: `url(
+  //     "${bannerBg.src}"
+  //   )`,
+  //   "-webkit-mask-repeat": "no-repeat",
+  //   maskRepeat: "no-repeat",
+  //   maskSize: "100%",
+  //   maskPosition: "top",
+  //   height: "760px",
+  // },
 
   position: "relative",
 
@@ -95,8 +95,8 @@ export const UIBgBox = styled(Box)(({ theme, img }) => ({
   // backgroundSize: "cover",
   // backgroundPosition: "right bottom",
   // backgroundRepeat: "no-repeat",
-  borderTopRightRadius: "20px",
-  borderTopLeftRadius: "20px",
+  borderTopRightRadius: "0px",
+  borderTopLeftRadius: "0px",
   // position: "relative",
   // clipPath: "polygon(100% 0, 100% 100%, 50% 100%, 50% 80%, 0 80%, 0 0)",
   // clipPath: "polygon(100% 0, 100% 100%, 50% 100%, 50% 80%, 0 80%, 0 0)",

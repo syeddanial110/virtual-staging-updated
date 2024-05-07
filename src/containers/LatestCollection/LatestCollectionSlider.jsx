@@ -8,7 +8,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 // import required modules
-import { Navigation } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import LatestCollectionCard from "@/components/LatestCollectionCard/LatestCollectionCard";
 import { Box, Grid } from "@mui/material";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
@@ -23,8 +23,12 @@ const LatestCollectionSlider = ({ arr }) => {
     <div style={{ position: "relative" }}>
       <Swiper
         navigation={{ nextEl: ".nextBtn", prevEl: ".prevBtn" }}
-        modules={[Navigation]}
+        modules={[Autoplay, Navigation]}
         className="latestSliderSwiper"
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
         slidesPerView={3}
         spaceBetween={5}
         loopedSlides={1}

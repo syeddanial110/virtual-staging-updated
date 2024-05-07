@@ -16,12 +16,13 @@ export const BlogBanner = styled(Box)(({ theme }) => ({
   backgroundRepeat: "no-repeat",
   display: "flex",
   alignItems: "flex-end",
-  borderRadius: "35px",
+  borderBottomLeftRadius: "20px",
+  borderBottomRightRadius: "20px",
 }));
 
 export const BlogWrapper = styled(Box)(({ theme }) => ({
   backgroundColor: "white",
-  borderRadius: "35px",
+  borderRadius: "15px",
   minHeight: "460px",
   height: "100%",
   [theme.breakpoints.down("md")]: {

@@ -50,12 +50,12 @@ p {
   bottom: 80px;
   width: 29% !important;
   top: auto !important;
-  left: 0 !important;
+  left: 50px !important;
 }
 
 .headerSlider > .swiper-pagination > .swiper-pagination-progressbar-fill {
   background-color: #3c828e !important;
-  border-radius: 40px !important;
+  /* border-radius: 40px !important; */
 }
 
 @media screen and (max-width: 700px) {
@@ -120,11 +120,11 @@ p {
 /* hero slider css end */
 
 .virtualStaging {
-  background: transparent
+  /* background: transparent
     linear-gradient(261deg, #63a5b1 0%, #bfb2a1 47%, #3c828e 100%) 0% 0%
-    no-repeat padding-box;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+    no-repeat padding-box; */
+  /* -webkit-background-clip: text; */
+  /* -webkit-text-fill-color: transparent; */
 }
 
 /* tabs slider css */
@@ -455,7 +455,7 @@ p {
 /* header css  */
 .dropdownButton {
   background-color: transparent !important;
-  color: #7e7e7e !important;
+  color: white !important;
   padding: 0 0px 0 0 !important;
   font-size: 16px !important;
   font-weight: 500 !important;
@@ -621,7 +621,7 @@ p {
   height: 470px;
 }
 
-.reviewSwiper > .swiper-pagination{
+.reviewSwiper > .swiper-pagination {
   left: 50% !important;
   right: 50% !important;
 }
@@ -709,7 +709,7 @@ select:-webkit-autofill:focus {
 }
 
 @media screen and (min-width: 200px) and (max-width: 800px) {
-  .testimonialBgImg{
+  .testimonialBgImg {
     height: 190px;
   }
   .reviewSwiper > .swiper-wrapper {
@@ -718,3 +718,38 @@ select:-webkit-autofill:focus {
     height: 370px;
   }
 }
+
+.funitureBanner {
+  background-position: center;
+  background-size: 150%;
+  animation: zoom-b 5s infinite;
+}
+
+@keyframes zoom-b {
+  0% {
+    background-size: 150%;
+  }
+  50% {
+    background-size: 180%;
+  }
+  100% {
+    background-size: 150%;
+  }
+}
+
+
+/* .backgroundBanner{
+  animation: zoom-1 15s ease;
+}
+
+@keyframes zoom-1 {
+  0% {
+    background-size: 150%;
+  }
+  50% {
+    background-size: 200%;
+  }
+  100% {
+    background-size: 150%;
+  }
+} */

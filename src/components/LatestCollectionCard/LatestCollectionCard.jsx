@@ -12,7 +12,7 @@ const LatestCollectionCard = ({ img, heading, handleClick }) => {
           background:
             "linear-gradient(360deg, rgba(59,64,65,1) 0%, rgba(246,246,246,0) 33%)",
           zIndex: 999999,
-          borderRadius: "20px",
+          borderRadius: "10px",
           width: "100%",
           height: "100%",
           position: "absolute",

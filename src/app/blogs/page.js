@@ -37,7 +37,7 @@ const Blogs = () => {
   return (
     <DefaultLayout>
       <Grid container justifyContent="center" spacing={{ xs: 5, md: 10 }}>
-        <Grid item xs={11}>
+        <Grid item xs={12}>
           <BlogBanner>
             <UITypography
               type="mainHeading"

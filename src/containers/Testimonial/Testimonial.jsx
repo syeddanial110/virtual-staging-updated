@@ -27,7 +27,7 @@ import ReviewsSlider from "../Reviews/ReviewsSlider";
 const Testimonial = () => {
   return (
     <Box sx={{ position: "relative", my: { xs: 0, md: 4 } }}>
-      <Image
+      {/* <Image
         src={testimonialBg}
         alt="testimonialBg"
         style={{
@@ -38,13 +38,13 @@ const Testimonial = () => {
         }}
         height={290}
         className="testimonialBgImg"
-      />
+      /> */}
       <Grid container justifyContent="center">
         <Grid
           item
           xs={11}
           md={12}
-          pt={{ xs: 9, sm: 16, md: 14, lg: 12 }}
+          // pt={{ xs: 9, sm: 16, md: 14, lg: 12 }}
           display="flex"
           justifyContent="center"
         >
@@ -77,6 +77,7 @@ const Testimonial = () => {
                   lg: "55px",
                   xl: "66px",
                 },
+                color: "black !important",
               }}
             />
             <UITypography
@@ -96,7 +97,7 @@ const Testimonial = () => {
             />
           </Box>
         </Grid>
-        <Grid item xs={11} mt={{ xs: 0, md: 10 }}>
+        <Grid item xs={11} mt={{ xs: 0 }}>
           <ReviewsSlider />
         </Grid>
       </Grid>

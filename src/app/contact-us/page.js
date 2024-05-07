@@ -14,8 +14,12 @@ const ContactUs = () => {
   return (
     <DefaultLayout>
       <Grid container justifyContent="center" gap={3}>
-        <Grid item xs={11}>
-          <BannerWrapper bgImg={contactUsBanner} isGradient={true}>
+        <Grid item xs={12}>
+          <BannerWrapper
+            bgImg={contactUsBanner}
+            isGradient={true}
+            borderRadius="0px"
+          >
             <UITypography
               type="heading"
               title="Contact Us"

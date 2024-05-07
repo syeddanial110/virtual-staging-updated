@@ -10,7 +10,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 // import required modules
-import { Pagination, Navigation } from "swiper/modules";
+import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import { Box, Button, Stack } from "@mui/material";
 import { UIBgBox, UISliderBox } from "./ui";
 import leftArrow from "../../assets/icons/leftArrow.svg";
@@ -83,8 +83,12 @@ const HeroSectionSlider = () => {
           type: "progressbar",
           progressBarClass: "custom-pagination-progress",
         }}
+        autoplay={{
+          delay: 2000,
+          disableOnInteraction: false,
+        }}
         //   navigation={true}
-        modules={[Pagination, Navigation]}
+        modules={[Autoplay, Pagination, Navigation]}
         className="headerSlider"
         // navigation={{
         //   prevEl: navigationPrevRef.current,
@@ -119,14 +123,14 @@ const HeroSectionSlider = () => {
                   />
                   <Box
                     sx={{
-                      width: { xs: "90%", md: "59%" },
+                      width: { xs: "65%", md: "50%" },
                       paddingLeft: { xs: "14px", md: "60px" },
                       display: "flex",
                       alignItems: "center",
                       // height: { xs: "80vh", sm: "90vh", md: "90vh" },
                       position: "absolute",
                       top: 50,
-                      height: "80%",
+                      height: "65%",
                     }}
                   >
                     <Stack

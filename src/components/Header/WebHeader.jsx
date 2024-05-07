@@ -34,6 +34,7 @@ import { ApiEndpoints } from "@/auth/apiEndpoints";
 import Link from "next/link";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import UILoader2 from "../UILoader/UILoader2";
 
 const WebHeader = () => {
   const router = useRouter();
@@ -82,7 +83,7 @@ const WebHeader = () => {
   }, []);
 
   return (
-    <Grid container alignItems="center" pt={3} pb={1}>
+    <Grid container alignItems="center" sx={{ paddingY: "8px" }}>
       <Grid
         item
         xs={2}
@@ -95,7 +96,8 @@ const WebHeader = () => {
         display="flex"
         justifyContent="center"
       >
-        <Image
+        <UILoader2 />
+        {/* <Image
           src={logo}
           alt="logo"
           height={80}
@@ -105,7 +107,7 @@ const WebHeader = () => {
           //     cursor: "pointer",
           //   },
           // }}
-        />
+        /> */}
       </Grid>
       <Grid item xs={8.5} display="flex" justifyContent="center">
         <List
@@ -133,7 +135,7 @@ const WebHeader = () => {
                     <ListItemText
                       sx={{
                         color: (theme) =>
-                          `${theme.palette.primary.greyShade1} !important`,
+                          `${theme.palette.primary.white} !important`,
                         textAlign: "center",
                       }}
                       primary={item.name}
@@ -164,10 +166,14 @@ const WebHeader = () => {
                             href={`${subLink.link}`}
                           >
                             <UITypography
-                              title={`- ${subLink.name}`}
+                              title={`${subLink.name}`}
                               isWhite={true}
                               // textAlign="center"
-                              sx={{ width: "100%" }}
+                              sx={{
+                                width: "100%",
+                                color: (theme) =>
+                                  `${theme.palette.primary.white} !important`,
+                              }}
                             />
                           </Link>
                         </Dropdown.Item>
@@ -209,7 +215,11 @@ const WebHeader = () => {
                   >
                     <UITypography
                       title="Curated Collection"
-                      sx={{ padding: "8px 1px", color: "#7E7E7E" }}
+                      sx={{
+                        padding: "8px 1px",
+                        color: (theme) =>
+                          `${theme.palette.primary.white} !important`,
+                      }}
                     />
                   </Link>
                   <Dropdown
@@ -256,7 +266,7 @@ const WebHeader = () => {
                                     href={`${pathLocations.curatedCollection}/${subLink.id}`}
                                   >
                                     <UITypography
-                                      title={`- ${subLink.title}`}
+                                      title={`${subLink.title}`}
                                       isWhite={true}
                                       className="subLinkTitle"
                                       sx={{ padding: "8px 1px" }}
@@ -294,7 +304,7 @@ const WebHeader = () => {
                                     href={`${pathLocations.styles}/${subLink.id}`}
                                   >
                                     <UITypography
-                                      title={`- ${subLink.title}`}
+                                      title={`${subLink.title}`}
                                       isWhite={true}
                                       className="subLinkTitle"
                                       sx={{ padding: "8px 1px" }}
@@ -377,7 +387,7 @@ const WebHeader = () => {
             <Tooltip title="Register">
               <IconButton onClick={() => router.push(pathLocations.login)}>
                 <PersonAddIcon
-                  sx={{ color: (theme) => theme.palette.primary.main }}
+                  sx={{ color: (theme) => theme.palette.primary.greenShade1 }}
                 />
               </IconButton>
             </Tooltip>

@@ -27,6 +27,7 @@ const theme = createTheme({
       brownShade1: "#BFB2A1",
       borwnShade2: "#6D6D6D",
       black: "#000000",
+      headerShade: "#222222e0",
     },
     secondary: {
       main: "#19857b",

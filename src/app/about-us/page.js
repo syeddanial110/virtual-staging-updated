@@ -42,8 +42,8 @@ const AboutUs = () => {
   return (
     <DefaultLayout>
       <Grid container justifyContent="center" spacing={{ xs: 3, md: 10 }}>
-        <Grid item xs={11}>
-          <BannerWrapper bgImg={aboutImg} isGradient={true}>
+        <Grid item xs={12}>
+          <BannerWrapper bgImg={aboutImg} isGradient={true} borderRadius="0px">
             <UITypography
               type="mainHeading"
               title="About Us"

@@ -7,6 +7,7 @@ const UISimpleTextField = ({
   handleChange,
   onChange,
   name,
+  fullWidth,
   ...props
 }) => {
   return (
@@ -17,6 +18,7 @@ const UISimpleTextField = ({
       label={label}
       onChange={onChange}
       name={name}
+      fullWidth={fullWidth}
       // error={errorMessage && true}
       {...props}
     />

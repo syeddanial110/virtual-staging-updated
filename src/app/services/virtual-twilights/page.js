@@ -11,6 +11,8 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { addOrderData } from "@/store/orderPlaceSlice";
 import { pathLocations } from "@/utlils/pathLocations";
+import virtualTwilightGif2 from "../../../assets/images/virtualTwilightGif2.gif";
+import Image from "next/image";
 
 const VirtualTwilights = () => {
   const dispatch = useDispatch();
@@ -26,9 +28,9 @@ const VirtualTwilights = () => {
   };
   return (
     <DefaultLayout>
-      <Grid container justifyContent="center" gap={3} my={3}>
-        <Grid item xs={11}>
-          <BannerWrapper bgImg={virtualTwilightImg}>
+      <Grid container justifyContent="center" gap={3} mb={3}>
+        <Grid item xs={12}>
+          <BannerWrapper bgImg={virtualTwilightImg} borderRadius="0px">
             <UITypography
               type="mainHeading"
               title="Virtual Twilights"
@@ -42,16 +44,27 @@ const VirtualTwilights = () => {
             />
           </BannerWrapper>
         </Grid>
-        <Grid item xs={11}>
-          <UITypography
-            type="description"
-            title={`Looking to sell your real estate listing? Stand out from the crowd with virtual twilights for just $15 per image! In today's competitive housing market, catching a buyer's attention is crucial. With countless listings to scroll through, you need something extraordinary to make yours shine. Enter virtual twilights.`}
-          />
+        <Grid item xs={5.5} display="flex" alignItems="center">
+          <Grid container gap={3}>
+            <Grid item xs={12}>
+              <UITypography
+                type="description"
+                title={`Looking to sell your real estate listing? Stand out from the crowd with virtual twilights for just $15 per image! In today's competitive housing market, catching a buyer's attention is crucial. With countless listings to scroll through, you need something extraordinary to make yours shine. Enter virtual twilights.`}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <UITypography
+                type="description"
+                title={`Not only are they breathtakingly beautiful, but they also possess the power to captivate any viewer. These stunning images make your listing pop and give your sellers a unique advantage. Stand apart from the competition and ensure your property gets noticed with virtual twilights. Don't miss out on the opportunity to make a lasting impression. Upgrade your real estate game today!`}
+              />
+            </Grid>
+          </Grid>
         </Grid>
-        <Grid item xs={11}>
-          <UITypography
-            type="description"
-            title={`Not only are they breathtakingly beautiful, but they also possess the power to captivate any viewer. These stunning images make your listing pop and give your sellers a unique advantage. Stand apart from the competition and ensure your property gets noticed with virtual twilights. Don't miss out on the opportunity to make a lasting impression. Upgrade your real estate game today!`}
+
+        <Grid item xs={5} mt={5}>
+          <Image
+            src={virtualTwilightGif2}
+            style={{ height: "100%", width: "100%" }}
           />
         </Grid>
         <Grid item xs={11}>

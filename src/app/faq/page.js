@@ -57,8 +57,8 @@ const FAQ = () => {
   return (
     <DefaultLayout>
       <Grid container justifyContent="center" gap={2}>
-        <Grid item xs={11}>
-          <BannerWrapper bgImg={faqBanner} isGradient>
+        <Grid item xs={12}>
+          <BannerWrapper bgImg={faqBanner} isGradient borderRadius="0px">
             <UITypography
               type="heading"
               title="FAQ's"

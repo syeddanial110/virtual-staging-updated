@@ -1,5 +1,5 @@
 import UITabs from "@/components/UITabs/UITabs";
-import { Box, CircularProgress, Grid } from "@mui/material";
+import { Box, CircularProgress, Grid, IconButton } from "@mui/material";
 import React, { useState } from "react";
 import TabSlider from "./TabSlider";
 import UITypography from "@/components/UITypography/UITypography";
@@ -116,6 +116,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { addOrderData } from "@/store/orderPlaceSlice";
 import { pathLocations } from "@/utlils/pathLocations";
 import { useRouter } from "next/navigation";
+
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 const TabSection = () => {
   const tabArr = [
@@ -384,6 +387,7 @@ const TabSection = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (event, newValue) => {
+    console.log("newValue", newValue);
     setValue(newValue);
     setIsLoading(true);
     setInterval(() => {
@@ -402,6 +406,16 @@ const TabSection = () => {
     dispatch(addOrderData(dataObj));
     router.push(pathLocations.placeOrder);
   };
+
+  const handleRightMoveTab = () => {
+    setValue(value + 1);
+  };
+
+  const handleLeftMoveTab = () => {
+    setValue(value - 1);
+  };
+
+  console.log("value", value);
 
   return (
     <>
@@ -443,8 +457,24 @@ const TabSection = () => {
           />
         </Grid>
       </Grid>
-      <Grid container justifyContent="center" mt={{ xs: 3, md: 5 }}>
-        <Grid item xs={11} md={12}>
+      <Grid
+        container
+        justifyContent={{ xs: "space-around", md: "center" }}
+        mt={{ xs: 3, md: 5 }}
+      >
+        <Grid
+          item
+          xs={1}
+          sx={{ display: { xs: "block", md: "none" }, textAlign: "center" }}
+        >
+          <IconButton
+            disabled={value == 0 ? true : false}
+            onClick={handleLeftMoveTab}
+          >
+            <ArrowBackIosIcon />
+          </IconButton>
+        </Grid>
+        <Grid item xs={10} md={12}>
           <UITabs handleChange={handleChange} value={value} tabArr={tabArr}>
             {tabArr.map((item, i) => {
               return (
@@ -529,6 +559,18 @@ const TabSection = () => {
               );
             })}
           </UITabs>
+        </Grid>
+        <Grid
+          item
+          xs={1}
+          sx={{ display: { xs: "block", md: "none" }, textAlign: "center" }}
+        >
+          <IconButton
+            disabled={value == 4 ? true : false}
+            onClick={handleRightMoveTab}
+          >
+            <ArrowForwardIosIcon />
+          </IconButton>
         </Grid>
       </Grid>
     </>

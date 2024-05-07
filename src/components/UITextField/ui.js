@@ -30,15 +30,15 @@ export const UIStyledOutlinedField = styled(TextField)(({ theme }) => ({
 export const UIStyledContainedField = styled(TextField)(({ theme }) => ({
   boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
   backgroundColor: "white",
-  borderRadius: "0.5rem !important",
+  borderRadius: "0.5rem",
   "&": {
-    borderRadius: "16px !important",
+    borderRadius: "16px",
   },
   "& > div": {
-    borderRadius: "16px !important",
+    borderRadius: "16px",
   },
   "& * > fieldset": {
-    borderRadius: "16px !important",
+    borderRadius: "16px",
   },
   "& .MuiInputBase-root": {
     "> input": {

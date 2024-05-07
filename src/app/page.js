@@ -8,7 +8,9 @@ import Testimonial from "@/containers/Testimonial/Testimonial";
 import DefaultLayout from "@/layout/default-layout";
 import BeforeAfterImg from "@/containers/BeforeAfterImg/BeforeAfterImg";
 import ReviewsSlider from "@/containers/Reviews/ReviewsSlider";
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
+import backgroundBanner from "../assets/images/backgroundBanner.jpg";
+import Popup from "@/components/Popup/Popup";
 
 export default function Home() {
   // useEffect(() => {
@@ -27,6 +29,16 @@ export default function Home() {
       {/* <Box sx={{ position: "relative" }}> */}
       {/* <Header /> */}
       <DefaultLayout>
+        {/* <Box
+          sx={{
+            backgroundImage: `url('${backgroundBanner.src}')`,
+            backgroundSize: "30%",
+            backgroundRepeat: "repeat",
+            height: "100%",
+            width: "100%",
+          }}
+          className='backgroundBanner'
+        > */}
         <HeroSection />
 
         {/* <VirtualSection /> */}
@@ -35,11 +47,8 @@ export default function Home() {
         <LatestCollection />
         <StepProcess />
         <Testimonial />
-        {/* <Grid container justifyContent="center">
-          <Grid item xs={11}>
-            <ReviewsSlider />
-          </Grid>
-        </Grid> */}
+        {/* </Box> */}
+        <Popup />
       </DefaultLayout>
       {/* <Footer /> */}
       {/* <RandomizedImage /> */}

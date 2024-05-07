@@ -60,7 +60,7 @@ const BlogsCard = ({
               objectFit: "cover",
               width: "100%",
               height: "220px",
-              borderRadius: "35px",
+              borderRadius: "15px",
               //   transform: "scale(1)",
               transition: "all 0.3s linear",
             }}

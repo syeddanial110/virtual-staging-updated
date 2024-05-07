@@ -7,8 +7,13 @@ import MobileHeader from "./MobileHeader";
 
 const Header = () => {
   return (
-    <Grid container>
-      <Grid item xs={12} display={{ xs: "none", lg: "block" }} mb={3} > 
+    <Grid
+      container
+      sx={{
+        backgroundColor: (theme) => theme.palette.primary.headerShade,
+      }}
+    >
+      <Grid item xs={12} display={{ xs: "none", lg: "block" }}>
         <WebHeader />
       </Grid>
       <Grid item xs={12} display={{ xs: "block", lg: "none" }}>

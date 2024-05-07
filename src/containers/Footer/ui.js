@@ -10,7 +10,7 @@ export const FooterWrapper = styled(Box)(({ theme, isDark }) => ({
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
   minHeight: "50vh",
-  borderTopRightRadius: "40px",
-  borderTopLeftRadius: "40px",
+  borderTopRightRadius: "16px",
+  borderTopLeftRadius: "16px",
   
 }));

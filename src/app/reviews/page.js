@@ -11,8 +11,8 @@ const Reviews = () => {
   return (
     <DefaultLayout>
       <Grid container justifyContent="center">
-        <Grid item xs={11}>
-          <BannerWrapper bgImg={reviewsBanner} isGradient>
+        <Grid item xs={12}>
+          <BannerWrapper bgImg={reviewsBanner} isGradient borderRadius="0px">
             <UITypography
               type="heading"
               title="Reviews"

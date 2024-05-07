@@ -5,12 +5,15 @@ import { ApiEndpoints } from "@/auth/apiEndpoints";
 import FurnitureCard from "@/components/FurnitreCard/FurnitureCard";
 import UILoader from "@/components/UILoader/UILoader";
 import UITypography from "@/components/UITypography/UITypography";
+import { BannerWrapper } from "@/containers/AboutUs/ui";
 import CuratedCollectionCard from "@/containers/CuratedCollection/CuratedCollectionCard";
 import DefaultLayout from "@/layout/default-layout";
 import { pathLocations } from "@/utlils/pathLocations";
 import { Grid } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import curatedCollectionBanner from "../../assets/images/curatedCollectionBanner.jpg";
+import { CuratedCollectionWrapper } from "@/containers/CuratedCollection/ui";
 
 const CuratedCollection = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -37,42 +40,63 @@ const CuratedCollection = () => {
 
   return (
     <DefaultLayout>
-      <Grid container mt={4}>
-        <Grid item xs={12}>
-          <UITypography
-            type="heading"
-            title="Curated Collections"
-            textAlign="center"
-          />
+      <CuratedCollectionWrapper
+        bgImg={curatedCollectionBanner}
+        isGradient={true}
+        borderRadius="0px"
+      >
+        <Grid container>
+          <Grid item xs={12}>
+            <UITypography
+              type="heading"
+              title="Curated Collections"
+              textAlign="center"
+              sx={{ color: (theme) => theme.palette.primary.white }}
+            />
+          </Grid>
         </Grid>
-      </Grid>
-      <Grid container justifyContent="center" gap={3} my={{ xs: 2, md: 6 }}>
-        <Grid item xs={11} md={10}>
-          <UITypography
-            type="mainHeading"
-            title="Welcome to our curated collection of pre-designed virtually staged rooms!"
-          />
-        </Grid>
-        <Grid item xs={11}>
-          <UITypography
-            type="description"
-            title="Transform your living space with our stunning selection of multi-functional and stylishly designed rooms, ready to inspire and captivate you.
+        <Grid container justifyContent="center">
+          <Grid item xs={10}>
+            <Grid
+              container
+              justifyContent="center"
+              gap={3}
+              my={{ xs: 2, md: 6 }}
+            >
+              <Grid item xs={12} md={12}>
+                <UITypography
+                  type="mainHeading"
+                  title="Welcome to our curated collection of pre-designed virtually staged rooms!"
+                  sx={{ color: (theme) => theme.palette.primary.white }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <UITypography
+                  type="description"
+                  title="Transform your living space with our stunning selection of multi-functional and stylishly designed rooms, ready to inspire and captivate you.
             Browse through our web pages and explore a wide range of meticulously curated interiors, carefully crafted to suit various aesthetics and preferences. Whether you're looking to revamp your living room, bedroom, kitchen, or even a home office, we have the perfect virtual designs to bring your vision to life."
-          />
+                  sx={{ color: (theme) => theme.palette.primary.white }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <UITypography
+                  type="description"
+                  title="Each room in our collection is meticulously staged, combining the best in interior design with the latest in virtual technology. Visualize your dream space, experiment with different layouts, and get inspired by our creative combinations of furniture, colors, and textures."
+                  sx={{ color: (theme) => theme.palette.primary.white }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <UITypography
+                  type="description"
+                  title="With our pre-designed virtually staged rooms, you can explore different styles, experiment with various color schemes, and imagine the possibilities for your own home. Start your journey towards a transformed living space today and let our curated collection ignite your creativity and help you design the home of your dreams."
+                  sx={{ color: (theme) => theme.palette.primary.white }}
+                />
+              </Grid>
+            </Grid>
+          </Grid>
+        
         </Grid>
-        <Grid item xs={11}>
-          <UITypography
-            type="description"
-            title="Each room in our collection is meticulously staged, combining the best in interior design with the latest in virtual technology. Visualize your dream space, experiment with different layouts, and get inspired by our creative combinations of furniture, colors, and textures."
-          />
-        </Grid>
-        <Grid item xs={11}>
-          <UITypography
-            type="description"
-            title="With our pre-designed virtually staged rooms, you can explore different styles, experiment with various color schemes, and imagine the possibilities for your own home. Start your journey towards a transformed living space today and let our curated collection ignite your creativity and help you design the home of your dreams."
-          />
-        </Grid>
-      </Grid>
+      </CuratedCollectionWrapper>
       <Grid container justifyContent="center" mt={8} gap={5}>
         <Grid item xs={11}>
           {isLoading && (

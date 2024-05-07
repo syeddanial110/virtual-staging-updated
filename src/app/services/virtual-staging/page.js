@@ -10,6 +10,8 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { pathLocations } from "@/utlils/pathLocations";
 import { addOrderData } from "@/store/orderPlaceSlice";
+import Image from "next/image";
+import VirtualStagingGif from "../../../assets/images/virtualStagingGif.gif";
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -25,9 +27,9 @@ const Index = () => {
   };
   return (
     <DefaultLayout>
-      <Grid container justifyContent="center" gap={3} my={{ xs: 2, md: 3 }}>
-        <Grid item xs={11}>
-          <BannerWrapper bgImg={virtualStagingImg}>
+      <Grid container justifyContent="center" gap={3} mb={{ xs: 2, md: 3 }}>
+        <Grid item xs={12}>
+          <BannerWrapper bgImg={virtualStagingImg}   borderRadius="0px">
             <UITypography
               type="mainHeading"
               title="Virtual Staging"
@@ -41,32 +43,44 @@ const Index = () => {
             />
           </BannerWrapper>
         </Grid>
-        <Grid item xs={11}>
-          <UITypography
-            type="description"
-            title={`Welcome to our virtual staging service! Transform your empty spaces into visually stunning masterpieces with our professional virtual staging solutions. For just $24 per image, we can enhance your photos to showcase the true potential of your property.`}
+
+        <Grid item xs={5.5} display="flex" alignItems="center">
+          <Grid container gap={3}>
+            <Grid item xs={12}>
+              <UITypography
+                type="description"
+                title={`Welcome to our virtual staging service! Transform your empty spaces into visually stunning masterpieces with our professional virtual staging solutions. For just $24 per image, we can enhance your photos to showcase the true potential of your property.`}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <UITypography
+                type="description"
+                title={`Our highly skilled team of designers use state-of-the-art technology to digitally furnish and decorate your empty rooms, creating inviting and realistic visuals. Whether you are a real estate agent looking to attract potential buyers or a homeowner wanting to showcase the possibilities of your space, our virtual staging service is the perfect solution.`}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <UITypography
+                type="description"
+                title={
+                  "By leveraging our expertise, you can save time and money compared to traditional staging methods. No need to spend hours moving furniture or investing in expensive rentals. With virtual staging, your property will stand out from the competition, capturing the attention of potential buyers and helping you sell faster."
+                }
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <UITypography
+                type="description"
+                title={`Don't miss out on the opportunity to make a lasting impression. Contact us today to get started with our affordable and professional virtual staging service.`}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={5} mt={5}>
+          <Image
+            src={VirtualStagingGif}
+            style={{ height: "100%", width: "100%" }}
           />
         </Grid>
-        <Grid item xs={11}>
-          <UITypography
-            type="description"
-            title={`Our highly skilled team of designers use state-of-the-art technology to digitally furnish and decorate your empty rooms, creating inviting and realistic visuals. Whether you are a real estate agent looking to attract potential buyers or a homeowner wanting to showcase the possibilities of your space, our virtual staging service is the perfect solution.`}
-          />
-        </Grid>
-        <Grid item xs={11}>
-          <UITypography
-            type="description"
-            title={
-              "By leveraging our expertise, you can save time and money compared to traditional staging methods. No need to spend hours moving furniture or investing in expensive rentals. With virtual staging, your property will stand out from the competition, capturing the attention of potential buyers and helping you sell faster."
-            }
-          />
-        </Grid>
-        <Grid item xs={11}>
-          <UITypography
-            type="description"
-            title={`Don't miss out on the opportunity to make a lasting impression. Contact us today to get started with our affordable and professional virtual staging service.`}
-          />
-        </Grid>
+
         <Grid item xs={11}>
           <Grid container justifyContent={{ xs: "center", md: "flex-start" }}>
             <Grid item xs={9} md={4} lg={2}>

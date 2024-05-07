@@ -16,7 +16,7 @@ export const UIStyledButton = styled(Button)(({ theme, isDark }) => ({
     backgroundColor: theme.palette.primary.greyShade1,
   },
   [theme.breakpoints.down("md")]: {
-    fontSize: "8px",
+    fontSize: "12px",
   },
 }));
 
