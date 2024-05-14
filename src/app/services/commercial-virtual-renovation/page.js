@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import { pathLocations } from "@/utlils/pathLocations";
 import { useRouter } from "next/navigation";
 import { addOrderData } from "@/store/orderPlaceSlice";
-import commercialVirtualRenovationGif from "../../../assets/images/commercialVirtualRenovationGif.gif";
+import commercialVirtualRenovationGif from "../../../assets/images/commercialVirtualRenovationGif3.gif";
 import Image from "next/image";
 
 const CommercialVirtualRenovation = () => {
@@ -48,7 +48,7 @@ const CommercialVirtualRenovation = () => {
             />
           </BannerWrapper>
         </Grid>
-        <Grid item xs={5.5} display="flex" alignItems="center">
+        <Grid item xs={11} md={5.5} display="flex" alignItems="center">
           <Grid container gap={3}>
             <Grid item xs={12}>
               <UITypography
@@ -70,7 +70,7 @@ const CommercialVirtualRenovation = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={5} mt={5}>
+        <Grid item xs={11} md={5} mt={5}>
           <Image
             src={commercialVirtualRenovationGif}
             style={{ height: "100%", width: "100%" }}
@@ -85,6 +85,7 @@ const CommercialVirtualRenovation = () => {
                 label="Order now"
                 fullWidth
                 onClick={handleServiceRedirect}
+                className="pulse"
               />
             </Grid>
           </Grid>

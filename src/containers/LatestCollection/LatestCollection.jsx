@@ -1,3 +1,4 @@
+"use client"
 import UITypography from "@/components/UITypography/UITypography";
 import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";

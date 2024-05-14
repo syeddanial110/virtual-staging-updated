@@ -54,6 +54,8 @@ const Step5 = () => {
     setAdditionalServices({ ...additionalServices, promoCode: e.target.value });
   };
 
+  console.log('orderPlaceReducer', orderPlaceReducer)
+
   const promoCodeSubmit = () => {
     const dataObj = {
       code: additionalServices.promoCode,
@@ -72,6 +74,7 @@ const Step5 = () => {
               let bogoObj = {
                 promoCodeDiscount: 0,
                 promoCodeType: "BOGO",
+                promoCodeId: res.promocode.id,
                 total:
                   orderPlaceReducer?.total -
                   parseInt(orderPlaceReducer.servicePrice).toFixed(2),
@@ -89,6 +92,7 @@ const Step5 = () => {
             const percentObj = {
               promoCodeDiscount: res.promocode?.discount,
               promoCodeType: "Percentage",
+              promoCodeId: res.promocode.id,
               total:
                 parseFloat(orderPlaceReducer?.total) -
                 parseFloat(_percentTotal.toFixed(2)),
@@ -106,6 +110,7 @@ const Step5 = () => {
             const fixedTotalObj = {
               promoCodeDiscount: parseInt(res?.promocode?.discount),
               promoCodeType: "Fixed Price",
+              promoCodeId: res.promocode.id,
               total: parseInt(fixedPriceTotal.toFixed(2)),
             };
             dispatch(addOrderData(fixedTotalObj));
@@ -120,6 +125,7 @@ const Step5 = () => {
             const fixedTotalObj = {
               promoCodeDiscount: 0,
               promoCodeType: "Free Item",
+              promoCodeId: res.promocode.id,
               total: parseInt(freeItemTotal.toFixed(2)),
             };
             dispatch(addOrderData(fixedTotalObj));
@@ -138,6 +144,7 @@ const Step5 = () => {
                     const percentObj = {
                       promoCodeDiscount: parseFloat(res.promocode?.discount),
                       promoCodeType: "New User",
+                      promoCodeId: res.promocode.id,
                       total:
                         parseFloat(orderPlaceReducer?.total) -
                         parseFloat(newUserTotal.toFixed(2)),
@@ -158,6 +165,7 @@ const Step5 = () => {
               const percentObj = {
                 promoCodeDiscount: parseFloat(res.promocode?.discount),
                 promoCodeType: "New User",
+                promoCodeId: res.promocode.id,
                 total:
                   parseFloat(orderPlaceReducer?.total) -
                   parseFloat(newUserTotal.toFixed(2)),
@@ -242,6 +250,7 @@ const Step5 = () => {
       email: orderPlaceReducer.email,
       user_id: id === undefined ? null : id,
       phone: orderPlaceReducer.phoneNumber,
+      promocode_id: orderPlaceReducer.promoCodeId,
       service_name: orderPlaceReducer.serviceName,
       style_id: orderPlaceReducer.styleId,
       service_price: parseInt(orderPlaceReducer.servicePrice),

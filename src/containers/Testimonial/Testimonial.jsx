@@ -1,32 +1,12 @@
-import TestimonialCard from "@/components/TestimonialCard/TestimonialCard";
 import UITypography from "@/components/UITypography/UITypography";
 import { Box, Grid } from "@mui/material";
-import Image from "next/image";
 import React from "react";
-import testimonialBg from "../../assets/images/testimonialBg.png";
-import TestimonialSlider from "./TestimonialSlider";
 
-import reviewImg1 from "../../assets/images/reviews/Ann Holtz.png";
-import reviewImg2 from "../../assets/images/reviews/Antoinette Young.png";
-import reviewImg3 from "../../assets/images/reviews/Bianca Reyes.png";
-import reviewImg4 from "../../assets/images/reviews/carlos f.png";
-import reviewImg5 from "../../assets/images/reviews/carmen murphy.png";
-import reviewImg6 from "../../assets/images/reviews/Chris Reeder.png";
-import reviewImg7 from "../../assets/images/reviews/christine dick.png";
-import reviewImg8 from "../../assets/images/reviews/David Alexander.png";
-import reviewImg9 from "../../assets/images/reviews/georgette c.png";
-import reviewImg10 from "../../assets/images/reviews/jenn clark.png";
-import reviewImg11 from "../../assets/images/reviews/john rawlings.png";
-import reviewImg12 from "../../assets/images/reviews/Kay Riddle.png";
-import reviewImg13 from "../../assets/images/reviews/kelly m.png";
-import reviewImg14 from "../../assets/images/reviews/ron wolfe.png";
-import reviewImg15 from "../../assets/images/reviews/seth shapiro.png";
-import reviewImg16 from "../../assets/images/reviews/Tim Campbell.png";
 import ReviewsSlider from "../Reviews/ReviewsSlider";
 
 const Testimonial = () => {
   return (
-    <Box sx={{ position: "relative", my: { xs: 0, md: 4 } }}>
+    <Box sx={{ position: "relative", my: { xs: 2, md: 4 } }}>
       {/* <Image
         src={testimonialBg}
         alt="testimonialBg"

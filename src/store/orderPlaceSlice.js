@@ -31,6 +31,7 @@ const initalState = {
   deliveryPrice: "",
   promoCodeDiscount: 0,
   promoCodeType: "",
+  promoCodeId: null,
   // promoCodeId: "",
   additionalItemsTotal: 0,
   total: 0,

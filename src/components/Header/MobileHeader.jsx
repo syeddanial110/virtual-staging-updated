@@ -13,6 +13,7 @@ import {
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import logo from "../../assets/images/headerlogo.png";
+import logoBlack from "../../assets/images/headerlogoblack.png";
 
 import avatar from "../../assets/icons/avatar.svg";
 import cart from "../../assets/icons/cart.svg";
@@ -128,9 +129,9 @@ const MobileHeader = () => {
       // onKeyDown={toggleDrawer(anchor, false)}
     >
       <Grid container justifyContent="center" gap={2} py={2}>
-        <Grid item xs={9}>
+        <Grid item xs={9} px={2}>
           <Image
-            src={logo}
+            src={logoBlack}
             alt="logo"
             height={60}
             onClick={() => router.push("/")}
@@ -325,7 +326,7 @@ const MobileHeader = () => {
               sx={{ px: 1, py: 0 }}
             >
               <MenuOpenIcon
-                sx={{ color: (theme) => theme.palette.primary.blackShade1 }}
+                sx={{ color: (theme) => theme.palette.primary.white }}
               />
             </IconButton>
             <Drawer

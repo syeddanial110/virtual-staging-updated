@@ -19,7 +19,7 @@ const QuestionAnswer = ({ question, answer, index }) => {
             backgroundColor: "transparent",
           },
           "&  > .Mui-expanded": {
-            backgroundColor: (theme) => theme.palette.primary.main,
+            backgroundColor: "#3C828E",
             //   height: "100%",
             //   width: "100%",
             borderRadius: "20px",

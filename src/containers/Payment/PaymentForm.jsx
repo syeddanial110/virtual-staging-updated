@@ -21,6 +21,7 @@ const PaymentForm = ({ clientSecret }) => {
   const [isOrderCreated, setIsOrderCreated] = useState(false);
 
   const orderPlaceReducer = useSelector((state) => state?.orderPlaceReducer);
+  console.log("orderPlaceReducer", orderPlaceReducer);
 
   const handleMakePayment = () => {
     const orderItem = orderPlaceReducer?.uploadImageDetails.map((item) => {
@@ -48,6 +49,7 @@ const PaymentForm = ({ clientSecret }) => {
       service_name: orderPlaceReducer.serviceName,
       style_id: orderPlaceReducer.styleId,
       service_price: parseInt(orderPlaceReducer.servicePrice),
+      promocode_id: orderPlaceReducer.promoCodeId,
       total_price:
         parseFloat(orderPlaceReducer.total) +
         parseFloat(orderPlaceReducer.additionalItemsTotal),

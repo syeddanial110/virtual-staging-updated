@@ -29,7 +29,7 @@ const Index = () => {
     <DefaultLayout>
       <Grid container justifyContent="center" gap={3} mb={{ xs: 2, md: 3 }}>
         <Grid item xs={12}>
-          <BannerWrapper bgImg={virtualStagingImg}   borderRadius="0px">
+          <BannerWrapper bgImg={virtualStagingImg} borderRadius="0px">
             <UITypography
               type="mainHeading"
               title="Virtual Staging"
@@ -44,7 +44,7 @@ const Index = () => {
           </BannerWrapper>
         </Grid>
 
-        <Grid item xs={5.5} display="flex" alignItems="center">
+        <Grid item xs={11} md={5.5} display="flex" alignItems="center">
           <Grid container gap={3}>
             <Grid item xs={12}>
               <UITypography
@@ -74,7 +74,7 @@ const Index = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={5} mt={5}>
+        <Grid item xs={11} md={5} mt={5}>
           <Image
             src={VirtualStagingGif}
             style={{ height: "100%", width: "100%" }}
@@ -89,6 +89,7 @@ const Index = () => {
                 label="Order now"
                 fullWidth
                 onClick={handleServiceRedirect}
+                className="pulse"
               />
             </Grid>
           </Grid>

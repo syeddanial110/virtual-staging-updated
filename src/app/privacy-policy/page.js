@@ -17,7 +17,7 @@ const Policy = () => {
   return (
     <DefaultLayout>
       <Grid container justifyContent="center" gap={3}>
-        <Grid item xs={11}>
+        <Grid item xs={12}>
           <BannerWrapper bgImg={privacyPolicyBanner} isGradient>
             <UITypography
               type="heading"

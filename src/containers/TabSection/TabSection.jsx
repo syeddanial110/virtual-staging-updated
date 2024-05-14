@@ -1,3 +1,5 @@
+"use client";
+
 import UITabs from "@/components/UITabs/UITabs";
 import { Box, CircularProgress, Grid, IconButton } from "@mui/material";
 import React, { useState } from "react";
@@ -414,8 +416,6 @@ const TabSection = () => {
   const handleLeftMoveTab = () => {
     setValue(value - 1);
   };
-
-  console.log("value", value);
 
   return (
     <>

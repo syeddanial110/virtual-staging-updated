@@ -95,6 +95,7 @@ const WebHeader = () => {
         }}
         display="flex"
         justifyContent="center"
+        onClick={() => router.push("/")}
       >
         <UILoader2 />
         {/* <Image
@@ -383,6 +384,7 @@ const WebHeader = () => {
               label="Order Now"
               onClick={() => router.push(pathLocations.placeOrder)}
               sx={{ padding: "5px 8px", fontSize: "12px", minWidth: "100px" }}
+              className="pulse"
             />
             <Tooltip title="Register">
               <IconButton onClick={() => router.push(pathLocations.login)}>

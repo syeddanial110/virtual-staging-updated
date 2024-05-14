@@ -1,4 +1,3 @@
-"use client";
 import { BannerWrapper } from "@/containers/AboutUs/ui";
 import DefaultLayout from "@/layout/default-layout";
 import { Box, Grid } from "@mui/material";

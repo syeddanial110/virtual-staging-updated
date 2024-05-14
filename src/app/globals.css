@@ -7,7 +7,7 @@ body {
   background-color: #ededed;
   box-sizing: border-box;
   margin: 0;
-  padding: 0;
+  padding: 0px !important;
   position: relative;
 }
 
@@ -737,7 +737,6 @@ select:-webkit-autofill:focus {
   }
 }
 
-
 /* .backgroundBanner{
   animation: zoom-1 15s ease;
 }
@@ -753,3 +752,26 @@ select:-webkit-autofill:focus {
     background-size: 150%;
   }
 } */
+
+.pulse {
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+  transform: scale(1);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    /* transform: scale(0.95); */
+    box-shadow: 0 0 0 0 rgba(99, 165, 177, 0.1);
+  }
+
+  50% {
+    /* transform: scale(1); */
+    box-shadow: 0 0 0 10px rgba(99, 165, 177, 0.5);
+  }
+
+  100% {
+    /* transform: scale(0.95); */
+    box-shadow: 0 0 0 0 rgba(99, 165, 177, 1);
+  }
+}

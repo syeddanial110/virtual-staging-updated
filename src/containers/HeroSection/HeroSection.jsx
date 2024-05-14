@@ -1,9 +1,6 @@
-"use client";
-
 import { Grid } from "@mui/material";
 import React from "react";
 import HeroSectionSlider from "./HeroSectionSlider";
-import { GoogleGemini } from "@/components/GoogleGemini/GoogleGemini";
 
 const HeroSection = () => {
   return (

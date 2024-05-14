@@ -30,7 +30,7 @@ const VirtualRenovation = () => {
     <DefaultLayout>
       <Grid container justifyContent="center" gap={5} mb={3}>
         <Grid item xs={12}>
-          <BannerWrapper bgImg={virtualRenovationImg}  borderRadius="0px">
+          <BannerWrapper bgImg={virtualRenovationImg} borderRadius="0px">
             <UITypography
               type="mainHeading"
               title="Virtual Renovation"
@@ -41,11 +41,10 @@ const VirtualRenovation = () => {
                 mb: "13px",
                 ml: { xs: "30px", md: "60px" },
               }}
-             
             />
           </BannerWrapper>
         </Grid>
-        <Grid item xs={5.5} display="flex" alignItems="center">
+        <Grid item xs={11} md={5.5} display="flex" alignItems="center">
           <Grid container gap={3}>
             <Grid item xs={12}>
               <UITypography
@@ -67,7 +66,7 @@ const VirtualRenovation = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={5} mt={5}>
+        <Grid item xs={11} md={5} mt={5}>
           <Image
             src={virtualRenovationGif}
             style={{ height: "100%", width: "100%" }}
@@ -82,6 +81,7 @@ const VirtualRenovation = () => {
                 label="Order now"
                 fullWidth
                 onClick={handleServiceRedirect}
+                className="pulse"
               />
             </Grid>
           </Grid>

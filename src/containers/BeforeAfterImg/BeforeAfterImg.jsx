@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 // import beforeImg from "../../assets/images/services/commercialReno/Commercial Reno 1 Before.jpg";
 // import afterImg from "../../assets/images/services/commercialReno/Commercial Reno 1 after.jpg";

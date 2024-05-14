@@ -3,15 +3,15 @@
 import React from "react";
 import { UIStyledButton } from "./ui";
 
-const UIButton = ({ isDark, label, variant, ...props }) => {
+const UIButton = ({ isDark, label, variant, className, ...props }) => {
   return (
     <>
       {isDark ? (
-        <UIStyledButton isDark={isDark} {...props}>
+        <UIStyledButton isDark={isDark} className={className} {...props}>
           {label}
         </UIStyledButton>
       ) : (
-        <UIStyledButton isDark={isDark} {...props}>
+        <UIStyledButton isDark={isDark} className={className} {...props}>
           {label}
         </UIStyledButton>
       )}

@@ -12,7 +12,7 @@ import { pathLocations } from "@/utlils/pathLocations";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import commercialVirtualStagingGif from "../../../assets/images/commercialVirtualStagingGif.gif";
+import commercialVirtualStagingGif from "../../../assets/images/commercialVirtualStaginGif2.gif";
 
 const CommercialVirtualStaging = () => {
   const dispatch = useDispatch();
@@ -49,7 +49,7 @@ const CommercialVirtualStaging = () => {
             />
           </BannerWrapper>
         </Grid>
-        <Grid item xs={5.5} display="flex" alignItems="center">
+        <Grid item xs={11} md={5.5} display="flex" alignItems="center">
           <Grid container gap={3}>
             <Grid item xs={12}>
               <UITypography
@@ -71,7 +71,7 @@ const CommercialVirtualStaging = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={5} mt={5}>
+        <Grid item xs={11} md={5} mt={5}>
           <Image
             src={commercialVirtualStagingGif}
             style={{ height: "100%", width: "100%" }}
@@ -86,6 +86,7 @@ const CommercialVirtualStaging = () => {
                 label="Order now"
                 fullWidth
                 onClick={handleServiceRedirect}
+                className="pulse"
               />
             </Grid>
           </Grid>

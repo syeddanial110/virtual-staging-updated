@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import HeroSection from "@/containers/HeroSection/HeroSection";
 import TabSection from "@/containers/TabSection/TabSection";
@@ -6,11 +6,8 @@ import LatestCollection from "@/containers/LatestCollection/LatestCollection";
 import StepProcess from "@/containers/StepProcess/StepProcess";
 import Testimonial from "@/containers/Testimonial/Testimonial";
 import DefaultLayout from "@/layout/default-layout";
-import BeforeAfterImg from "@/containers/BeforeAfterImg/BeforeAfterImg";
-import ReviewsSlider from "@/containers/Reviews/ReviewsSlider";
-import { Box, Grid } from "@mui/material";
-import backgroundBanner from "../assets/images/backgroundBanner.jpg";
 import Popup from "@/components/Popup/Popup";
+import { getToken } from "@/auth/Auth";
 
 export default function Home() {
   // useEffect(() => {
@@ -23,6 +20,8 @@ export default function Home() {
   //   document.documentElement.style.setProperty("--initial-top", initialTop);
   //   document.documentElement.style.setProperty("--initial-right", initialRight);
   // }, []);
+
+  let token = getToken();
 
   return (
     <>

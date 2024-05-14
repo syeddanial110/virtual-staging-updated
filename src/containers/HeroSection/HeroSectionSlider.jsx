@@ -195,6 +195,7 @@ const HeroSectionSlider = () => {
                             dispatch(addOrderData(dataObj));
                             router.push(pathLocations.placeOrder);
                           }}
+                          className="pulse"
                         />
                         <UIButton
                           label="Explore Gallery"

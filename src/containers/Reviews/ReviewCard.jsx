@@ -1,3 +1,4 @@
+"use client";
 import { Grid, Paper } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import reviewImg from "../../assets/images/reviews/Ann Holtz.png";

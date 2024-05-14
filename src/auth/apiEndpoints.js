@@ -25,4 +25,8 @@ export const ApiEndpoints = {
   getSingleBlog: "/blog/",
   recentBlogs: "/recent-blogs",
   contactForm: "/contact-form",
+  applyForPromocode: "/apply-for-promocode",
+  reviews: "/reviews",
+  addReview: "/user/review/store",
+  reviewUploadImage: "/review/generate-image-url",
 };
