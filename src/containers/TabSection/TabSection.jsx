@@ -389,7 +389,6 @@ const TabSection = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (event, newValue) => {
-    console.log("newValue", newValue);
     setValue(newValue);
     setIsLoading(true);
     setInterval(() => {

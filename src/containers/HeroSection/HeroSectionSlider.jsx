@@ -84,7 +84,7 @@ const HeroSectionSlider = () => {
           progressBarClass: "custom-pagination-progress",
         }}
         autoplay={{
-          delay: 2000,
+          delay: 5000,
           disableOnInteraction: false,
         }}
         //   navigation={true}

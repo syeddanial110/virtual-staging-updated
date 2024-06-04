@@ -46,11 +46,9 @@ const Reviews = () => {
   const _handleChangeImage = (e) => {
     setIsImageUploading(true);
     if (e.target.files[0]) {
-      console.log("e.target.files[0]", e.target.files[0]);
       fileUpload(`${ApiEndpoints.reviewUploadImage}`, e.target.files[0])
         .then((res) => {
           setIsImageUploading(false);
-          console.log("res", res);
           setFileDataURL([...fileDataURL, res.url]);
           toast.success(res.message);
         })
@@ -66,7 +64,6 @@ const Reviews = () => {
     apiGet(
       `${ApiEndpoints.reviews}`,
       (res) => {
-        console.log("res", res);
         setReviews(res);
       },
       (err) => {
@@ -88,7 +85,6 @@ const Reviews = () => {
       `${ApiEndpoints.addReview}`,
       dataObj,
       (res) => {
-        console.log("res", res);
         toast.success(res.message);
         setOpen(false);
         setComment("");
@@ -106,8 +102,7 @@ const Reviews = () => {
     getAllReviews();
   }, []);
 
-  console.log("reviews", reviews);
-  console.log("fileDataURL", fileDataURL);
+  
 
   return (
     <DefaultLayout>
@@ -245,7 +240,7 @@ const Reviews = () => {
             <Grid item xs={12}>
               <UITypography
                 type="heading"
-                title="Create or Login to Add a Review"
+                title="Sign Up or Login to Add a Review"
                 textAlign="center"
               />
             </Grid>
